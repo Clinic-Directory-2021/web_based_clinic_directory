@@ -1,9 +1,17 @@
 {% extends "base.html" %}
 {% block content %}
-<div class='header'>
+<div class='result'>
+<!-- Search bar-->
+<input type="text" class='search-bar' placeholder="Search place, clinic name, or shop"> <button class="search-button" onclick="hello()"> Search </button>
+
+<!--RESULT-->
+<div class='preview'>
 
 </div>
+</div>
 
-<!-- Search bar-->
-<input type="text" class='search-bar' placeholder="Search place, clinic name, or shop"> <button class="search-button"> Search </button>
+<div class='map'>
+    <img src="../static/images/map.jpg" alt="">
+</div>
+
 {% endblock content %}

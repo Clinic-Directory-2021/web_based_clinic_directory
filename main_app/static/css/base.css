@@ -1,0 +1,145 @@
+*{
+    margin: 0;
+    font-family: Arial, Helvetica, sans-serif;
+}
+.header{
+    background-color:#B85C38;
+    width: 100%;
+    height: 7vh;
+    padding: 10px;
+    display: flex;
+}
+.header h2{
+    color: #E0C097;
+}
+
+.button:active{
+    opacity: 0.7;
+}
+@media (min-width:320px)  { /* smartphones, iPhone, portrait 480x320 phones */ 
+    .header{
+        background-color:#B85C38;
+    }
+    .search-bar{
+        width: 70%;
+        height: 5vh;
+        border-radius: 5px;
+        border:2px solid #E0C097;
+        margin-right: 5px;
+    }
+    .search-button{
+        background-color: #E0C097;
+        border-radius: 5px;
+        border:1px solid #E0C097;
+        margin-left: 5px;
+        width: 25%;
+        height: 5vh;
+    }
+        .result{
+        padding: 10px;
+    }
+    .preview{
+        margin: auto;
+        width: 100%;
+        height: 30vh;
+        border:1px solid black;
+        margin-top:10px;
+    }
+    .map{
+        width: 100%;
+        height: 40vh;
+        padding: 10px;
+    }
+     .map img{
+         width: 100%;
+         height: 100%;
+     }
+     .header .logo{
+        width: 90%;
+        height: 100%;
+    }
+    .header .menu{
+        width: 10%;
+        height: 100%;
+        display: block;
+    }
+    .header .menu .line {
+        width: 35px;
+        height: 5px;
+        background-color: #E0C097;
+        margin: 6px 0;
+      }
+      .menu-list{
+          padding: 20px;
+          display: none;
+          position: absolute;
+          top: 0%;
+          right: 0%;
+          width: 100%;
+          height: 40vh;
+          opacity: 0.9;
+          background-color: black;
+      }
+      .menu-list .menu-header{
+          width: 100%;
+          height: 5vh;
+          display: flex;
+      }
+      .menu-header .close{
+          width: 10%;
+          height: 100%;
+      }
+      .menu-header .decoy{
+          width: 90%;
+          height: 100%;
+      }
+      .menu-list .close .left{
+        transform: rotate(45deg);
+        position: relative;
+        top: 15%;
+        left: 2%;
+        width: 35px;
+        height: 5px;
+        background-color: #E0C097;
+      }
+      .menu-list .close .right{
+        transform: rotate(-45deg);
+        position: relative;
+        top: 2%;
+        left: 2%;
+        width: 35px;
+        height: 5px;
+        background-color: #E0C097;
+      }
+      ul{
+          list-style-type: none;
+      }
+      ul a{
+          text-decoration: none;
+      }
+      ul a li h3{
+          padding: 10px;
+          text-align: center;
+          color: white;
+      }
+}
+@media (min-width:481px)  { /* portrait e-readers (Nook/Kindle), smaller tablets @ 600 or @ 640 wide. */ 
+    .header{
+        background-color:black;
+    }
+    .header .menu{
+        display: none;
+    }
+}
+@media (min-width:641px)  { /* portrait tablets, portrait iPad, landscape e-readers, landscape 800x480 or 854x480 phones */ 
+    
+}
+@media (min-width:961px)  { /* tablet, landscape iPad, lo-res laptops ands desktops */ 
+    
+}
+@media (min-width:1025px) { /* big landscape tablets, laptops, and desktops */ 
+    
+}
+@media (min-width:1281px) { /* hi-res laptops and desktops */ 
+    
+}
