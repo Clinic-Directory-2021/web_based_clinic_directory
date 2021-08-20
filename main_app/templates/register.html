@@ -1,17 +1,19 @@
 {% extends "base.html" %}
 {% block content %}
 <div class='register-content'>
+    <form action="/register_user_firebase/" method='post'>
+    {% csrf_token %}
     <h1 class='register-h1'>Register an account here</h1>
-    <input type="text" placeholder="First name" class='register-input'>
-    <input type="text" placeholder="Last name" class='register-input'>
-    <input type="email" placeholder="Email" class='register-input'>
-    <input type="password" placeholder="Password" class='register-input'>
-    <input type="password" placeholder="Confirm password" class='register-input'>
+    <input type="text" placeholder="First name" name="fname" class='register-input'>
+    <input type="text" placeholder="Last name" name="lname" class='register-input'>
+    <input type="email" placeholder="Email" name="email" class='register-input'>
+    <input type="password" placeholder="Password" name="password" class='register-input'>
+    <input type="password" placeholder="Confirm password" name="confirm_password" class='register-input'>
     <br>
-    <button class="register-button">Register</button>
+    <input type="submit" value="Register"class="register-button" />
     <br>
     <br>
     <a href="#" class="register-link" style='text-align: center;'>Already a member? Login here.</a>
-    
+    </form>
 </div>
 {% endblock content %}

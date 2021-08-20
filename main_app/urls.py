@@ -5,4 +5,5 @@ urlpatterns = [
     path('', views.index, name='dashboard'),
     path('login/', views.login, name='login'),
     path('register/', views.register, name='register'),
+    path('register_user_firebase/', views.register_user_firebase, name='register_user_firebase'),
 ]
