@@ -12,8 +12,8 @@
 }
 .header h2{
     color: #E0C097;
+    cursor: pointer;
 }
-
 button:active{
     opacity: 0.7;
 }
@@ -21,11 +21,14 @@ button:active{
     .header{
         background-color:#B85C38;
     }
-     .header .logo{
+    .header h2{
+        width: 30%;
+    }
+    .header .logo{
         width: 90%;
-        height: 100%;
     }
     .header .menu{
+        float: right;
         width: 10%;
         height: 100%;
         display: block;
@@ -95,21 +98,28 @@ button:active{
     }
 }
 @media (min-width:481px)  { /* portrait e-readers (Nook/Kindle), smaller tablets @ 600 or @ 640 wide. */ 
-    
+    .header h2{
+        width: 25%;
+    }
 }
 @media (min-width:641px)  { /* portrait tablets, portrait iPad, landscape e-readers, landscape 800x480 or 854x480 phones */ 
-    
+    .header h2{
+        width: 20%;
+    }
     
 }
 @media (min-width:961px)  { /* tablet, landscape iPad, lo-res laptops ands desktops */ 
-    
-    .header .logo{
-        width: 70%;
+    .header h2{
+        width: 15%;
     }
     .header .middle{
         display: block;
-        width: 30%;
         height: 100%;
+    }
+    .header .middle ul{
+        position: absolute;
+        right: 0%;
+        padding: 10px;
     }
     .middle ul {
         list-style-type: none;
@@ -127,15 +137,13 @@ button:active{
     }
 }
 @media (min-width:1025px) { /* big landscape tablets, laptops, and desktops */ 
-    
+    .header h2{
+        width: 10%;
+    }
 }
 @media (min-width:1281px) { /* hi-res laptops and desktops */ 
-    .header .logo{
-        width: 50%;
-    }
     .header .middle{
         display: block;
-        width: 50%;
         height: 100%;
     }
     .header .middle ul{
