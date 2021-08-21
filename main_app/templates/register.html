@@ -10,7 +10,12 @@
     <input type="password" placeholder="Password" name="password" class='register-input'>
     <input type="password" placeholder="Confirm password" name="confirm_password" class='register-input'>
     <br>
-    <input type="submit" value="Register"class="register-button" />
+    {%if messages%}
+    {%for msg in messages%}
+    <h3>{{msg}}</h3>
+    {%endfor%}
+    {%endif%}
+    <input type="submit" value="Register" class="register-button" />
     <br>
     <br>
     <a href="#" class="register-link" style='text-align: center;'>Already a member? Login here.</a>

@@ -1,5 +1,9 @@
 from django.shortcuts import render
 import pyrebase
+import requests
+import json
+from django.contrib import messages
+
 config={
     "apiKey": "AIzaSyDwWsW--ZHaZIOE4OXu5VhMIclZad8zDYw",
     "authDomain": "animal-clinic-directory-2021.firebaseapp.com",
@@ -30,10 +34,40 @@ def register_user_firebase(request):
     lname = request.POST.get('lname')
     email = request.POST.get('email')
     password = request.POST.get('password')
+    confirm_password = request.POST.get('confirm_password')
 
-    data = {"fname": fname,
-    "lname": lname,
-    "email": email,
-    "password": password}
-    db.child("users").push(data)
-    return render(request,'login.html')
+    if password == confirm_password:
+        data = {"fname": fname,
+        "lname": lname,
+        "email": email,
+        "password": password}
+        try:
+            #register email and password to firebase auth
+            user = auth.create_user_with_email_and_password(email, password)
+            db.child("users").push(data, user['idToken'])
+            messages.success(request, "New User Registered Successfully!")
+            return render(request,'register.html')
+        except requests.HTTPError as e:
+            error_json = e.args[1]
+            error = json.loads(error_json)['error']['message']
+            if error == "EMAIL_EXISTS":
+                messages.success(request, "Email Already Exists!")
+            return render(request,'register.html')
+
+    else:
+        messages.success(request, "Password Do not Match!")
+        return render(request,'register.html')
+
+def login_validation(request):
+    email = request.POST.get('login_email')
+    password = request.POST.get('login_password')
+    
+    try:
+        user_signin = auth.sign_in_with_email_and_password(email,password)
+        return render(request,'homepage.html', {
+            'email': email
+        })
+    except:
+        messages.success(request, "Invalid Email or Password!")
+        return render(request,'login.html')
+    
