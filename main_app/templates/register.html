@@ -1,17 +1,29 @@
 {% extends "base.html" %}
 {% block content %}
 <div class='register-content'>
+    <form action="/register_user_firebase/" method='post'>
+    {% csrf_token %}
     <h1 class='register-h1'>Register an account here</h1>
-    <input type="text" placeholder="First name" class='register-input'>
-    <input type="text" placeholder="Last name" class='register-input'>
-    <input type="email" placeholder="Email" class='register-input'>
-    <input type="password" placeholder="Password" class='register-input'>
-    <input type="password" placeholder="Confirm password" class='register-input'>
+    <input type="text" placeholder="First name" name="fname" class='register-input'>
+    <input type="text" placeholder="Last name" name="lname" class='register-input'>
+    <input type="email" placeholder="Email" name="email" class='register-input'>
+    <input type="password" placeholder="Password" name="password" class='register-input'>
+    <input type="password" placeholder="Confirm password" name="confirm_password" class='register-input'>
     <br>
-    <button class="register-button">Register</button>
+    {%if messages%}
+    {%for msg in messages%}
+    <h3>{{msg}}</h3>
+    {%endfor%}
+    {%endif%}
+    <input type="submit" value="Register" class="register-button" />
     <br>
     <br>
+<<<<<<< HEAD
     <a href="{% url 'login' %}" class="register-link" style='text-align: center;'>Already a member? Login here.</a>
     
+=======
+    <a href="#" class="register-link" style='text-align: center;'>Already a member? Login here.</a>
+    </form>
+>>>>>>> f32924e809c01b728689f5e9a911570cbb44b5df
 </div>
 {% endblock content %}
