@@ -1,5 +1,8 @@
 from django.shortcuts import render
 import pyrebase
+import firebase_admin
+from firebase_admin import credentials
+from firebase_admin import firestore
 import requests
 import json
 from django.contrib import messages
@@ -14,9 +17,14 @@ config={
     "appId": "1:165228810397:web:8378bcc8cb06dd52520474",
     "measurementId": "G-D4BEP96KMK"
 }
+
 firebase = pyrebase.initialize_app(config)
+cred = credentials.Certificate("main_app\serviceAccountKey.json")
+firebase_admin.initialize_app(cred)
+
 auth = firebase.auth()
 db = firebase.database()
+firestoreDB = firestore.client()
 
 # Create your views here.
 def index(request):
@@ -44,7 +52,13 @@ def register_user_firebase(request):
         try:
             #register email and password to firebase auth
             user = auth.create_user_with_email_and_password(email, password)
-            db.child("users").push(data, user['idToken'])
+            doc_ref = firestoreDB.collection('users').document(user['localId'])
+            doc_ref.set({
+                'first_name': fname,
+                'last_name': lname,
+                'email': email,
+                'password': password,
+            })
             messages.success(request, "New User Registered Successfully!")
             return render(request,'register.html')
         except requests.HTTPError as e:
@@ -64,8 +78,10 @@ def login_validation(request):
     
     try:
         user_signin = auth.sign_in_with_email_and_password(email,password)
+        result = firestoreDB.collection('users').document(user_signin['localId']).get()
+        result.to_dict()
         return render(request,'homepage.html', {
-            'email': email
+            'user_data': result.to_dict()
         })
     except:
         messages.success(request, "Invalid Email or Password!")
