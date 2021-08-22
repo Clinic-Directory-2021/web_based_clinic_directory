@@ -106,5 +106,5 @@ def logout(request):
     try:
         del request.session['user_id']
     except:
-        return redirect('/index')
-    return redirect('/index')
+        return redirect('/')
+    return redirect('/')
