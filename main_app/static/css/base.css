@@ -66,9 +66,9 @@ button:active{
       .menu-list .close .left{
         transform: rotate(45deg);
         position: relative;
-        top: 15%;
+        top: 16%;
         left: 2%;
-        width: 35px;
+        width: 20px;
         height: 5px;
         background-color: #E0C097;
       }
@@ -77,7 +77,7 @@ button:active{
         position: relative;
         top: 2%;
         left: 2%;
-        width: 35px;
+        width: 20px;
         height: 5px;
         background-color: #E0C097;
       }
