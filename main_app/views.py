@@ -1,11 +1,13 @@
-from django.shortcuts import render
-import pyrebase
-import firebase_admin
+from django.shortcuts import render, redirect
 from firebase_admin import credentials
 from firebase_admin import firestore
+from django.contrib import messages
+
+import pyrebase
+import firebase_admin
 import requests
 import json
-from django.contrib import messages
+
 
 config={
     "apiKey": "AIzaSyDwWsW--ZHaZIOE4OXu5VhMIclZad8zDYw",
@@ -28,10 +30,26 @@ firestoreDB = firestore.client()
 
 # Create your views here.
 def index(request):
-    return render(request,'index.html')
+    if 'user_id' not in request.session:
+        return render(request,'index.html')
+    else:
+        return redirect('/homepage')
 
 def login(request):
-    return render(request,'login.html')
+    if 'user_id' not in request.session:
+        return render(request,'login.html')
+    else:
+        return redirect('/homepage')
+
+def homepage(request):
+    if 'user_id' in request.session:
+        result = firestoreDB.collection('users').document(request.session['user_id']).get()
+        result.to_dict()
+        return render(request,'homepage.html', {
+        'user_data': result.to_dict(),
+        })
+    else:
+        return redirect('/login')
 
 def register(request):
     return render(request,'register.html')
@@ -78,12 +96,15 @@ def login_validation(request):
     
     try:
         user_signin = auth.sign_in_with_email_and_password(email,password)
-        result = firestoreDB.collection('users').document(user_signin['localId']).get()
-        result.to_dict()
-        return render(request,'homepage.html', {
-            'user_data': result.to_dict()
-        })
+        request.session['user_id'] = user_signin['localId']
+        return redirect('/homepage')
     except:
         messages.success(request, "Invalid Email or Password!")
         return render(request,'login.html')
-    
+
+def logout(request):
+    try:
+        del request.session['user_id']
+    except:
+        return redirect('/index')
+    return redirect('/index')

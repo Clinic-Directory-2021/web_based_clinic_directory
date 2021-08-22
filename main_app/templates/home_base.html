@@ -23,7 +23,7 @@
     </div>
     <div class="menu-list">
         <div class="menu-header">
-            <div class="decoy"><h4 style="color: white;">Kenneth Galvez</h4></div>
+            <div class="decoy"><h4 style="color: white;">{{user_data.first_name}} {{user_data.last_name}}</h4></div>
             <div class='close' onclick="close_menu()">
                 <div class="line left"></div>
                 <div class="line right"></div>
@@ -36,7 +36,7 @@
             <a href="#"><li><h3>Saved list</h3></li></a>
             <a href="#"><li><h3>Contact history</h3></li></a>
             <a href="#"><li><h3>About</h3></li></a>
-            <a href="#"><li><h3>Logout</h3></li></a>
+            <a href="{% url 'logout' %}"><li><h3>Logout</h3></li></a>
         </ul>
     </div>
     {% block content %}
