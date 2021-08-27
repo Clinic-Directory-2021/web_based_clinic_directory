@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from firebase_admin import credentials
 from firebase_admin import firestore
 from django.contrib import messages
+from django.http import HttpResponse
 
 import pyrebase
 import firebase_admin
@@ -55,7 +56,6 @@ def register(request):
     return render(request,'register.html')
 
 def register_user_firebase(request):
-
     fname = request.POST.get('fname')
     lname = request.POST.get('lname')
     email = request.POST.get('email')
@@ -77,18 +77,18 @@ def register_user_firebase(request):
                 'email': email,
                 'password': password,
             })
-            messages.success(request, "New User Registered Successfully!")
-            return render(request,'register.html')
+            #messages.success(request, "New User Registered Successfully!")
+            return HttpResponse('New User Registered Successfully!')
         except requests.HTTPError as e:
             error_json = e.args[1]
             error = json.loads(error_json)['error']['message']
             if error == "EMAIL_EXISTS":
-                messages.success(request, "Email Already Exists!")
-            return render(request,'register.html')
+                #messages.success(request, "Email Already Exists!")
+                return HttpResponse('Email Already Exists!')
 
     else:
-        messages.success(request, "Password Do not Match!")
-        return render(request,'register.html')
+        #messages.success(request, "Password Do not Match!")
+        return HttpResponse('Password Do not Match!')
 
 def login_validation(request):
     email = request.POST.get('login_email')
@@ -99,8 +99,7 @@ def login_validation(request):
         request.session['user_id'] = user_signin['localId']
         return redirect('/homepage')
     except:
-        messages.success(request, "Invalid Email or Password!")
-        return render(request,'login.html')
+        return HttpResponse('Invalid Email or Password!')
 
 def logout(request):
     try:
