@@ -3,19 +3,20 @@
 <div class='register-content'>
     <form method='post' id="registerForm">
     {% csrf_token %}
-    <h1 class='register-h1'>Register an account here</h1>
-    <input type="text" placeholder="First name" name="fname" id="fname" class='register-input'>
-    <input type="text" placeholder="Last name" name="lname" id="lname" class='register-input'>
-    <input type="email" placeholder="Email" name="email" id="registerEmail" class='register-input' onkeyup="validation();">
+    <h1 class='register-h1'>You can register your clinic here</h1>
+    <input type="text" placeholder="Clinic name *" name="fname" id="fname" class='register-input'>
+    <input type="text" placeholder="Clinic address *" name="lname" id="lname" class='register-input'>
+    <input type="email" placeholder="Email*" name="email" id="registerEmail" class='register-input' onkeyup="validation();">
     <span id="emailValidationText"></span>
-    <input type="password" placeholder="Password" name="password" id="password" class='register-input'>
-    <input type="password" placeholder="Confirm password" name="confirm_password" id="confirm_password" class='register-input'>
+    <input type="password" placeholder="Password *" name="password" id="password" class='register-input'>
+    <input type="password" placeholder="Confirm password *" name="confirm_password" id="confirm_password" class='register-input'>
+    <textarea rows="4" cols="50" placeholder="Add description" class="register-input"></textarea>
     <br>
     <h3 id="responseMessage"></h3>
     <input type="submit" value="Register" class="register-button" />
     <br>
     <br>
-    <a href="#" class="register-link" style='text-align: center;'>Already a member? Login here.</a>
+    <a href="{% url 'login' %}" class="register-link" style='text-align: center;'>Already a member? Login here.</a>
     </form>
 </div>
 {% endblock content %}

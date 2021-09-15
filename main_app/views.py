@@ -107,3 +107,6 @@ def logout(request):
     except:
         return redirect('/')
     return redirect('/')
+
+def settings(request):
+    return render(request,'settings.html')
