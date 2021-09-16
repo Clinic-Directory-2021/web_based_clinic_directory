@@ -4,13 +4,13 @@
     <form method='post' id="registerForm">
     {% csrf_token %}
     <h1 class='register-h1'>You can register your clinic here</h1>
-    <input type="text" placeholder="Clinic name *" name="fname" id="fname" class='register-input'>
-    <input type="text" placeholder="Clinic address *" name="lname" id="lname" class='register-input'>
+    <input type="text" placeholder="Clinic name *" name="clinicName" id="clinicName" class='register-input'>
+    <input type="text" placeholder="Clinic address *" name="clinicAddress" id="clinicAddress" class='register-input'>
     <input type="email" placeholder="Email*" name="email" id="registerEmail" class='register-input' onkeyup="validation();">
     <span id="emailValidationText"></span>
     <input type="password" placeholder="Password *" name="password" id="password" class='register-input'>
     <input type="password" placeholder="Confirm password *" name="confirm_password" id="confirm_password" class='register-input'>
-    <textarea rows="4" cols="50" placeholder="Add description" class="register-input"></textarea>
+    <textarea rows="4" cols="50" placeholder="Add description"  name="clinicDescription" id="clinicDescription" class="register-input"></textarea>
     <br>
     <h3 id="responseMessage"></h3>
     <input type="submit" value="Register" class="register-button" />
