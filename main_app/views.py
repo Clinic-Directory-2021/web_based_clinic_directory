@@ -56,26 +56,24 @@ def register(request):
     return render(request,'register.html')
 
 def register_user_firebase(request):
-    fname = request.POST.get('fname')
-    lname = request.POST.get('lname')
+    clinicName = request.POST.get('clinicName')
+    clinicAddress = request.POST.get('clinicAddress')
     email = request.POST.get('email')
     password = request.POST.get('password')
     confirm_password = request.POST.get('confirm_password')
+    clinicDescription = request.POST.get('clinicDescription')
 
     if password == confirm_password:
-        data = {"fname": fname,
-        "lname": lname,
-        "email": email,
-        "password": password}
         try:
             #register email and password to firebase auth
             user = auth.create_user_with_email_and_password(email, password)
             doc_ref = firestoreDB.collection('users').document(user['localId'])
             doc_ref.set({
-                'first_name': fname,
-                'last_name': lname,
+                'clinic_name': clinicName,
+                'clinic_address': clinicAddress,
                 'email': email,
                 'password': password,
+                'clinic_description': clinicDescription,
             })
             #messages.success(request, "New User Registered Successfully!")
             return HttpResponse('New User Registered Successfully!')

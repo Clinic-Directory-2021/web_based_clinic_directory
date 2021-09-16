@@ -1,3 +1,4 @@
+//Email Address validation for registration of user
 function validation(){
     var form = document.getElementById('registerForm');
     var email = document.getElementById('registerEmail').value;
@@ -16,6 +17,9 @@ function validation(){
         text.innerHTML = "Please Enter Valid Email Address";
         text.style.color = "#ff0000";
     }
+
+    console.log($('#clinicName').val(),);
+    console.log($('#clinicAddress').val(),);
 }
 
 $('#registerForm').on('submit', function(e){
@@ -25,8 +29,9 @@ $('#registerForm').on('submit', function(e){
       type: 'post',
       url: "/register_user_firebase/",
       data: {
-        fname: $('#fname').val(),
-        lname: $('#lname').val(),
+        clinicName: $('#clinicName').val(),
+        clinicAddress: $('#clinicAddress').val(),
+        clinicDescription: $('#clinicDescription').val(),
         email: $('#registerEmail').val(),
         password: $('#password').val(),
         confirm_password: $('#confirm_password').val(),
