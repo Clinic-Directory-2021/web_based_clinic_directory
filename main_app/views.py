@@ -37,6 +37,7 @@ def index(request):
         return redirect('/homepage')
 
 def login(request):
+    #meaning if user_id session variable is not set then execute this code
     if 'user_id' not in request.session:
         return render(request,'login.html')
     else:
@@ -107,4 +108,21 @@ def logout(request):
     return redirect('/')
 
 def settings(request):
-    return render(request,'settings.html')
+    result = firestoreDB.collection('users').document(request.session['user_id']).get()
+    result.to_dict()
+    return render(request,'settings.html', {
+        'user_data': result.to_dict(),
+        })
+
+def save_clinic_info(request):
+    editClinicName = request.POST.get('editClinicName')
+    editClinicAddress = request.POST.get('editClinicAddress')
+    editClinicDescription = request.POST.get('editClinicDescription')
+
+    doc_ref = firestoreDB.collection('users').document(request.session['user_id'])
+    doc_ref.update({
+        'clinic_address': editClinicAddress,
+        'clinic_name': editClinicName,
+        'clinic_description': editClinicDescription,
+        })
+    return HttpResponse('Information Updated Successfully!')
