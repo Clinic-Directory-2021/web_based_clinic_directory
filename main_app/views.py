@@ -126,3 +126,6 @@ def save_clinic_info(request):
         'clinic_description': editClinicDescription,
         })
     return HttpResponse('Information Updated Successfully!')
+
+def add_item(request):
+    return render(request,'add_item.html')
