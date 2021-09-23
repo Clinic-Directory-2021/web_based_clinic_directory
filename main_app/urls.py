@@ -13,4 +13,5 @@ urlpatterns = [
     path('save_clinic_info/', views.save_clinic_info, name='save_clinic_info'),
     path('add_item/', views.add_item, name='add_item'),
     path('add_item_firebase/', views.add_item_firebase, name='add_item_firebase'),
+    path('edit_item_firebase/', views.edit_item_firebase, name='edit_item_firebase'),
 ]

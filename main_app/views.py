@@ -160,7 +160,8 @@ def add_item_firebase(request):
             try:
                 items_doc_ref.update({
                 field_name: {
-                    'product_img' : storage.child(img_file_directory).get_url(request.session['user_id']),
+                    'product_img_url' : storage.child(img_file_directory).get_url(request.session['user_id']),
+                    'product_img_directory' : img_file_directory,
                     'product_name': product_name,
                     'product_price': product_price,
                     }
@@ -168,7 +169,8 @@ def add_item_firebase(request):
             except:
                 items_doc_ref.set({
                 field_name: {
-                        'product_img' : storage.child(img_file_directory).get_url(request.session['user_id']),
+                        'product_img_url' : storage.child(img_file_directory).get_url(request.session['user_id']),
+                        'product_img_directory' : img_file_directory,
                         'product_name': product_name,
                         'product_price': product_price,
                         }
@@ -184,4 +186,42 @@ def add_item_firebase(request):
         messages.success(request, "Please upload product image first")
         return render(request,'add_item.html')
    
+def edit_item_firebase(request):
+    items_doc_ref = firestoreDB.collection('items').document(request.session['user_id'])
+
+    try:
+        product_name = request.POST.get('edit_prod_name')
+        product_price = request.POST.get('edit_prod_price')
+        field_name = request.POST.get('edit_field_name')
+        product_image = request.FILES['selected_edit_product_image']
+        img_fileName = product_image.name
+        img_file_directory = request.session['user_id']+"/product_images/"+ img_fileName
+        old_img_file_directory = request.POST.get('old_image_directory')
+        
+        #if fields are not null then try to update the document on items,
+        #if that document is not yet existing then create one
+        if product_name != "" and product_price != "" and field_name != "" and product_image != "" and img_fileName != "" and img_file_directory != "" and old_img_file_directory != "":
+            
+            #delete the old picture
+            storage.delete(old_img_file_directory, request.session['user_id'])
+
+            #upload product image
+            storage.child(img_file_directory).put(product_image, request.session['user_id'])
+
+            items_doc_ref.update({
+            field_name: {
+                'product_img_url' : storage.child(img_file_directory).get_url(request.session['user_id']),
+                'product_img_directory' : img_file_directory,
+                'product_name': product_name,
+                'product_price': product_price,
+                }
+            })
+
+            return redirect('/')
+        else:
+            messages.success(request, "Please Fill up all the forms")
+            return render(request,'homepage.html')
+    except:
+        messages.success(request, "Please upload product image first")
+        return render(request,'homepage.html')   
     
