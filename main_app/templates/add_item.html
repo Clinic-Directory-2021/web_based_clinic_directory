@@ -31,7 +31,7 @@
     <input type="text" name="product_name" id="product_name" class="credentials" placeholder="Product name*">
     <input type="number" name="product_price" id="product_price"class="credentials" placeholder="Product price*">
     <input type="number" hidden="true" class="credentials" name="current_number_of_items" id="current_number_of_items" value="{{user_data.total_items}}" />
-    <input type="text" hidden="true" name="field_name" class="credentials" id="new_field_name" />
+    <input type="hidden" name="field_name" class="credentials" id="new_field_name" />
     <div class="buttons">
         <input type="submit" value="Save" class="save"  id="settings_edit">
         <button type="button" class="btn-danger cancel"  id="cancel_button" onclick="toHomepage()">Cancel</button>
@@ -39,6 +39,10 @@
    
     </div>
     
-    
+    {% if messages %}
+        {% for message in messages %}
+        <h3>{{ message }}</h3>
+        {% endfor %}
+    {% endif %}
 </body>
 </html>

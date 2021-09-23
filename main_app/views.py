@@ -140,37 +140,48 @@ def add_item(request):
     })
 
 def add_item_firebase(request):
-    product_name = request.POST.get('product_name')
-    product_price = request.POST.get('product_price')
-    field_name = request.POST.get('field_name')
-    product_image = request.FILES['selected_product_image']
-    img_fileName = product_image.name
-    img_file_directory = request.session['user_id']+"/product_images/"+ img_fileName
-
     items_doc_ref = firestoreDB.collection('items').document(request.session['user_id'])
 
-    storage.child(img_file_directory).put(product_image, request.session['user_id'])
-    
-    
     try:
-        items_doc_ref.update({
-        field_name: {
-            'product_img' : storage.child(img_file_directory).get_url(request.session['user_id']),
-            'product_name': product_name,
-            'product_price': product_price,
-            }
-        })
+        product_name = request.POST.get('product_name')
+        product_price = request.POST.get('product_price')
+        field_name = request.POST.get('field_name')
+        product_image = request.FILES['selected_product_image']
+        img_fileName = product_image.name
+        img_file_directory = request.session['user_id']+"/product_images/"+ img_fileName
+        
+        #if fields are not null then try to update the document on items,
+        #if that document is not yet existing then create one
+        if product_name != "" and product_price != "" and field_name != "" and product_image != "" and img_fileName != "" and img_file_directory != "":
+            
+            #upload product image
+            storage.child(img_file_directory).put(product_image, request.session['user_id'])
+            
+            try:
+                items_doc_ref.update({
+                field_name: {
+                    'product_img' : storage.child(img_file_directory).get_url(request.session['user_id']),
+                    'product_name': product_name,
+                    'product_price': product_price,
+                    }
+                })
+            except:
+                items_doc_ref.set({
+                field_name: {
+                        'product_img' : storage.child(img_file_directory).get_url(request.session['user_id']),
+                        'product_name': product_name,
+                        'product_price': product_price,
+                        }
+                    })
+            #increment the total number of items in a specific user
+            users_doc_ref = firestoreDB.collection('users').document(request.session['user_id'])
+            users_doc_ref.update({"total_items": firestore.Increment(1)})
+            return redirect('/')
+        else:
+            messages.success(request, "Please Fill up all the forms")
+            return render(request,'add_item.html')
     except:
-        items_doc_ref.set({
-        field_name: {
-                'product_img' : storage.child(img_file_directory).get_url(request.session['user_id']),
-                'product_name': product_name,
-                'product_price': product_price,
-                }
-            })
-
+        messages.success(request, "Please upload product image first")
+        return render(request,'add_item.html')
+   
     
-
-    users_doc_ref = firestoreDB.collection('users').document(request.session['user_id'])
-    users_doc_ref.update({"total_items": firestore.Increment(1)})
-    return redirect('/')
