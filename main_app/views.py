@@ -29,6 +29,8 @@ auth = firebase.auth()
 db = firebase.database()
 firestoreDB = firestore.client()
 
+storage = firebase.storage()
+
 # Create your views here.
 def index(request):
     if 'user_id' not in request.session:
@@ -45,10 +47,13 @@ def login(request):
 
 def homepage(request):
     if 'user_id' in request.session:
-        result = firestoreDB.collection('users').document(request.session['user_id']).get()
-        result.to_dict()
+        user_data = firestoreDB.collection('users').document(request.session['user_id']).get()
+
+        item_data = firestoreDB.collection('items').document(request.session['user_id']).get()
+
         return render(request,'homepage.html', {
-        'user_data': result.to_dict(),
+        'user_data': user_data.to_dict(),
+        'item_data': item_data.to_dict(),
         })
     else:
         return redirect('/login')
@@ -75,6 +80,7 @@ def register_user_firebase(request):
                 'email': email,
                 'password': password,
                 'clinic_description': clinicDescription,
+                'total_items': 0,
             })
             #messages.success(request, "New User Registered Successfully!")
             return HttpResponse('New User Registered Successfully!')
@@ -128,4 +134,43 @@ def save_clinic_info(request):
     return HttpResponse('Information Updated Successfully!')
 
 def add_item(request):
-    return render(request,'add_item.html')
+    user_data = firestoreDB.collection('users').document(request.session['user_id']).get()
+    return render(request,'add_item.html', {
+        'user_data': user_data.to_dict(),
+    })
+
+def add_item_firebase(request):
+    product_name = request.POST.get('product_name')
+    product_price = request.POST.get('product_price')
+    field_name = request.POST.get('field_name')
+    product_image = request.FILES['selected_product_image']
+    img_fileName = product_image.name
+    img_file_directory = request.session['user_id']+"/product_images/"+ img_fileName
+
+    items_doc_ref = firestoreDB.collection('items').document(request.session['user_id'])
+
+    storage.child(img_file_directory).put(product_image, request.session['user_id'])
+    
+    
+    try:
+        items_doc_ref.update({
+        field_name: {
+            'product_img' : storage.child(img_file_directory).get_url(request.session['user_id']),
+            'product_name': product_name,
+            'product_price': product_price,
+            }
+        })
+    except:
+        items_doc_ref.set({
+        field_name: {
+                'product_img' : storage.child(img_file_directory).get_url(request.session['user_id']),
+                'product_name': product_name,
+                'product_price': product_price,
+                }
+            })
+
+    
+
+    users_doc_ref = firestoreDB.collection('users').document(request.session['user_id'])
+    users_doc_ref.update({"total_items": firestore.Increment(1)})
+    return redirect('/')

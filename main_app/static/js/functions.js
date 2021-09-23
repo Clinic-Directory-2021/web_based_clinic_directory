@@ -18,8 +18,6 @@ function validation(){
         text.style.color = "#ff0000";
     }
 
-    console.log($('#clinicName').val(),);
-    console.log($('#clinicAddress').val(),);
 }
 
 $('#registerForm').on('submit', function(e){
