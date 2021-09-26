@@ -28,12 +28,12 @@
     <img src="../static/images/map.jpg" id="preview_img" alt="" class="image">
     <br>
     <!-- Input File-->
-    <input name="selected_product_image" id="product_image" accept=".jpg, .jpeg, .png" type="file" alt="Submit" class="credentials">
+    <input required name="selected_product_image" id="product_image" accept=".jpg, .jpeg, .png" type="file" alt="Submit" class="credentials">
     <br>
     <!-- Input Prod Name-->
-    <input type="text" name="product_name" id="product_name" class="credentials" placeholder="Product name*">
+    <input required type="text" name="product_name" id="product_name" class="credentials" placeholder="Product name*">
     <!-- Input Prod Price-->
-    <input type="number" name="product_price" id="product_price"class="credentials" placeholder="Product price*">
+    <input required type="number" name="product_price" id="product_price"class="credentials" placeholder="Product price*">
     <!-- Current Number of Items -->
     <input type="number" hidden="true" class="credentials" name="current_number_of_items" id="current_number_of_items" value="{{user_data.total_items}}" />
     <!-- Field Name -->

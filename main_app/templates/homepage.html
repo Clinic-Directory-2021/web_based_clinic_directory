@@ -37,12 +37,12 @@
             <img src="../static/images/map.jpg" alt="" class="image" id="edit_prod_img_preview">
             <br>
             <!-- Input File-->
-            <input name="selected_edit_product_image" id="edit_prod_img" type="file" alt="Submit" class="credentials" accept=".jpg, .jpeg, .png">
+            <input name="selected_edit_product_image" id="edit_prod_img" type="file" alt="Submit" class="credentials" accept=".jpg, .jpeg, .png" required>
             <br>
             <!-- Input Prod Name-->
-            <input type="text" id="edit_prod_name" name="edit_prod_name"  class="credentials" placeholder="Product name*">
+            <input type="text" id="edit_prod_name" name="edit_prod_name"  class="credentials" placeholder="Product name*" required>
             <!-- Input Prod Price-->
-            <input type="number" id="edit_prod_price" name="edit_prod_price" class="credentials" placeholder="Product price*">
+            <input type="number" id="edit_prod_price" name="edit_prod_price" class="credentials" placeholder="Product price*" required>
             <!-- Field Name -->
             <input type="hidden" id="edit_field_name" name="edit_field_name" class="credentials"  />
 
@@ -52,7 +52,7 @@
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-          <input type="submit" class="btn btn-primary">Save changes</button>
+          <input type="submit" class="btn btn-primary" onclick="returnEmpty()">Save changes</button>
         </div>
         </form>
         <!-- End Form-->
