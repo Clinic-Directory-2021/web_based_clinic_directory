@@ -14,4 +14,5 @@ urlpatterns = [
     path('add_item/', views.add_item, name='add_item'),
     path('add_item_firebase/', views.add_item_firebase, name='add_item_firebase'),
     path('edit_item_firebase/', views.edit_item_firebase, name='edit_item_firebase'),
+    path('search_item/', views.search_item, name='search_item'),
 ]
