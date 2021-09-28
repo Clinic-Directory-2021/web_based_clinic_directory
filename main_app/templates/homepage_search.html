@@ -4,24 +4,33 @@
 <!-- <h1>Welcome {{user_data.first_name}} {{user_data.last_name}}</h1> -->
 <h1 class="welcome">Hello, {{user_data.clinic_name}}</h1>
 
-  <form action="/search_item/" method='post'>
-    {% csrf_token %}
-      <input type="text" name="searchField" class="search-product" placeholder="Search item" required>
-      <input type="submit" class="search-button" />
-  </form>
+<form action="/search_item/" method='post'>
+  {% csrf_token %}
+    <input type="text" name="searchField" class="search-product" placeholder="Search item" required>
+    <input type="submit" class="search-button" />
+</form>
 <br>
 <br>
 
+<h1 id="not_found">Item Not Found</h1>
 
 <div class="items">
     <div class="add-item" onclick="toAddItem()">
     </div>
     {% for key, values in item_data.items reversed %}
+    
+    {% if searchField in values.product_name %}
+    <script>
+      $("#not_found").hide();
+    </script>
+
     <div  onclick="editItem('{{key}}','{{values.product_img_url}}','{{values.product_img_directory}}' , '{{values.product_name}}' , '{{values.product_price}}' )" id="{{key}}" style="background-image: url({{values.product_img_url}});background-size: cover;" class="item" data-bs-toggle="modal" data-bs-target="#exampleModal">
   
         <p>product name: </p> {{values.product_name}} <br>
     </div>
+    {% endif %}
     {% endfor %}
+
 </div>
 
 <!-- Modal -->

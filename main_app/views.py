@@ -225,3 +225,18 @@ def edit_item_firebase(request):
         messages.success(request, "Please upload product image first")
         return render(request,'homepage.html')   
     
+def search_item(request):
+    searchField = request.POST.get('searchField')
+
+    if 'user_id' in request.session:
+        user_data = firestoreDB.collection('users').document(request.session['user_id']).get()
+
+        item_data = firestoreDB.collection('items').document(request.session['user_id']).get()
+
+        return render(request,'homepage_search.html', {
+        'user_data': user_data.to_dict(),
+        'item_data': item_data.to_dict(),
+        'searchField': searchField,
+        })
+    else:
+        return redirect('/login')
