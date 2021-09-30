@@ -9,6 +9,7 @@ import firebase_admin
 import requests
 import json
 
+import folium
 
 config={
     "apiKey": "AIzaSyDwWsW--ZHaZIOE4OXu5VhMIclZad8zDYw",
@@ -32,9 +33,22 @@ firestoreDB = firestore.client()
 storage = firebase.storage()
 
 # Create your views here.
+
 def index(request):
+
+    #create Map and zoom on Malolos, Bulacan Philippines
+    map = folium.Map(location =[14.8527, 120.8160], zoom_start = 13)
+
+    # Get html representation of the map
+    map = map._repr_html_()
+
+    #Store the html representation of the map to data variable
+    data = {
+        'map': map,
+    }
+
     if 'user_id' not in request.session:
-        return render(request,'index.html')
+        return render(request,'index.html', data)
     else:
         return redirect('/homepage')
 
