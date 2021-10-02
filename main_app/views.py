@@ -47,7 +47,7 @@ def index(request):
         longitude = value['longitude']
 
         folium.Marker([latitude, longitude], 
-        popup= value['clinic_address'], 
+        popup= "<b>Clinic Name:</b><br>" + value['clinic_name'] + "<br><b>Clinic Address:</b><br>" + value['clinic_address'], 
         icon=folium.Icon(color="red", icon="fa-paw", prefix='fa'),
         tooltip= value['clinic_name']).add_to(map)
         
