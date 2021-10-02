@@ -39,6 +39,18 @@ def index(request):
     #create Map and zoom on Malolos, Bulacan Philippines
     map = folium.Map(location =[14.8527, 120.8160], zoom_start = 13)
 
+    users = firestoreDB.collection('users').get()
+
+    for user in users:
+        value = user.to_dict()
+        latitude = value['latitude']
+        longitude = value['longitude']
+
+        folium.Marker([latitude, longitude], 
+        popup= value['clinic_address'], 
+        icon=folium.Icon(color="red", icon="fa-paw", prefix='fa'),
+        tooltip= value['clinic_name']).add_to(map)
+        
     # Get html representation of the map
     map = map._repr_html_()
 
@@ -73,11 +85,30 @@ def homepage(request):
         return redirect('/login')
 
 def register(request):
-    return render(request,'register.html')
+    #create Map and zoom on Malolos, Bulacan Philippines
+    map = folium.Map(location =[14.8527, 120.8160], zoom_start = 13)
+
+    map.add_child(folium.LatLngPopup())
+
+    #map.add_child(folium.ClickForMarker())
+
+    # Get html representation of the map
+    map = map._repr_html_()
+
+    
+
+    #Store the html representation of the map to data variable
+    data = {
+        'map': map,
+    }
+
+    return render(request,'register.html', data)
 
 def register_user_firebase(request):
     clinicName = request.POST.get('clinicName')
     clinicAddress = request.POST.get('clinicAddress')
+    latitude = request.POST.get('latitude')
+    longitude = request.POST.get('longitude')
     email = request.POST.get('email')
     password = request.POST.get('password')
     confirm_password = request.POST.get('confirm_password')
@@ -91,6 +122,8 @@ def register_user_firebase(request):
             doc_ref.set({
                 'clinic_name': clinicName,
                 'clinic_address': clinicAddress,
+                'latitude': latitude,
+                'longitude': longitude,
                 'email': email,
                 'password': password,
                 'clinic_description': clinicDescription,
