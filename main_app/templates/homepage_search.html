@@ -19,7 +19,7 @@
     </div>
     {% for key, values in item_data.items reversed %}
     
-    {% if searchField in values.product_name %}
+    {% if searchField|lower in values.product_name|lower %}
     <script>
       $("#not_found").hide();
     </script>

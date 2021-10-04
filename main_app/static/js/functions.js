@@ -21,27 +21,37 @@ function validation(){
 }
 
 $('#registerForm').on('submit', function(e){
+
+  var formData = new FormData();
+  var files = $('#clinic_image')[0].files[0];
+
+  formData.append('clinicImage', files);
+  formData.append('fileName', files.name);
+  formData.append('clinicName', $('#clinicName').val());
+  formData.append('clinicAddress', $('#clinicAddress').val());
+  formData.append('latitude', $('#latitude').val());
+  formData.append('longitude', $('#longitude').val());
+  formData.append('clinicDescription', $('#clinicDescription').val());
+  formData.append('email', $('#registerEmail').val());
+  formData.append('password', $('#password').val());
+  formData.append('confirm_password', $('#confirm_password').val());
+  formData.append('csrfmiddlewaretoken', $("input[name='csrfmiddlewaretoken']").val());
+
+
   e.preventDefault();
   console.log("1");
   $.ajax({
       type: 'post',
       url: "/register_user_firebase/",
-      data: {
-        clinicName: $('#clinicName').val(),
-        clinicAddress: $('#clinicAddress').val(),
-        latitude: $('#latitude').val(),
-        longitude: $('#longitude').val(),
-        clinicDescription: $('#clinicDescription').val(),
-        email: $('#registerEmail').val(),
-        password: $('#password').val(),
-        confirm_password: $('#confirm_password').val(),
-        csrfmiddlewaretoken: $("input[name='csrfmiddlewaretoken']").val(),
-        },
+      enctype: 'multipart/form-data',
+      processData: false,
+      contentType: false,
+      data: formData,
       success: function(data){
           $('#responseMessage').html(data);
       },
       error: function(data){
-          alert('have an error');
+          alert(data + 'have an error');
       }
 
   });
@@ -93,6 +103,27 @@ $('#loginForm').on('submit', function(e){
     }, 
     100);
 
+    $(function(){
+        $('#clinic_image').change(function(){
+          var input = this;
+          var url = $(this).val();
+          var ext = url.substring(url.lastIndexOf('.') + 1).toLowerCase();
+          if (input.files && input.files[0]&& (ext == "png" || ext == "jpeg" || ext == "jpg")) 
+           {
+              var reader = new FileReader();
+      
+              reader.onload = function (e) {
+                 $('#preview_img').attr('src', e.target.result);
+              }
+             reader.readAsDataURL(input.files[0]);
+          }
+          else
+          {
+            $('#preview_img').attr('src', '../static/images/map.jpg');
+          }
+        });
+      
+      });
     
     
 

@@ -2,9 +2,15 @@
 {% block content %}
 <div class='register-content'>
     
-    <form method='post' id="registerForm">
+    <form method='post' id="registerForm" enctype="multipart/form-data">
     {% csrf_token %}
     <h1 class='register-h1'>You can register your clinic here</h1>
+    <!-- Clinic Image Preview-->
+    <img src="../static/images/map.jpg" id="preview_img" alt="" class="image">
+    <br>
+    <!-- Clinic Image Input File-->
+    <input required name="clinic_image" id="clinic_image" accept=".jpg, .jpeg, .png" type="file" alt="Submit" class="credentials">
+    <br>
     <!-- Clinic Name -->
     <input required type="text" placeholder="Clinic name *" name="clinicName" id="clinicName" class='register-input'>
     <!-- Address -->
@@ -18,7 +24,7 @@
     <input style="pointer-events: none;" required type="text"  placeholder="latitude" name="latitude" id="latitude" class='register-input'>
     <input style="pointer-events: none;" required type="text"  placeholder="longitude" name="longitude" id="longitude" class='register-input'>
     <!-- Email -->
-    <input required type="email" placeholder="Email*" name="email" id="registerEmail" class='register-input' onkeyup="validation();">
+    <input required type="email" placeholder="Email*" name="registerEmail" id="registerEmail" class='register-input' onkeyup="validation();">
     <span id="emailValidationText"></span>
     <!-- Password -->
     <input required type="password" placeholder="Password *" name="password" id="password" class='register-input'>
