@@ -21,7 +21,7 @@ function validation(){
 }
 
 $('#registerForm').on('submit', function(e){
-
+  $('#loader').show();
   var formData = new FormData();
   var files = $('#clinic_image')[0].files[0];
 
@@ -48,9 +48,11 @@ $('#registerForm').on('submit', function(e){
       contentType: false,
       data: formData,
       success: function(data){
+          $('#loader').hide();
           $('#responseMessage').html(data);
       },
       error: function(data){
+          $('#loader').hide();
           alert(data + 'have an error');
       }
 
@@ -58,6 +60,7 @@ $('#registerForm').on('submit', function(e){
 });
 
 $('#loginForm').on('submit', function(e){
+    $('#loader').show();
     e.preventDefault();
     console.log("1");
     $.ajax({
@@ -69,6 +72,7 @@ $('#loginForm').on('submit', function(e){
           csrfmiddlewaretoken: $("input[name='csrfmiddlewaretoken']").val(),
           },
         success: function(data){
+            $('#loader').hide();
             if(data=="Invalid Email or Password!"){
                  $('#responseMessage').html(data);
             }else{
@@ -76,8 +80,9 @@ $('#loginForm').on('submit', function(e){
             }
         },
         error: function(data){
+            $('#loader').hide();
             alert('have an error');
-        }
+        },
   
     });
   });

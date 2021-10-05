@@ -22,7 +22,7 @@
     <br>
 
 
-    <form action="/add_item_firebase/" method='post' enctype="multipart/form-data">
+    <form action="/add_item_firebase/" method='post' enctype="multipart/form-data" id="add_item_form">
     {% csrf_token %}
     <!-- Image Preview-->
     <img src="../static/images/map.jpg" id="preview_img" alt="" class="image">
@@ -50,5 +50,7 @@
         <h3>{{ message }}</h3>
         {% endfor %}
     {% endif %}
+
+    <div id="loader"></div>
 </body>
 </html>

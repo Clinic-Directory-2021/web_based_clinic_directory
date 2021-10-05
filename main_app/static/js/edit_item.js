@@ -36,3 +36,7 @@ $(function(){
     });
   
   });
+
+  $('#edit_item_form').on('submit', function(e){
+    $('#loader').show();
+  });

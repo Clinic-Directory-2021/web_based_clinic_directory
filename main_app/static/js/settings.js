@@ -22,6 +22,8 @@ function edit_clinic_info(){
 }
 
 $('#settingsForm').on('submit', function(e){
+    $('#loader').show();
+
     var formData = new FormData();
     var files = $('#clinic_image')[0].files[0];
   
@@ -45,6 +47,7 @@ $('#settingsForm').on('submit', function(e){
         contentType: false,
         data: formData,
         success: function(data){
+            $('#loader').hide();
             $('#responseMessage').html(data);
 
             edit.style.display = "block";
@@ -56,6 +59,7 @@ $('#settingsForm').on('submit', function(e){
 
         },
         error: function(data){
+            $('#loader').hide();
             alert('have an error');
         }
   
