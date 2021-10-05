@@ -9,6 +9,7 @@ import firebase_admin
 import requests
 import json
 
+import folium
 
 config={
     "apiKey": "AIzaSyDwWsW--ZHaZIOE4OXu5VhMIclZad8zDYw",
@@ -32,9 +33,36 @@ firestoreDB = firestore.client()
 storage = firebase.storage()
 
 # Create your views here.
+
 def index(request):
+    #map Size
+    #f = folium.Figure(width=1200, height=1000)
+
+    #create Map and zoom on Malolos, Bulacan Philippines
+    map = folium.Map(location =[14.8527, 120.8160], zoom_start = 13)
+    
+    users = firestoreDB.collection('users').get()
+
+    for user in users:
+        value = user.to_dict()
+        latitude = value['latitude']
+        longitude = value['longitude']
+
+        folium.Marker([latitude, longitude], 
+        popup= "<img style=\"width:200px;\" src=\""+value['clinic_img_url']+"\">"+"<b>Clinic Name:</b><br>" + value['clinic_name'] + "<br><br><b>Clinic Address:</b><br>" + value['clinic_address'], 
+        icon=folium.Icon(color="red", icon="fa-paw", prefix='fa'),
+        tooltip= value['clinic_name']).add_to(map)
+        
+    # Get html representation of the map
+    map = map._repr_html_()
+
+    #Store the html representation of the map to data variable
+    data = {
+        'map': map,
+    }
+
     if 'user_id' not in request.session:
-        return render(request,'index.html')
+        return render(request,'index.html', data)
     else:
         return redirect('/homepage')
 
@@ -59,11 +87,34 @@ def homepage(request):
         return redirect('/login')
 
 def register(request):
-    return render(request,'register.html')
+    #create Map and zoom on Malolos, Bulacan Philippines
+    map = folium.Map(location =[14.8527, 120.8160], zoom_start = 13)
+
+    map.add_child(folium.LatLngPopup())
+
+    #map.add_child(folium.ClickForMarker())
+
+    # Get html representation of the map
+    map = map._repr_html_()
+
+    
+
+    #Store the html representation of the map to data variable
+    data = {
+        'map': map,
+    }
+
+    return render(request,'register.html', data)
 
 def register_user_firebase(request):
+    clinicImage =  request.FILES['clinicImage']
+    fileName = request.POST.get('fileName')
+    
+
     clinicName = request.POST.get('clinicName')
     clinicAddress = request.POST.get('clinicAddress')
+    latitude = request.POST.get('latitude')
+    longitude = request.POST.get('longitude')
     email = request.POST.get('email')
     password = request.POST.get('password')
     confirm_password = request.POST.get('confirm_password')
@@ -73,10 +124,22 @@ def register_user_firebase(request):
         try:
             #register email and password to firebase auth
             user = auth.create_user_with_email_and_password(email, password)
+
+            img_file_directory = user['localId']+"/clinic_images/"+ fileName
+
+            #upload product image
+            storage.child(img_file_directory).put(clinicImage, user['localId'])
+
+
+            
             doc_ref = firestoreDB.collection('users').document(user['localId'])
             doc_ref.set({
+                'clinic_img_url' : storage.child(img_file_directory).get_url(user['localId']),
+                'clinic_img_directory' : img_file_directory,
                 'clinic_name': clinicName,
                 'clinic_address': clinicAddress,
+                'latitude': latitude,
+                'longitude': longitude,
                 'email': email,
                 'password': password,
                 'clinic_description': clinicDescription,
@@ -114,21 +177,54 @@ def logout(request):
     return redirect('/')
 
 def settings(request):
+
+    #map Size
+    f = folium.Figure(width=800, height=500)
+
+    #create Map and zoom on Malolos, Bulacan Philippines
+    map = folium.Map(location =[14.8527, 120.8160], zoom_start = 13).add_to(f)
+
+    map.add_child(folium.LatLngPopup())
+
+    #map.add_child(folium.ClickForMarker())
+
+    # Get html representation of the map
+    map = map._repr_html_()
+
     result = firestoreDB.collection('users').document(request.session['user_id']).get()
     result.to_dict()
     return render(request,'settings.html', {
         'user_data': result.to_dict(),
+        'map': map,
         })
 
 def save_clinic_info(request):
+    clinicImage =  request.FILES['clinicImage']
+    fileName = request.POST.get('fileName')
+    img_file_directory = request.session['user_id']+"/clinic_images/"+ fileName
+    old_img_file_directory = request.POST.get('old_image_directory')
+
     editClinicName = request.POST.get('editClinicName')
     editClinicAddress = request.POST.get('editClinicAddress')
+    editLatitude = request.POST.get('editLatitude')
+    editLongitude = request.POST.get('editLongitude')
     editClinicDescription = request.POST.get('editClinicDescription')
 
     doc_ref = firestoreDB.collection('users').document(request.session['user_id'])
+
+    #delete the old picture
+    storage.delete(old_img_file_directory, request.session['user_id'])
+    
+    #upload product image
+    storage.child(img_file_directory).put(clinicImage, request.session['user_id'])
+
     doc_ref.update({
+        'clinic_img_url' : storage.child(img_file_directory).get_url(request.session['user_id']),
+        'clinic_img_directory' : img_file_directory,
         'clinic_address': editClinicAddress,
         'clinic_name': editClinicName,
+        'latitude': editLatitude,
+        'longitude': editLongitude,
         'clinic_description': editClinicDescription,
         })
     return HttpResponse('Information Updated Successfully!')

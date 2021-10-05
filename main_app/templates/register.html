@@ -1,15 +1,34 @@
 {% extends "base.html" %}
 {% block content %}
 <div class='register-content'>
-    <form method='post' id="registerForm">
+    
+    <form method='post' id="registerForm" enctype="multipart/form-data">
     {% csrf_token %}
     <h1 class='register-h1'>You can register your clinic here</h1>
-    <input type="text" placeholder="Clinic name *" name="clinicName" id="clinicName" class='register-input'>
-    <input type="text" placeholder="Clinic address *" name="clinicAddress" id="clinicAddress" class='register-input'>
-    <input type="email" placeholder="Email*" name="email" id="registerEmail" class='register-input' onkeyup="validation();">
+    <!-- Clinic Image Preview-->
+    <img src="../static/images/map.jpg" id="preview_img" alt="" class="image">
+    <br>
+    <!-- Clinic Image Input File-->
+    <input required name="clinic_image" id="clinic_image" accept=".jpg, .jpeg, .png" type="file" alt="Submit" class="credentials">
+    <br>
+    <!-- Clinic Name -->
+    <input required type="text" placeholder="Clinic name *" name="clinicName" id="clinicName" class='register-input'>
+    <!-- Address -->
+    <input required type="text" placeholder="Clinic address *" name="clinicAddress" id="clinicAddress" class='register-input'>
+    <h3> Please Select Exact Location on the Map</h3>
+     <!-- Map -->
+     {% autoescape off %}
+     {{map}}
+     {% endautoescape %}
+
+    <input style="pointer-events: none;" required type="text"  placeholder="latitude" name="latitude" id="latitude" class='register-input'>
+    <input style="pointer-events: none;" required type="text"  placeholder="longitude" name="longitude" id="longitude" class='register-input'>
+    <!-- Email -->
+    <input required type="email" placeholder="Email*" name="registerEmail" id="registerEmail" class='register-input' onkeyup="validation();">
     <span id="emailValidationText"></span>
-    <input type="password" placeholder="Password *" name="password" id="password" class='register-input'>
-    <input type="password" placeholder="Confirm password *" name="confirm_password" id="confirm_password" class='register-input'>
+    <!-- Password -->
+    <input required type="password" placeholder="Password *" name="password" id="password" class='register-input'>
+    <input required type="password" placeholder="Confirm password *" name="confirm_password" id="confirm_password" class='register-input'>
     <textarea rows="4" cols="50" placeholder="Add description"  name="clinicDescription" id="clinicDescription" class="register-input"></textarea>
     <br>
     <h3 id="responseMessage"></h3>
@@ -19,4 +38,5 @@
     <a href="{% url 'login' %}" class="register-link" style='text-align: center;'>Already a member? Login here.</a>
     </form>
 </div>
+<div id="loader"></div>
 {% endblock content %}

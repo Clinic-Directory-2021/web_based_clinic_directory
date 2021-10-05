@@ -19,7 +19,7 @@
     </div>
     {% for key, values in item_data.items reversed %}
     
-    {% if searchField in values.product_name %}
+    {% if searchField|lower in values.product_name|lower %}
     <script>
       $("#not_found").hide();
     </script>
@@ -42,7 +42,7 @@
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <!-- Start Form-->
-        <form action="/edit_item_firebase/" method='post' enctype="multipart/form-data">
+        <form action="/edit_item_firebase/" method='post' id="edit_item_form" enctype="multipart/form-data">
           {% csrf_token %}
         <div class="modal-body">
             <!-- Image Preview-->
@@ -71,5 +71,6 @@
       </div>
     </div>
   </div>
+  <div id="loader"></div>
  <script src="{% static 'js/homepage.js' %}"></script>
 {% endblock %}

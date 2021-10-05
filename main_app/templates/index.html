@@ -8,13 +8,15 @@
             
             <!--RESULT-->
             <div class='preview'>
-            
+
             </div>
             </div>
     </div>
     <div class="column">
         <div class='map'>
-            <img src="../static/images/map.jpg" alt="">
+            {% autoescape off %}
+                {{map}}
+            {% endautoescape %}
         </div>
     </div>
   </div>

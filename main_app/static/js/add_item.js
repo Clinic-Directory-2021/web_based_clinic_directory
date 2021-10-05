@@ -33,6 +33,9 @@ function toHomepage(){
 
 });
  
+$('#add_item_form').on('submit', function(e){
+  $('#loader').show();
+});
 
 /*
  var current_number_of_items = $('#current_number_of_items').val();
