@@ -5,20 +5,23 @@
         <div class='result'>
             <!-- Search bar-->
             <input type="text" class='search-bar' placeholder="Search place, clinic name, or item"> <button class="search-button" onclick="hello()"> Search </button>
-            
             <!--RESULT-->
             <div class='preview'>
+                {% for values in user_data %}
                 <div class="preview-item" onclick="showModal()">
-                    <img src="../static/images/map.jpg" alt="image">
+                    <img src="{{values.clinic_img_url}}" alt="image">
                     <div class="details">
-                        Clinic name
+                        {{values.clinic_name}}
                         <br>
                         Rate
                         <br>
                         <br>
-                        <p>Location</p>
+                        <p>{{values.clinic_address}}</p>
+                        
                     </div>
                 </div>
+                {% endfor %}
+
             </div>
             </div>
 
@@ -67,7 +70,7 @@
     </div>
   </div>
 
-  <div class="search-modal">
+  <div style="display: none;" class="search-modal">
       <!-- Search result item-->
       <div class="search-result">
           <img src="../static/images/map.jpg" alt="">

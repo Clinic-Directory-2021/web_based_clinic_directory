@@ -43,8 +43,13 @@ def index(request):
     
     users = firestoreDB.collection('users').get()
 
+    user_data = []
+
     for user in users:
         value = user.to_dict()
+
+        user_data.append(value)
+
         latitude = value['latitude']
         longitude = value['longitude']
 
@@ -59,6 +64,7 @@ def index(request):
     #Store the html representation of the map to data variable
     data = {
         'map': map,
+        'user_data': user_data,
     }
 
     if 'user_id' not in request.session:
