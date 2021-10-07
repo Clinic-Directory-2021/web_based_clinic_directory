@@ -8,7 +8,7 @@
             <!--RESULT-->
             <div class='preview'>
                 {% for values in user_data %}
-                <div class="preview-item" onclick="showModal()">
+                <div class="preview-item" onclick="showModal('{{values.clinic_name}}', '{{values.clinic_img_url}}', '{{values.clinic_address}}')">
                     <img src="{{values.clinic_img_url}}" alt="image">
                     <div class="details">
                         {{values.clinic_name}}
@@ -36,14 +36,16 @@
   </div>
 <div class="grey"></div>
   <div class="item-modal">
-    <img src="../static/images/map.jpg" alt="image">
+    <img src="../static/images/map.jpg" id="item-modal-img" alt="image">
     <div class="details">
         <b>Clinic name</b>
+        <p id="item-modal-name"></p>
         <br>
         rate
         <br>
         <br>
         <p>Location</p>
+        <p id="item-modal-address"></p>
         Contact number
         <p align='left' style="font-size: 12px;">Available Items</p>
         <div class="available-item">

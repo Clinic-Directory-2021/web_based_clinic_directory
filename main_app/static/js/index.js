@@ -4,9 +4,15 @@ function show_menu(){
 function close_menu(){
     $('.menu-list').hide();
 }
-function showModal(){
+function showModal(clinic_name, img_url, clinic_address){
     $('.item-modal').show();
     $('.grey').show();
+
+    $("#item-modal-img").attr("src",img_url);
+
+    $('#item-modal-name').text(clinic_name);
+
+    $('#item-modal-address').text(clinic_address);
     
 }
 
