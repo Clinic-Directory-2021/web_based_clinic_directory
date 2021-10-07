@@ -49,6 +49,7 @@ button:active{
           height: 100vh;
           opacity: 0.9;
           background-color: black;
+          z-index: 1;
       }
       .menu-list .menu-header{
           width: 100%;

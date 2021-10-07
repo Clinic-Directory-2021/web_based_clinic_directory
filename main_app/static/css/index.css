@@ -2,6 +2,27 @@
     outline: none !important;
     border:3px solid #E0C097;
 }
+.item-modal{
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        background-color: whitesmoke;
+        border-radius: 5px;
+        border: 1px solid gray;
+        display: none;
+        padding:10px;
+}
+.grey{
+    width: 100%;
+    height: 100vh;
+    background-color: gray;
+    opacity: 0.5;
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: none;
+}
 @media (min-width:320px)  { /* smartphones, iPhone, portrait 480x320 phones */ 
     .header{
         background-color:#B85C38;
@@ -39,15 +60,125 @@
          width: 100%;
          height: 100%;
      }
+     .preview-item{
+         width: 100%;
+         height: 120px;
+         border: 1px solid #B85C38;
+         border-radius: 5px;
+        display: flex;
+        cursor: pointer;
+        padding: 5px;
+     }
+     .preview-item:hover{
+         background-color: #E0C097;
+         border: 1px solid #E0C097;
+     }
+     .preview-item img{
+         width: 40%;
+         height: 100%;
+     }
+     .preview-item .details{
+         padding: 10px;
+         width: 60%;
+         height: 100%;
+         overflow-y: hidden;
+     }
+     .item-modal{
+         width: 90%;
+         height: 500px;
+         margin-right: 10px;
+         text-align: center;
+     }
+     .item-modal img{
+         width: 100%;
+         height: 50%;
+     }
+     .item-modal .available-item .item{
+         width: 100%;
+         height: 70px;
+         border: 1px solid black;
+         display: flex;
+         padding: 5px;
+     }
+     .item img{
+         width: 20%;
+         height: 100%;
+     }
+     .item .details{
+        text-align: center;
+        width: 80%;
+     }
+     .search-modal{
+         width: 95%;
+         height: 300px; /*This should be automatic, remove this when data is real*/
+         border: 1px solid #E0C097;
+         position: absolute;
+         top:140px;
+         left: 0;
+         margin-left: 10px;
+         background-color: white;
+         border-radius: 5px;
+     }
+     .search-modal .search-result{
+         width: 100%;
+         height: 120px;
+         border-bottom:1px solid #E0C097;
+         padding: 5px;
+         display: flex;
+     }
+     .search-result img{
+         width: 30%;
+         height: 100%;
+     }
+     .search-result .details{
+         width: 70%;
+         height: 100%;
+         text-align: center;
+     }
 }
 @media (min-width:481px)  { /* portrait e-readers (Nook/Kindle), smaller tablets @ 600 or @ 640 wide. */ 
-   
+    .preview-item img{
+        width: 30%;
+        height: 100%;
+    }
+    .preview-item .details{
+        padding: 10px;
+        width: 70%;
+        height: 100%;
+        overflow-y: hidden;
+    }
 }
 @media (min-width:641px)  { /* portrait tablets, portrait iPad, landscape e-readers, landscape 800x480 or 854x480 phones */ 
-    
+    .preview-item img{
+        width: 25%;
+        height: 100%;
+    }
+    .preview-item .details{
+        padding: 10px;
+        width: 70%;
+        height: 100%;
+        overflow-y: hidden;
+    }
 }
 @media (min-width:961px)  { /* tablet, landscape iPad, lo-res laptops ands desktops */ 
-    
+    .preview-item img{
+        width: 20%;
+        height: 100%;
+    }
+    .preview-item .details{
+        padding: 10px;
+        width: 70%;
+        height: 100%;
+        overflow-y: hidden;
+    }
+    .item-modal{
+        width: 50%;
+        height: 600px;
+        margin-right: 10px;
+    }
+    .search-modal{
+        width: 68%;
+    }
 }
 @media (min-width:1025px) { /* big landscape tablets, laptops, and desktops */ 
     /* Create two equal columns that floats next to each other */
@@ -66,7 +197,25 @@
   .map{
       height: 100%;
   }
+  .search-modal{
+    width: 46%;
+    top:150px;
+}
 }
 @media (min-width:1281px) { /* hi-res laptops and desktops */ 
-    
+    .preview-item img{
+        width: 15%;
+        height: 100%;
+    }
+    .preview-item .details{
+        padding: 10px;
+        width: 70%;
+        height: 100%;
+        overflow-y: hidden;
+    }
+    .item-modal{
+        width: 30%;
+        height: 600px;
+        margin-right: 10px;
+    }
 }
