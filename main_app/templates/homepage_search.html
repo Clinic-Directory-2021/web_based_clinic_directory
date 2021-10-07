@@ -24,9 +24,9 @@
       $("#not_found").hide();
     </script>
 
-    <div  onclick="editItem('{{key}}','{{values.product_img_url}}','{{values.product_img_directory}}' , '{{values.product_name}}' , '{{values.product_price}}' )" id="{{key}}" style="background-image: url({{values.product_img_url}});background-size: cover;" class="item" data-bs-toggle="modal" data-bs-target="#exampleModal">
-  
-        <p>product name: </p> {{values.product_name}} <br>
+    <div  onclick="editItem('{{key}}','{{values.product_img_url}}','{{values.product_img_directory}}' , '{{values.product_name}}' , '{{values.product_price}}' )" id="{{key}}" style="background-size: cover;" class="item" data-bs-toggle="modal" data-bs-target="#exampleModal"> <!--This is the query i removed--><!--background-image: url({{values.product_img_url}});-->
+      <img src="{{values.product_img_url}}" alt="">
+      <b>{{values.product_name}}</b>
     </div>
     {% endif %}
     {% endfor %}
