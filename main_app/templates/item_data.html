@@ -1,0 +1,11 @@
+{% for key, values in item_data.items reversed %}
+            <div class="item">
+                <img src="{{values.product_img_url}}" alt="image">
+                <div class="details">
+                    <b>Product name </b>
+                    {{values.product_name}}
+                    <br>
+                    Stocks: 0
+                </div>
+            </div>
+            {% endfor %}

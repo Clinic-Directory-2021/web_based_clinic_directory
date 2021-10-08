@@ -27,8 +27,8 @@
     <input required type="email" placeholder="Email*" name="registerEmail" id="registerEmail" class='register-input' onkeyup="validation();">
     <span id="emailValidationText"></span>
     <!-- Password -->
-    <input required type="password" placeholder="Password *" name="password" id="password" class='register-input'>
-    <input required type="password" placeholder="Confirm password *" name="confirm_password" id="confirm_password" class='register-input'>
+    <input required type="password" minlength="6" placeholder="Password *" name="password" id="password" class='register-input'>
+    <input required type="password" minlength="6" placeholder="Confirm password *" name="confirm_password" id="confirm_password" class='register-input'>
     <textarea rows="4" cols="50" placeholder="Add description"  name="clinicDescription" id="clinicDescription" class="register-input"></textarea>
     <br>
     <h3 id="responseMessage"></h3>

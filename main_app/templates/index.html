@@ -7,8 +7,14 @@
             <input type="text" class='search-bar' placeholder="Search place, clinic name, or item"> <button class="search-button" onclick="hello()"> Search </button>
             <!--RESULT-->
             <div class='preview'>
+                <form id="indexForm" method='post' enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <input type="hidden" id="id_field">
+                    <input type="submit" hidden>
+                    </form>
                 {% for values in user_data %}
-                <div class="preview-item" onclick="showModal('{{values.clinic_name}}', '{{values.clinic_img_url}}', '{{values.clinic_address}}')">
+                <div class="preview-item" onclick="showModal('{{values.clinic_name}}', '{{values.clinic_img_url}}', '{{values.clinic_address}}', '{{values.user_id}}')">
+                   
                     <img src="{{values.clinic_img_url}}" alt="image">
                     <div class="details">
                         {{values.clinic_name}}
@@ -48,26 +54,20 @@
         <p id="item-modal-address"></p>
         Contact number
         <p align='left' style="font-size: 12px;">Available Items</p>
+        <div id="loading"></div>
         <div class="available-item">
             <!-- Available item design -->
-            <div class="item">
+            <!-- <div class="item">
                 <img src="../static/images/map.jpg" alt="image">
                 <div class="details">
                     <b>Product name</b>
                     <br>
                     Stocks: 0
                 </div>
-            </div>
-            <div class="item">
-                <img src="../static/images/map.jpg" alt="image">
-                <div class="details">
-                    <b>Product name</b>
-                    <br>
-                    Stocks: 0
-                </div>
-            </div>
-
+            </div> -->
+            
         </div>
+        
 
     </div>
   </div>

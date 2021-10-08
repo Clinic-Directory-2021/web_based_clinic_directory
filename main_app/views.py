@@ -3,6 +3,7 @@ from firebase_admin import credentials
 from firebase_admin import firestore
 from django.contrib import messages
 from django.http import HttpResponse
+from pyasn1.type.univ import Null
 
 import pyrebase
 import firebase_admin
@@ -10,6 +11,9 @@ import requests
 import json
 
 import folium
+
+from django.template.loader import render_to_string
+from django.template import loader
 
 config={
     "apiKey": "AIzaSyDwWsW--ZHaZIOE4OXu5VhMIclZad8zDYw",
@@ -39,8 +43,10 @@ def index(request):
     #f = folium.Figure(width=1200, height=1000)
 
     #create Map and zoom on Malolos, Bulacan Philippines
-    map = folium.Map(location =[14.8527, 120.8160], zoom_start = 13)
+    map = folium.Map(location =[14.8527, 120.8160], zoom_start = 13, min_zoom=13)
+
     
+
     users = firestoreDB.collection('users').get()
 
     user_data = []
@@ -61,16 +67,46 @@ def index(request):
     # Get html representation of the map
     map = map._repr_html_()
 
-    #Store the html representation of the map to data variable
-    data = {
-        'map': map,
-        'user_data': user_data,
-    }
+    if request.method == 'POST':
+        userId = request.POST.get('user_id_post')
+        items = firestoreDB.collection('items').document(userId).get()
+        data = {
+            'map': map,
+            'user_data': user_data,
+            'item_data': items.to_dict(),
+         }
+        return render(request, 'item_data.html', {'item_data':items.to_dict()})
+        #return HttpResponse(json.dumps(items.to_dict()))
+    else:
+        data = {
+            'map': map,
+            'user_data': user_data,
+        }
+    
 
     if 'user_id' not in request.session:
         return render(request,'index.html', data)
     else:
         return redirect('/homepage')
+
+
+# def getItemData(request):
+#     userId = request.POST.get('user_id_post')
+#     items = firestoreDB.collection('items').document(userId).get()
+
+#     #rendered = render_to_string('index.html', {'item_data': items.to_dict()})
+#     # t = loader.get_template('index.html')
+#     # c = {
+#     #     'item_data': items.to_dict(),
+#     #     }
+
+#     # return render(request, 'index.html', {
+#     #     'item_data': items.to_dict(),
+#     # }, content_type='application/xhtml+xml')
+    
+#     #return HttpResponse(t.render(c, request), content_type='application/xhtml+xml')
+#     # json.dumps( items.to_dict() )
+#     return HttpResponse(json.dumps(items.to_dict()))
 
 def login(request):
     #meaning if user_id session variable is not set then execute this code
@@ -94,7 +130,7 @@ def homepage(request):
 
 def register(request):
     #create Map and zoom on Malolos, Bulacan Philippines
-    map = folium.Map(location =[14.8527, 120.8160], zoom_start = 13)
+    map = folium.Map(location =[14.8527, 120.8160], zoom_start = 13, min_zoom=13)
 
     map.add_child(folium.LatLngPopup())
 
@@ -140,6 +176,7 @@ def register_user_firebase(request):
             
             doc_ref = firestoreDB.collection('users').document(user['localId'])
             doc_ref.set({
+                'user_id': user['localId'],
                 'clinic_img_url' : storage.child(img_file_directory).get_url(user['localId']),
                 'clinic_img_directory' : img_file_directory,
                 'clinic_name': clinicName,
@@ -188,7 +225,7 @@ def settings(request):
     f = folium.Figure(width=800, height=500)
 
     #create Map and zoom on Malolos, Bulacan Philippines
-    map = folium.Map(location =[14.8527, 120.8160], zoom_start = 13).add_to(f)
+    map = folium.Map(location =[14.8527, 120.8160], zoom_start = 13, min_zoom=13).add_to(f)
 
     map.add_child(folium.LatLngPopup())
 
