@@ -1,10 +1,7 @@
 {% if search_item|length > 0 %}
     {% for values in user_data %}
-        
-
-
             {% if search_item|lower in values.clinic_name|lower %}
-            <div class="search-result">
+            <div class="search-result" onclick="showModal('{{values.clinic_name}}', '{{values.clinic_img_url}}', '{{values.clinic_address}}', '{{values.user_id}}')">
                 <img src="{{values.clinic_img_url}}" alt="">
                 <div class="details">
                     {{values.clinic_name}}
@@ -17,7 +14,7 @@
             </div>
 
             {% elif search_item|lower in values.clinic_address|lower %}
-            <div class="search-result">
+            <div class="search-result" onclick="showModal('{{values.clinic_name}}', '{{values.clinic_img_url}}', '{{values.clinic_address}}', '{{values.user_id}}')">
                 <img src="{{values.clinic_img_url}}" alt="">
                 <div class="details">
                     {{values.clinic_name}}
@@ -28,23 +25,35 @@
                     {{values.clinic_address}}
                 </div>
             </div>
+
+            {% else %}
+
+                {% for items in item_data %}
+                {% for key, item_value in items.items %}
+                        {% if search_item|lower in item_value.product_name|lower %}
+                
+                                {% if item_value.belong_to == values.user_id %}
+                                <div class="search-result" onclick="showModal('{{values.clinic_name}}', '{{values.clinic_img_url}}', '{{values.clinic_address}}', '{{values.user_id}}')">
+                                    <img src="{{values.clinic_img_url}}" alt="">
+                                        <div class="details">
+                                            {{values.clinic_name}}
+                                            <br>
+                                            Rate
+                                            <br>
+                                            <br>
+                                            {{values.clinic_address}}
+                                        </div>
+                                </div>
+                                {% endif %}
+                
+                        {% endif %}
+                        {% endfor %}            
+                    {% endfor %}
+
             {% endif %}
         
     {% endfor %}
 
-    {% for items in item_data %}
-        {% for key, values in items.items %}
-                {% if search_item|lower in values.product_name|lower %}
-                    <div class="search-result">
-                        <img src="{{values.product_img_url}}" alt="">
-                        <div class="details">
-                            {{values.product_name}}
-                            <br>
-                            Rate
-                        </div>
-                    </div>
-                    {% endif %}
-        {% endfor %}            
-    {% endfor %}
+
 
 {% endif %}

@@ -21,6 +21,31 @@ function close_menu(){
     $('.menu-list').hide();
 }
 
+$('#search-clinic-form').on('submit', function(e){
+    e.preventDefault();
+    $( ".preview-item" ).remove();
+    console.log("1");
+    $.ajax({
+        type: 'post',
+        url: "/search_clinic/",
+        data: {
+            search_item: $('#searchItem').val(),
+            csrfmiddlewaretoken: $("input[name='csrfmiddlewaretoken']").val(),
+          },
+        success: function(data){
+            $( ".preview-item" ).remove();
+            $('.preview').append(data);
+        },
+        error: function(data){
+            alert('have an error');
+        },
+  
+    });
+});
+
+
+
+
 function suggestSearch(){
     $( ".search-result" ).remove();
     $( ".search-modal" ).show();
@@ -152,3 +177,4 @@ if($('.item-modal:visible').length == 0)
 else{
     
 }
+

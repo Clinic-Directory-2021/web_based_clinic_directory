@@ -1,0 +1,61 @@
+{% for values in user_data %}
+
+{% if search_item|lower in values.clinic_name|lower %}
+    <div class="preview-item" onclick="showModal('{{values.clinic_name}}', '{{values.clinic_img_url}}', '{{values.clinic_address}}', '{{values.user_id}}')">
+    
+        <img src="{{values.clinic_img_url}}" alt="image">
+        <div class="details">
+            {{values.clinic_name}}
+            <br>
+            Rate
+            <br>
+            <br>
+            <p>{{values.clinic_address}}</p>
+            
+        </div>
+    </div>
+
+{% elif search_item|lower in values.clinic_address|lower %}
+<div class="preview-item" onclick="showModal('{{values.clinic_name}}', '{{values.clinic_img_url}}', '{{values.clinic_address}}', '{{values.user_id}}')">
+    
+    <img src="{{values.clinic_img_url}}" alt="image">
+    <div class="details">
+        {{values.clinic_name}}
+        <br>
+        Rate
+        <br>
+        <br>
+        <p>{{values.clinic_address}}</p>
+        
+    </div>
+</div>
+{% endif %}
+{% endfor %}
+
+{% for items in item_data %}
+{% for key, values in items.items %}
+        {% if search_item|lower in values.product_name|lower %}
+
+            {% for user in user_data %}
+
+                {% if values.belong_to == user.user_id %}
+                <div class="preview-item" onclick="showModal('{{user.clinic_name}}', '{{user.clinic_img_url}}', '{{user.clinic_address}}', '{{user.user_id}}')">
+            
+                    <img src="{{user.clinic_img_url}}" alt="image">
+                    <div class="details">
+                        {{user.clinic_name}}
+                        <br>
+                        Rate
+                        <br>
+                        <br>
+                        <p>{{user.clinic_address}}</p>
+                        
+                    </div>
+                </div>
+                {% endif %}
+
+            {% endfor %} 
+
+        {% endif %}
+        {% endfor %}            
+    {% endfor %}
