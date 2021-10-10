@@ -1,0 +1,50 @@
+{% if search_item|length > 0 %}
+    {% for values in user_data %}
+        
+
+
+            {% if search_item|lower in values.clinic_name|lower %}
+            <div class="search-result">
+                <img src="{{values.clinic_img_url}}" alt="">
+                <div class="details">
+                    {{values.clinic_name}}
+                    <br>
+                    Rate
+                    <br>
+                    <br>
+                    {{values.clinic_address}}
+                </div>
+            </div>
+
+            {% elif search_item|lower in values.clinic_address|lower %}
+            <div class="search-result">
+                <img src="{{values.clinic_img_url}}" alt="">
+                <div class="details">
+                    {{values.clinic_name}}
+                    <br>
+                    Rate
+                    <br>
+                    <br>
+                    {{values.clinic_address}}
+                </div>
+            </div>
+            {% endif %}
+        
+    {% endfor %}
+
+    {% for items in item_data %}
+        {% for key, values in items.items %}
+                {% if search_item|lower in values.product_name|lower %}
+                    <div class="search-result">
+                        <img src="{{values.product_img_url}}" alt="">
+                        <div class="details">
+                            {{values.product_name}}
+                            <br>
+                            Rate
+                        </div>
+                    </div>
+                    {% endif %}
+        {% endfor %}            
+    {% endfor %}
+
+{% endif %}

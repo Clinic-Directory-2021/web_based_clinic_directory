@@ -90,23 +90,31 @@ def index(request):
         return redirect('/homepage')
 
 
-# def getItemData(request):
-#     userId = request.POST.get('user_id_post')
-#     items = firestoreDB.collection('items').document(userId).get()
+def getSearchData(request):
+    if request.method == 'POST':
+        search_item = request.POST.get('search_item')
 
-#     #rendered = render_to_string('index.html', {'item_data': items.to_dict()})
-#     # t = loader.get_template('index.html')
-#     # c = {
-#     #     'item_data': items.to_dict(),
-#     #     }
+    users = firestoreDB.collection('users').get()
 
-#     # return render(request, 'index.html', {
-#     #     'item_data': items.to_dict(),
-#     # }, content_type='application/xhtml+xml')
-    
-#     #return HttpResponse(t.render(c, request), content_type='application/xhtml+xml')
-#     # json.dumps( items.to_dict() )
-#     return HttpResponse(json.dumps(items.to_dict()))
+    items = firestoreDB.collection('items').get()
+
+    user_data = []
+
+    item_data = []
+
+    for user in users:
+        value = user.to_dict()
+        user_data.append(value)
+
+    for item in items:
+        item_value = item.to_dict()
+        item_data.append(item_value)
+
+    return render(request, 'search_suggest.html', {
+        'user_data': user_data,
+        'search_item': search_item,
+        'item_data': item_data,
+        })
 
 def login(request):
     #meaning if user_id session variable is not set then execute this code
