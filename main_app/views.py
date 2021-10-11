@@ -415,3 +415,6 @@ def search_clinic(request):
         'search_item': search_item,
         'item_data': item_data,
     })
+
+def forgot_password(request):
+    return render(request,'forgot_password.html')

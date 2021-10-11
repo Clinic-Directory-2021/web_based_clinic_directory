@@ -17,4 +17,5 @@ urlpatterns = [
     path('search_item/', views.search_item, name='search_item'),
     path('getSearchData/', views.getSearchData, name='getSearchData'),
     path('search_clinic/', views.search_clinic, name='search_clinic'),
+    path('forgot_password/', views.forgot_password, name='forgot_password'),
 ]
