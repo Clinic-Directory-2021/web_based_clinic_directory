@@ -34,7 +34,9 @@
     <!-- Clinic Image Input File-->
     <input disabled required name="clinic_image" id="clinic_image" accept=".jpg, .jpeg, .png" type="file" alt="Submit" class="credentials">
     <br>
+    <label for="exampleInputEmail1" class="form-label">Clinic name</label>
     <input type="text" disabled placeholder="{{user_data.clinic_name}}" class="credentials">
+    <label for="exampleInputEmail1" class="form-label">Clinic address</label>
     <input type="text" disabled placeholder="{{user_data.clinic_address}}" class="credentials">
     <div id="map" style="position: relative; top: 0; left: 30%; right: 0">
     <h3> Please Select Exact Location on the Map</h3>
@@ -42,10 +44,12 @@
     {% autoescape off %}
     {{map}}
     {% endautoescape %}
-    </div><br>Latitude:
+    </div><br>Latitude:<br>
     <input type="text" id="latitude" disabled placeholder="{{user_data.latitude}}" class="credentials">
-    Longitude: <input type="text" id="longitude" disabled placeholder="{{user_data.longitude}}" class="credentials">
-    <input type="text" disabled placeholder="{{user_data.email}}" class="credentials">
+    Longitude: <input type="text" id="longitude" disabled placeholder="{{user_data.longitude}}" class="credentials"><br>
+    <label for="exampleInputEmail1" class="form-label">Email</label><br>
+    <input type="text" disabled placeholder="{{user_data.email}}" class="credentials"><br>
+    <label for="exampleInputEmail1" class="form-label">Description</label><br>
     <textarea rows="4" cols="50" placeholder="{{user_data.clinic_description}}" class='credentials' disabled></textarea>
     <br>
     <br>
