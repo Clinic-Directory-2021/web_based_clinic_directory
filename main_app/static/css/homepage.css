@@ -55,7 +55,8 @@
         margin-bottom: 10px;
         height: 20%;
         border-radius: 5px;
-        background-color: #E0C097;
+        border: 1px solid #E0C097;
+        padding: 10px;
         cursor: pointer;
         text-align: center;
     }
