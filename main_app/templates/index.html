@@ -4,7 +4,11 @@
     <div class="column">
         <div class='result'>
             <!-- Search bar-->
-            <input type="text" class='search-bar' placeholder="Search place, clinic name, or item"> <button class="search-button" onclick="hello()"> Search </button>
+            <form id="search-clinic-form" method="post">
+                {% csrf_token %}
+                <input required type="text" autocomplete="off" name="search_item" class='search-bar' placeholder="Search place, clinic name, or item" id="searchItem" onkeyup="suggestSearch()"> 
+                <input type="submit" class="search-button">
+            </form>
             <!--RESULT-->
             <div class='preview'>
                 <form id="indexForm" method='post' enctype="multipart/form-data">
@@ -72,20 +76,10 @@
     </div>
   </div>
 
-  <div style="display: none;" class="search-modal">
+  <div class="search-modal">
       <!-- Search result item-->
-      <div class="search-result">
-          <img src="../static/images/map.jpg" alt="">
-          <div class="details">
-              Clinic name
-              <br>
-              Rate
-              <br>
-              <br>
-              Location
-          </div>
-      </div>
-      <div class="search-result">
+      
+      <!-- <div class="search-result">
         <img src="../static/images/map.jpg" alt="">
         <div class="details">
             Clinic name
@@ -94,7 +88,7 @@
             <br>
             <br>
             Location
-        </div>
+        </div> -->
     </div>
     
   </div>

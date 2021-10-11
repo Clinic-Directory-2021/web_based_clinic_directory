@@ -15,5 +15,6 @@ urlpatterns = [
     path('add_item_firebase/', views.add_item_firebase, name='add_item_firebase'),
     path('edit_item_firebase/', views.edit_item_firebase, name='edit_item_firebase'),
     path('search_item/', views.search_item, name='search_item'),
-    # path('getItemData/', views.getItemData, name='getItemData'),
+    path('getSearchData/', views.getSearchData, name='getSearchData'),
+    path('search_clinic/', views.search_clinic, name='search_clinic'),
 ]
