@@ -60,7 +60,7 @@ def index(request):
         longitude = value['longitude']
 
         folium.Marker([latitude, longitude], 
-        popup= "<img style=\"width:200px;\" src=\""+value['clinic_img_url']+"\">"+"<b>Clinic Name:</b><br>" + value['clinic_name'] + "<br><br><b>Clinic Address:</b><br>" + value['clinic_address'], 
+        popup= "<img style=\"width:200px;\" src=\""+value['clinic_img_url']+"\">"+"<b>Clinic Name:</b><br>" + value['clinic_name'] +"<br><br><img src='../static/images/rate.png' alt='' class='rate'><img src='../static/images/rate.png' alt='' class='rate'><img src='../static/images/rate.png' alt='' class='rate'><img src='../static/images/rate.png' alt='' class='rate'><img src='../static/images/rate.png' alt='' class='rate'><br>5.0" + "<br><br><b>Clinic Address:</b><br>" + value['clinic_address']  + "<br><br><b>Contact number:</b><br>", 
         icon=folium.Icon(color="red", icon="fa-paw", prefix='fa'),
         tooltip= value['clinic_name']).add_to(map)
         
@@ -418,3 +418,6 @@ def search_clinic(request):
 
 def forgot_password(request):
     return render(request,'forgot_password.html')
+
+def about(request):
+    return render(request,'about.html')

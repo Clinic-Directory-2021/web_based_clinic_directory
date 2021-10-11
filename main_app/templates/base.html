@@ -21,13 +21,14 @@
 <body>
     <div class='header'>
         <div class='logo'>
-            <h2 onclick="dashboard()">Clinic</h2>
+            <a href="{% url 'dashboard' %}"><img src="../static/images/logo.png" alt="logo" width="50" height="50" style="cursor: pointer;"></a>
         </div>
         <div class="middle">
             <ul>
+                <a href="{% url 'dashboard' %}" style='color:#2D2424;'><li><h4>Dashboard</h4></li></a>
                 <a href="{% url 'login' %}"><li><h4>Login</h4></li></a>
                 <a href="{% url 'register' %}" ><li><h4>Register</h4></li></a>
-                <a href="#" style = "color: #2D2424;"><li><h4>About</h4></li></a>
+                <a href="{% url 'about' %}" style = "color: #2D2424;"><li><h4>About</h4></li></a>
             </ul>
         </div>
         <div class="menu" onclick="show_menu()">

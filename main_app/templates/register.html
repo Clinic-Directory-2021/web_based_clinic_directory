@@ -5,8 +5,11 @@
     <form method='post' id="registerForm" enctype="multipart/form-data">
     {% csrf_token %}
     <h1 class='register-h1'>You can register your clinic here</h1>
+    <br>
+    <h5 align='center'>Towards getting your animal clinic more discoverable</h5><br>
     <!-- Clinic Image Preview-->
     <img src="../static/images/map.jpg" id="preview_img" alt="" class="image">
+    <br>
     <br>
     <!-- Clinic Image Input File-->
     <input required name="clinic_image" id="clinic_image" accept=".jpg, .jpeg, .png" type="file" alt="Submit" class="credentials">
@@ -15,6 +18,7 @@
     <input required type="text" placeholder="Clinic name *" name="clinicName" id="clinicName" class='register-input'>
     <!-- Address -->
     <input required type="text" placeholder="Clinic address *" name="clinicAddress" id="clinicAddress" class='register-input'>
+    <input required type="number" placeholder="Contact number *" name="clinicContact" id="clinicContact" class='register-input'>
     <h3> Please Select Exact Location on the Map</h3>
      <!-- Map -->
      {% autoescape off %}
@@ -31,6 +35,11 @@
     <input required type="password" minlength="6" placeholder="Confirm password *" name="confirm_password" id="confirm_password" class='register-input'>
     <textarea rows="4" cols="50" placeholder="Add description"  name="clinicDescription" id="clinicDescription" class="register-input"></textarea>
     <br>
+    <select class="form-select form-select-lg mb-3" aria-label=".form-select-lg example" disabled>
+        <option selected>Select your payment method</option>
+        <option value="1">Gcash</option>
+      </select>
+      <p>The system is under development. The payment method is currently disabled.</p>
     <h3 id="responseMessage"></h3>
     <input type="submit" value="Register" class="register-button" />
     <br>
