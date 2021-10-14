@@ -17,9 +17,14 @@
     <div class="add-item" onclick="toAddItem()">
     </div>
     {% for key, values in item_data.items reversed %}
-    <div  onclick="editItem('{{key}}','{{values.product_img_url}}','{{values.product_img_directory}}' , '{{values.product_name}}' , '{{values.product_price}}' )" id="{{key}}" style="background-size: cover;" class="item" data-bs-toggle="modal" data-bs-target="#exampleModal"> <!--This is the query i removed--><!--background-image: url({{values.product_img_url}});-->
-        <img src="{{values.product_img_url}}" alt="">
-        <b>{{values.product_name}}</b>
+    <div  onclick="editItem('{{key}}','{{values.product_img_url}}','{{values.product_img_directory}}' , '{{values.product_name}}' , '{{values.product_price}}' )" id="{{key}}" style="background-size: cover;" class="item" > <!--This is the query i removed--><!--background-image: url({{values.product_img_url}});-->
+      <p style='background-color:#42ba96; font-weight: bold; color:white;'>Available</p><!--Hex color if it's not available #ff0e0e-->
+        <img src="{{values.product_img_url}}" alt="" data-bs-toggle="modal" data-bs-target="#exampleModal"><br><br>
+        <b>{{values.product_name}}</b><br><br>
+    <div style="display: flex;">
+      <button type="button" class="btn btn-success" style="margin:0 10px 0 10px; width: 150px; height: 50px;">Available</button>
+      <button type="button" class="btn btn-danger" style="width: 150px; height: 50px;">Unavailable</button>
+    </div>
     </div>
     {% endfor %}
 </div>

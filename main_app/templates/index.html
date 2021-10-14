@@ -11,6 +11,8 @@
             </form>
             <!--RESULT-->
             <div class='preview'>
+                <br>
+                <h3 align='center'>Available Clinics</h3>
                 <form id="indexForm" method='post' enctype="multipart/form-data">
                     {% csrf_token %}
                     <input type="hidden" id="id_field">
@@ -64,8 +66,9 @@
         <br>
         <br>
         <p id="item-modal-address"></p>
-        <p></p><!--Dito ilalagay yung description-->
-        Contact number
+        <p style="font-size: 14px;"><strong>Opening and Closing time</strong></p><!--Dito ilalagay yung open and closing time-->
+        <p style="font-size: 14px;"><em>Description here</em></p><!--Dito ilalagay yung description-->
+        <p style="font-size: 12px;"><b>Contact number</b></p>
         <p align='left' style="font-size: 12px;">Available Items</p>
         <div id="loading"></div>
         <div class="available-item">
@@ -84,7 +87,7 @@
 
     </div>
     <br>
-    <a href="#"><em>Rate</em></a> this clinic. <em>(This feature is disabled)</em>
+    <a href="#"><em>Rate</em></a> this clinic. <em style="font-size: 12px;">(This feature is disabled)</em>
   </div>
 
   <div class="search-modal">
