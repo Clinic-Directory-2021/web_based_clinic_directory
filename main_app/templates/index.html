@@ -13,13 +13,15 @@
             <div class='preview'>
                 <br>
                 <h3 align='center'>Available Clinics</h3>
+                {{time}}
                 <form id="indexForm" method='post' enctype="multipart/form-data">
                     {% csrf_token %}
                     <input type="hidden" id="id_field">
                     <input type="submit" hidden>
                     </form>
                 {% for values in user_data %}
-                <div class="preview-item" onclick="showModal('{{values.clinic_name}}', '{{values.clinic_img_url}}', '{{values.clinic_address}}', '{{values.user_id}}')">
+                <!-- {% if time|time:"g:i A" < values.closing_time or values.opening_time < time|time:"g:i A" %} -->
+                <div class="preview-item" onclick="showModal('{{values.clinic_name}}', '{{values.clinic_img_url}}', '{{values.clinic_address}}', '{{values.user_id}}', '{{values.clinic_description}}') " >
                    
                     <img src="{{values.clinic_img_url}}" alt="image">
                     <div class="details">
@@ -36,6 +38,7 @@
                         
                     </div>
                 </div>
+                <!-- {% endif %} -->
                 {% endfor %}
 
             </div>
@@ -67,7 +70,7 @@
         <br>
         <p id="item-modal-address"></p>
         <p style="font-size: 14px;"><strong>Opening and Closing time</strong></p><!--Dito ilalagay yung open and closing time-->
-        <p style="font-size: 14px;"><em>Description here</em></p><!--Dito ilalagay yung description-->
+        <p id="item-modal-description" style="font-size: 14px;"><em>Description here</em></p><!--Dito ilalagay yung description-->
         <p style="font-size: 12px;"><b>Contact number</b></p>
         <p align='left' style="font-size: 12px;">Available Items</p>
         <div id="loading"></div>

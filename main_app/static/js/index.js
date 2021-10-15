@@ -88,7 +88,7 @@ function suggestSearch(){
 
 }
 
-function showModal(clinic_name, img_url, clinic_address, clicked_id){
+function showModal(clinic_name, img_url, clinic_address, clicked_id , clinic_description){
     $('.item-modal').show();
     $('.grey').show();
 
@@ -100,6 +100,8 @@ function showModal(clinic_name, img_url, clinic_address, clicked_id){
 
     $('#item-modal-address').text(clinic_address);
 
+    $('#item-modal-description').text(clinic_description);
+    
 
     formId = '#' + clicked_id;
     $('#id_field').val(clicked_id)

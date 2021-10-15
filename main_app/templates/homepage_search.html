@@ -25,11 +25,16 @@
     </script>
 
     <div  onclick="editItem('{{key}}','{{values.product_img_url}}','{{values.product_img_directory}}' , '{{values.product_name}}' , '{{values.product_price}}' )" id="{{key}}" style="background-size: cover;" class="item"> <!--This is the query i removed--><!--background-image: url({{values.product_img_url}});-->
-      <img src="{{values.product_img_url}}" alt="" data-bs-toggle="modal" data-bs-target="#exampleModal">
+      {% if values.availability|lower == 'available' %}
+      <p style='background-color:#42ba96; font-weight: bold; color:white;'>{{values.availability|upper}}</p><!--Hex color if it's not available #ff0e0e-->
+      {% else %}
+      <p style='background-color:#ff0e0e; font-weight: bold; color:white;'>{{values.availability|upper}}</p>
+
+      <img src="{{values.product_img_url}}" alt="" data-bs-toggle="modal" data-bs-target="#exampleModal"><br><br>
       <b>{{values.product_name}}</b>
       <div style="display: flex;">
-        <button type="button" class="btn btn-success" style="margin:0 10px 0 10px; width: 150px; height: 50px;">Available</button>
-        <button type="button" class="btn btn-danger" style="width: 150px; height: 50px;">Unavailable</button>
+       <button type="button" class="btn btn-success" style="margin:0 10px 0 10px; width: 150px; height: 50px;" onclick="MarkProductAvailable('{{key}}','{{values.product_img_url}}','{{values.product_img_directory}}' , '{{values.product_name}}' , '{{values.product_price}}')">Available</button>
+        <button type="button" class="btn btn-danger" style="width: 150px; height: 50px;" onclick="MarkProductNotAvailable('{{key}}','{{values.product_img_url}}','{{values.product_img_directory}}' , '{{values.product_name}}' , '{{values.product_price}}')" >Unavailable</button>
       </div>
     </div>
     {% endif %}

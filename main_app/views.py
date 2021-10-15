@@ -12,6 +12,8 @@ import json
 
 import folium
 
+import datetime
+
 from django.template.loader import render_to_string
 from django.template import loader
 
@@ -45,7 +47,9 @@ def index(request):
     #create Map and zoom on Malolos, Bulacan Philippines
     map = folium.Map(location =[14.8527, 120.8160], zoom_start = 13, min_zoom=13)
 
-    
+    timeNow = datetime.datetime.now().time()
+    date_time = timeNow.strftime('%H:%M')
+    #currentTime = datetime.datetime.strptime(date_time, '%I:%M %p').time()
 
     users = firestoreDB.collection('users').get()
 
@@ -54,8 +58,17 @@ def index(request):
     for user in users:
         value = user.to_dict()
 
-        user_data.append(value)
+        # opening_time = datetime.datetime.strptime(value['opening_time'], '%I:%M %p').time()
 
+        # closing_time = datetime.datetime.strptime(value['closing_time'], '%I:%M %p').time()
+
+        # opening_time = value['opening_time'].strftime('%I:%M %p')
+
+        # closing_time = value['closing_time'].strftime('%I:%M %p')
+
+        if value['opening_time'] < date_time and date_time < value['closing_time']:
+            user_data.append(value)
+            
         latitude = value['latitude']
         longitude = value['longitude']
 
@@ -81,6 +94,7 @@ def index(request):
         data = {
             'map': map,
             'user_data': user_data,
+            'time': date_time,
         }
     
 
@@ -312,6 +326,7 @@ def add_item_firebase(request):
                     'product_img_directory' : img_file_directory,
                     'product_name': product_name,
                     'product_price': product_price,
+                    'availability': "available",
                     }
                 })
             except:
@@ -322,6 +337,7 @@ def add_item_firebase(request):
                         'product_img_directory' : img_file_directory,
                         'product_name': product_name,
                         'product_price': product_price,
+                        'availability': "available",
                         }
                     })
             #increment the total number of items in a specific user
@@ -359,10 +375,12 @@ def edit_item_firebase(request):
 
             items_doc_ref.update({
             field_name: {
+                'belong_to': request.session['user_id'],
                 'product_img_url' : storage.child(img_file_directory).get_url(request.session['user_id']),
                 'product_img_directory' : img_file_directory,
                 'product_name': product_name,
                 'product_price': product_price,
+                'availability': "available",
                 }
             })
 
@@ -374,6 +392,42 @@ def edit_item_firebase(request):
         messages.success(request, "Please upload product image first")
         return render(request,'homepage.html')   
     
+def product_item_availability(request):
+    items_doc_ref = firestoreDB.collection('items').document(request.session['user_id'])
+    if request.method == 'POST':
+        availability = request.POST.get('availability')
+        field_name = request.POST.get('product_key')
+
+        product_name = request.POST.get('prod_name')
+        product_price = request.POST.get('prod_price')
+        product_image_url = request.POST.get('prod_img_url')
+        img_file_directory = request.POST.get('prod_img_directory')
+
+        if availability == 'available':
+            items_doc_ref.update({
+            field_name: {
+                'belong_to': request.session['user_id'],
+                'product_img_url' : product_image_url,
+                'product_img_directory' : img_file_directory,
+                'product_name': product_name,
+                'product_price': product_price,
+                'availability': "available",
+                }
+            })
+        if availability == 'not available':
+            items_doc_ref.update({
+            field_name: {
+                'belong_to': request.session['user_id'],
+                'product_img_url' : storage.child(img_file_directory).get_url(request.session['user_id']),
+                'product_img_directory' : img_file_directory,
+                'product_name': product_name,
+                'product_price': product_price,
+                'availability': "not available",
+                }
+            })
+
+    return HttpResponse('')
+
 def search_item(request):
     searchField = request.POST.get('searchField')
 

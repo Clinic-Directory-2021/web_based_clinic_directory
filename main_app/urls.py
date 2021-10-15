@@ -19,4 +19,6 @@ urlpatterns = [
     path('search_clinic/', views.search_clinic, name='search_clinic'),
     path('forgot_password/', views.forgot_password, name='forgot_password'),
     path('about/', views.about, name='about'),
+    path('product_item_availability/', views.product_item_availability, name='product_item_availability'),
+    
 ]
