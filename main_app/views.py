@@ -248,25 +248,29 @@ def logout(request):
 
 def settings(request):
 
-    #map Size
-    f = folium.Figure(width=800, height=500)
 
-    #create Map and zoom on Malolos, Bulacan Philippines
-    map = folium.Map(location =[14.8527, 120.8160], zoom_start = 13, min_zoom=13).add_to(f)
+    if 'user_id' in request.session:
+        #map Size
+        f = folium.Figure(width=800, height=500)
 
-    map.add_child(folium.LatLngPopup())
+        #create Map and zoom on Malolos, Bulacan Philippines
+        map = folium.Map(location =[14.8527, 120.8160], zoom_start = 13, min_zoom=13).add_to(f)
 
-    #map.add_child(folium.ClickForMarker())
+        map.add_child(folium.LatLngPopup())
 
-    # Get html representation of the map
-    map = map._repr_html_()
+        #map.add_child(folium.ClickForMarker())
 
-    result = firestoreDB.collection('users').document(request.session['user_id']).get()
-    result.to_dict()
-    return render(request,'settings.html', {
-        'user_data': result.to_dict(),
-        'map': map,
-        })
+        # Get html representation of the map
+        map = map._repr_html_()
+
+        result = firestoreDB.collection('users').document(request.session['user_id']).get()
+        result.to_dict()
+        return render(request,'settings.html', {
+            'user_data': result.to_dict(),
+            'map': map,
+            })
+    else:
+        return redirect('/login')
 
 def save_clinic_info(request):
     clinicImage =  request.FILES['clinicImage']
@@ -482,11 +486,24 @@ def search_clinic(request):
     })
 
 def forgot_password(request):
-    if request.method == 'POST':
-        forgot_pass_email = request.POST.get('forgot_pass_email')
-        auth.send_password_reset_email(forgot_pass_email)
+    try:
+        if request.method == 'POST':
+            forgot_pass_email = request.POST.get('forgot_pass_email')
+            auth.send_password_reset_email(forgot_pass_email)
+            data = {
+                'success': "Successfully Sent To Your Email",
+            }
+        else:
+            data = {
+                'success': "",
+            }
+    except:
+        data = {
+                'success': "Email Not Found!",
+            }
 
-    return render(request,'forgot_password.html')
+    return render(request,'forgot_password.html', data)
+
 
 def about(request):
     return render(request,'about.html')
