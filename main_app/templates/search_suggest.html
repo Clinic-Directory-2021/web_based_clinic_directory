@@ -1,7 +1,7 @@
 {% if search_item|length > 0 %}
     {% for values in user_data %}
             {% if search_item|lower in values.clinic_name|lower %}
-            <div class="search-result" onclick="showModal('{{values.clinic_name}}', '{{values.clinic_img_url}}', '{{values.clinic_address}}', '{{values.user_id}}', '{{values.clinic_description}}')">
+            <div class="search-result" onclick="showModal('{{values.clinic_name}}', '{{values.clinic_img_url}}', '{{values.clinic_address}}', '{{values.user_id}}', '{{values.clinic_description}}', '{{values.opening_time}}', '{{values.closing_time}}')">
                 <img src="{{values.clinic_img_url}}" alt="">
                 <div class="details">
                     {{values.clinic_name}}
@@ -14,7 +14,7 @@
             </div>
 
             {% elif search_item|lower in values.clinic_address|lower %}
-            <div class="search-result" onclick="showModal('{{values.clinic_name}}', '{{values.clinic_img_url}}', '{{values.clinic_address}}', '{{values.user_id}}', '{{values.clinic_description}}')">
+            <div class="search-result" onclick="showModal('{{values.clinic_name}}', '{{values.clinic_img_url}}', '{{values.clinic_address}}', '{{values.user_id}}', '{{values.clinic_description}}', '{{values.opening_time}}', '{{values.closing_time}}')">
                 <img src="{{values.clinic_img_url}}" alt="">
                 <div class="details">
                     {{values.clinic_name}}
@@ -33,7 +33,7 @@
                         {% if search_item|lower in item_value.product_name|lower %}
                 
                                 {% if item_value.belong_to == values.user_id %}
-                                <div class="search-result" onclick="showModal('{{values.clinic_name}}', '{{values.clinic_img_url}}', '{{values.clinic_address}}', '{{values.user_id}}', '{{values.clinic_description}}')">
+                                <div class="search-result" onclick="showModal('{{values.clinic_name}}', '{{values.clinic_img_url}}', '{{values.clinic_address}}', '{{values.user_id}}', '{{values.clinic_description}}', '{{values.opening_time}}', '{{values.closing_time}}')">
                                     <img src="{{values.clinic_img_url}}" alt="">
                                         <div class="details">
                                             {{values.clinic_name}}

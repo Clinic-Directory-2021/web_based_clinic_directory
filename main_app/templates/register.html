@@ -6,7 +6,7 @@
     {% csrf_token %}
     <h1 class='register-h1'>You can register your clinic here</h1>
     <br>
-    <h5 align='center'>Towards getting your animal clinic more discoverable</h5><br>
+    <h5 align='center'>Make Your First Step Towards Getting your Animal Clinic More Discoverable</h5><br>
     <!-- Clinic Image Preview-->
     <img src="../static/images/map.jpg" id="preview_img" alt="" class="image">
     <br>
@@ -37,12 +37,12 @@
     <br>
     <br>
     <div class="form-floating mb-3">
-      <input type="time" class="form-control" id="floatingInput" placeholder="Opening">
+      <input required type="time" class="form-control" id="opening_time" placeholder="Opening">
       <label for="floatingInput">Opening</label>
     </div>
     <br>
     <div class="form-floating mb-3">
-      <input type="time" class="form-control" id="floatingInput" placeholder="Closing">
+      <input required type="time" class="form-control" id="closing_time" placeholder="Closing">
       <label for="floatingInput">Closing</label>
     </div>
     <textarea rows="4" cols="50" placeholder="Add description"  name="clinicDescription" id="clinicDescription" class="register-input"></textarea>

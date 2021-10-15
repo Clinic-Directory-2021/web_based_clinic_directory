@@ -11,6 +11,10 @@
     <script src="{% static 'js/settings.js' %}" defer></script>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+     <!-- sweetalert2 -->
+     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
     <link rel="stylesheet" href="{% static 'css/settings.css' %}">
 </head>
 <body>
@@ -41,6 +45,8 @@
                 <input type="text" disabled placeholder="{{user_data.clinic_name}}" class="credentials">
                 <label for="exampleInputEmail1" class="form-label">Clinic address</label>
                 <input type="text" disabled placeholder="{{user_data.clinic_address}}" class="credentials">
+                <label for="exampleInputEmail1" class="form-label">Clinic Contact Number</label>
+                <input required type="number" placeholder="{{user_data.clinic_contact_number}}" name="clinicContact" id="clinicContact" class="credentials" disabled>
                 <div id="map" style="position: relative; top: 0; left: 30%; right: 0">
                 <h3> Please Select Exact Location on the Map</h3>
                 <!-- Map -->
@@ -53,12 +59,12 @@
                 <label for="exampleInputEmail1" class="form-label">Email</label><br>
                 <input type="text" disabled placeholder="{{user_data.email}}" class="credentials"><br>
                 <div class="form-floating mb-3">
-                    <input type="time" class="form-control" id="floatingInput" placeholder="Opening">
+                    <input required type="time" class="form-control" id="opening_time" placeholder="Opening" disabled>
                     <label for="floatingInput">Opening</label>
                   </div>
                   <br>
                   <div class="form-floating mb-3">
-                    <input type="time" class="form-control" id="floatingInput" placeholder="Closing">
+                    <input required type="time" class="form-control" id="closing_time" placeholder="Closing" disabled>
                     <label for="floatingInput">Closing</label>
                   </div>
                   <br>

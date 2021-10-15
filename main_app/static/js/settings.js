@@ -3,6 +3,8 @@ var save = document.getElementById("settings_save");
 var credentials = document.getElementsByClassName("credentials");
 save.style.display = "none";
 
+
+
 $('#map').hide();
 function edit_clinic_info(){
     $('#map').show();
@@ -10,11 +12,13 @@ function edit_clinic_info(){
    for(i = 0; i < credentials.length; i++)
    {
         credentials[i].disabled = false;
-        credentials[4].disabled = true;
         credentials[5].disabled = true;
         credentials[6].disabled = true;
+        credentials[7].disabled = true;
    }
-   
+
+   $('#opening_time').prop('disabled', false);
+   $('#closing_time').prop('disabled', false);
   
    edit.style.display = "none";
    save.style.display = "block";
@@ -33,9 +37,12 @@ $('#settingsForm').on('submit', function(e){
     formData.append('old_image_directory', credentials[0].value);
     formData.append('editClinicName', credentials[2].value);
     formData.append('editClinicAddress', credentials[3].value);
-    formData.append('editLatitude', credentials[4].value);
-    formData.append('editLongitude', credentials[5].value);
-    formData.append('editClinicDescription', credentials[7].value);
+    formData.append('clinicContact', credentials[4].value);
+    formData.append('editLatitude', credentials[5].value);
+    formData.append('editLongitude', credentials[6].value);
+    formData.append('opening_time', tConvert($('#opening_time').val()));
+    formData.append('closing_time', tConvert($('#closing_time').val()));
+    formData.append('editClinicDescription', credentials[8].value);
     formData.append('csrfmiddlewaretoken', $("input[name='csrfmiddlewaretoken']").val());
     e.preventDefault();
     console.log("1");
@@ -48,7 +55,8 @@ $('#settingsForm').on('submit', function(e){
         data: formData,
         success: function(data){
             $('#loader').hide();
-            $('#responseMessage').html(data);
+            //$('#responseMessage').html(data);
+            $('#map').hide();
 
             edit.style.display = "block";
             save.style.display = "none";
@@ -57,14 +65,46 @@ $('#settingsForm').on('submit', function(e){
                         credentials[i].disabled = true;
                 }
 
+                $('#opening_time').prop('disabled', true);
+                $('#closing_time').prop('disabled', true);
+
+            if(data == 'Information Updated Successfully!'){
+                Swal.fire({
+                    position: 'middle',
+                    icon: 'success',
+                    title: 'Information Updated Successfully!',
+                    showConfirmButton: true,
+                    confirmButtonText: 'PROCEED',
+                  }).then((result) => {
+                    if (result.isConfirmed) {
+                        location.reload();
+                    }
+                  })
+            }
         },
         error: function(data){
             $('#loader').hide();
-            alert('have an error');
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+              })
         }
   
     });
   });
+
+  function tConvert(time) {
+    // Check correct time format and split into components
+    time = time.toString().match(/^([01]\d|2[0-3])(:)([0-5]\d)(:[0-5]\d)?$/) || [time];
+
+    if (time.length > 1) { // If time format correct
+      time = time.slice(1); // Remove full string match value
+      time[5] = +time[0] < 12 ? ' AM' : ' PM'; // Set AM/PM
+      time[0] = +time[0] % 12 || 12; // Adjust hours
+    }
+    return time.join(''); // return adjusted time or original string
+  }
+
 
 
 

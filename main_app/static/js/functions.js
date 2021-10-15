@@ -29,12 +29,15 @@ $('#registerForm').on('submit', function(e){
   formData.append('fileName', files.name);
   formData.append('clinicName', $('#clinicName').val());
   formData.append('clinicAddress', $('#clinicAddress').val());
+  formData.append('clinicContact', $('#clinicContact').val());
   formData.append('latitude', $('#latitude').val());
   formData.append('longitude', $('#longitude').val());
   formData.append('clinicDescription', $('#clinicDescription').val());
   formData.append('email', $('#registerEmail').val());
   formData.append('password', $('#password').val());
   formData.append('confirm_password', $('#confirm_password').val());
+  formData.append('opening_time', tConvert($('#opening_time').val()));
+  formData.append('closing_time', tConvert($('#closing_time').val()));
   formData.append('csrfmiddlewaretoken', $("input[name='csrfmiddlewaretoken']").val());
 
 
@@ -49,11 +52,43 @@ $('#registerForm').on('submit', function(e){
       data: formData,
       success: function(data){
           $('#loader').hide();
-          $('#responseMessage').html(data);
+        //   $('#responseMessage').html(data);
+        
+          if(data == 'Email Already Exists!'){
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: data,
+              })
+          }
+          else if(data == 'Password Do not Match!'){
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: data,
+              })
+          }
+          else if(data == 'New User Registered Successfully!'){
+            Swal.fire({
+                position: 'middle',
+                icon: 'success',
+                title: 'New User Registered Successfully!',
+                showConfirmButton: true,
+                confirmButtonText: 'PROCEED',
+              }).then((result) => {
+                if (result.isConfirmed) {
+                    location.reload();
+                }
+              })
+          }
+
       },
       error: function(data){
           $('#loader').hide();
-          alert(data + 'have an error');
+          Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+              })
       }
 
   });
@@ -74,14 +109,33 @@ $('#loginForm').on('submit', function(e){
         success: function(data){
             $('#loader').hide();
             if(data=="Invalid Email or Password!"){
-                 $('#responseMessage').html(data);
-            }else{
-              location.reload();
+                //  $('#responseMessage').html(data);
+                 Swal.fire({
+                    icon: 'error',
+                    title: data,
+                    confirmButtonText: 'OKAY',
+                  })
+            }else if (data == 'Success!'){
+                $('#loader').hide();
+                Swal.fire({
+                    position: 'middle',
+                    icon: 'success',
+                    title: 'Login Successful!',
+                    showConfirmButton: true,
+                    confirmButtonText: 'PROCEED',
+                  }).then((result) => {
+                    if (result.isConfirmed) {
+                        location.reload();
+                    }
+                  })
             }
         },
         error: function(data){
             $('#loader').hide();
-            alert('have an error');
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+              })
         },
   
     });
@@ -103,10 +157,23 @@ $('#loginForm').on('submit', function(e){
         }
         catch(e){
             $('#latitude').val("");
-            $('#longitude').val("");
+            $('#longitude').val("");     
         }
     }, 
     100);
+
+    function tConvert(time) {
+        // Check correct time format and split into components
+        time = time.toString().match(/^([01]\d|2[0-3])(:)([0-5]\d)(:[0-5]\d)?$/) || [time];
+    
+        if (time.length > 1) { // If time format correct
+          time = time.slice(1); // Remove full string match value
+          time[5] = +time[0] < 12 ? ' AM' : ' PM'; // Set AM/PM
+          time[0] = +time[0] % 12 || 12; // Adjust hours
+        }
+        return time.join(''); // return adjusted time or original string
+      }
+
 
     $(function(){
         $('#clinic_image').change(function(){

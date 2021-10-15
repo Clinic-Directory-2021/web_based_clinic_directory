@@ -48,8 +48,8 @@ def index(request):
     map = folium.Map(location =[14.8527, 120.8160], zoom_start = 13, min_zoom=13)
 
     timeNow = datetime.datetime.now().time()
-    date_time = timeNow.strftime('%H:%M')
-    #currentTime = datetime.datetime.strptime(date_time, '%I:%M %p').time()
+    date_time = timeNow.strftime('%I:%M %p')
+    currentTime = datetime.datetime.strptime(date_time, '%I:%M %p').time()
 
     users = firestoreDB.collection('users').get()
 
@@ -58,22 +58,22 @@ def index(request):
     for user in users:
         value = user.to_dict()
 
-        # opening_time = datetime.datetime.strptime(value['opening_time'], '%I:%M %p').time()
+        opening_time = datetime.datetime.strptime(value['opening_time'], '%I:%M %p').time()
 
-        # closing_time = datetime.datetime.strptime(value['closing_time'], '%I:%M %p').time()
+        closing_time = datetime.datetime.strptime(value['closing_time'], '%I:%M %p').time()
 
         # opening_time = value['opening_time'].strftime('%I:%M %p')
 
         # closing_time = value['closing_time'].strftime('%I:%M %p')
 
-        if value['opening_time'] < date_time and date_time < value['closing_time']:
+        if opening_time < currentTime and currentTime < closing_time:
             user_data.append(value)
             
         latitude = value['latitude']
         longitude = value['longitude']
 
         folium.Marker([latitude, longitude], 
-        popup= "<img style=\"width:200px;\" src=\""+value['clinic_img_url']+"\">"+"<b>Clinic Name:</b><br>" + value['clinic_name'] +"<br><br><img src='../static/images/rate.png' alt='' class='rate'><img src='../static/images/rate.png' alt='' class='rate'><img src='../static/images/rate.png' alt='' class='rate'><img src='../static/images/rate.png' alt='' class='rate'><img src='../static/images/rate.png' alt='' class='rate'><br>5.0" + "<br><br><b>Clinic Address:</b><br>" + value['clinic_address']  + "<br><br><b>Open and Closing time:</b><br>" + "<br><br><em>Description:</em><br>" "<br><br><b>Contact number:</b><br>", 
+        popup= "<img style=\"width:200px;\" src=\""+value['clinic_img_url']+"\">"+"<b>Clinic Name:</b><br>" + value['clinic_name'] +"<br><br><img src='../static/images/rate.png' alt='' class='rate'><img src='../static/images/rate.png' alt='' class='rate'><img src='../static/images/rate.png' alt='' class='rate'><img src='../static/images/rate.png' alt='' class='rate'><img src='../static/images/rate.png' alt='' class='rate'><br>5.0" + "<br><br><b>Clinic Address:</b><br>" + value['clinic_address']  + "<br><br><b>Open and Closing time:</b><br>" + "<br><br><em>Description:</em><br>"+ value['clinic_description']  +"<br><br><b>Contact number:</b><br>", 
         icon=folium.Icon(color="red", icon="fa-paw", prefix='fa'),
         tooltip= value['clinic_name']).add_to(map)
         
@@ -94,7 +94,6 @@ def index(request):
         data = {
             'map': map,
             'user_data': user_data,
-            'time': date_time,
         }
     
 
@@ -177,11 +176,14 @@ def register_user_firebase(request):
 
     clinicName = request.POST.get('clinicName')
     clinicAddress = request.POST.get('clinicAddress')
+    clinicContact = request.POST.get('clinicContact')
     latitude = request.POST.get('latitude')
     longitude = request.POST.get('longitude')
     email = request.POST.get('email')
     password = request.POST.get('password')
     confirm_password = request.POST.get('confirm_password')
+    opening_time = request.POST.get('opening_time')
+    closing_time = request.POST.get('closing_time')
     clinicDescription = request.POST.get('clinicDescription')
 
     if password == confirm_password:
@@ -203,10 +205,13 @@ def register_user_firebase(request):
                 'clinic_img_directory' : img_file_directory,
                 'clinic_name': clinicName,
                 'clinic_address': clinicAddress,
+                'clinic_contact_number': clinicContact,
                 'latitude': latitude,
                 'longitude': longitude,
                 'email': email,
                 'password': password,
+                'opening_time': opening_time,
+                'closing_time': closing_time,
                 'clinic_description': clinicDescription,
                 'total_items': 0,
             })
@@ -230,7 +235,7 @@ def login_validation(request):
     try:
         user_signin = auth.sign_in_with_email_and_password(email,password)
         request.session['user_id'] = user_signin['localId']
-        return redirect('/homepage')
+        return HttpResponse('Success!')
     except:
         return HttpResponse('Invalid Email or Password!')
 
@@ -271,8 +276,11 @@ def save_clinic_info(request):
 
     editClinicName = request.POST.get('editClinicName')
     editClinicAddress = request.POST.get('editClinicAddress')
+    clinicContact = request.POST.get('clinicContact')
     editLatitude = request.POST.get('editLatitude')
     editLongitude = request.POST.get('editLongitude')
+    opening_time = request.POST.get('opening_time')
+    closing_time = request.POST.get('closing_time')
     editClinicDescription = request.POST.get('editClinicDescription')
 
     doc_ref = firestoreDB.collection('users').document(request.session['user_id'])
@@ -287,10 +295,13 @@ def save_clinic_info(request):
         'clinic_img_url' : storage.child(img_file_directory).get_url(request.session['user_id']),
         'clinic_img_directory' : img_file_directory,
         'clinic_address': editClinicAddress,
+        'clinic_contact_number': clinicContact,
         'clinic_name': editClinicName,
         'latitude': editLatitude,
         'longitude': editLongitude,
         'clinic_description': editClinicDescription,
+        'opening_time': opening_time,
+        'closing_time': closing_time,
         })
     return HttpResponse('Information Updated Successfully!')
 
