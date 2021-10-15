@@ -1,3 +1,4 @@
+
 //Email Address validation for registration of user
 function validation(){
     var form = document.getElementById('registerForm');
@@ -197,23 +198,8 @@ $('#loginForm').on('submit', function(e){
       
       });
     
-    
-      $( document ).ready(function() {
-        if($('#validation').val() == 'Email Not Found'){
-          Swal.fire({
-            icon: 'error',
-            title: 'Email Not Found',
-          })
-        }
-        else if($('#validation').val() == 'Successfully Sent To Your Email'){
-          Swal.fire({
-            icon: 'success',
-            title: 'Password Reset Successfully Sent To Your Email',
-            confirmButtonText: 'OKAY',
-          })
-        }
-    });
-
+     
+     
 
 //   mapClick.addEventListener("click", myFunction);
 
