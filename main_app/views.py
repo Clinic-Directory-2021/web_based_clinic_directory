@@ -482,6 +482,10 @@ def search_clinic(request):
     })
 
 def forgot_password(request):
+    if request.method == 'POST':
+        forgot_pass_email = request.POST.get('forgot_pass_email')
+        auth.send_password_reset_email(forgot_pass_email)
+
     return render(request,'forgot_password.html')
 
 def about(request):
