@@ -198,7 +198,7 @@ def register_user_firebase(request):
 
 
             
-            doc_ref = firestoreDB.collection('users').document(user['localId'])
+            doc_ref = firestoreDB.collection('queue').document(user['localId'])
             doc_ref.set({
                 'user_id': user['localId'],
                 'clinic_img_url' : storage.child(img_file_directory).get_url(user['localId']),
@@ -209,7 +209,6 @@ def register_user_firebase(request):
                 'latitude': latitude,
                 'longitude': longitude,
                 'email': email,
-                'password': password,
                 'opening_time': opening_time,
                 'closing_time': closing_time,
                 'clinic_description': clinicDescription,
@@ -232,10 +231,21 @@ def login_validation(request):
     email = request.POST.get('login_email')
     password = request.POST.get('login_password')
     
+    users = firestoreDB.collection('users').get()
+
+    
+
+
     try:
         user_signin = auth.sign_in_with_email_and_password(email,password)
-        request.session['user_id'] = user_signin['localId']
-        return HttpResponse('Success!')
+
+        for user in users:
+            value = user.to_dict()
+            if value['email'] == 'email':
+                request.session['user_id'] = user_signin['localId']
+                return HttpResponse('Success!')
+
+        return HttpResponse('Invalid Email or Password!')
     except:
         return HttpResponse('Invalid Email or Password!')
 

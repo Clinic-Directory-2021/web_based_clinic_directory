@@ -4,8 +4,8 @@
     <form method='post' id="loginForm">
     {% csrf_token %}
     <h1 class='login-h1'>Login to your account</h1>
-    <input type="email" name="login_email" id="login_email" placeholder="Email" class='login-input'>
-    <input type="password" name="login_password" id="login_password" placeholder="Password" class='login-input'>
+    <input type="email" name="login_email" id="login_email" placeholder="Email" class='login-input' required>
+    <input type="password" name="login_password" id="login_password" placeholder="Password" class='login-input' required>
     <br>
     <a href="{% url 'forgot_password' %}" class="login-link">Forgot your password?</a>
     <br>
