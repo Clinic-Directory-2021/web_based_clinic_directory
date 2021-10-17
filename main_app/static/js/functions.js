@@ -73,7 +73,8 @@ $('#registerForm').on('submit', function(e){
             Swal.fire({
                 position: 'middle',
                 icon: 'success',
-                title: 'New User Registered Successfully!',
+                title: 'Your Request Have Been Successfully Sent!',
+                text: 'Please wait for Email Confirmation if your Request will be Accepted or Declined, Confirmation Will Be sent to Your Provided Email!',
                 showConfirmButton: true,
                 confirmButtonText: 'PROCEED',
               }).then((result) => {
