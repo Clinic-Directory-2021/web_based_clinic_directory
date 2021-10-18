@@ -233,19 +233,16 @@ def login_validation(request):
     
     users = firestoreDB.collection('users').get()
 
-    
-
-
     try:
         user_signin = auth.sign_in_with_email_and_password(email,password)
-        request.session['user_id'] = user_signin['localId']
-        return HttpResponse('Success!')
-        # for user in users:
-        #     value = user.to_dict()
-        #     if value['email'] == 'email':
-                
+        
+        for user in users:
+            value = user.to_dict()
+            if value['email'] == email:
+              request.session['user_id'] = user_signin['localId']
+              return HttpResponse('Success!')
 
-        # return HttpResponse('Invalid Email or Password!')
+        return HttpResponse('Invalid Email or Password!')
     except:
         return HttpResponse('Invalid Email or Password!')
 
