@@ -209,6 +209,7 @@ def register_user_firebase(request):
                 'latitude': latitude,
                 'longitude': longitude,
                 'email': email,
+                'password': password,
                 'opening_time': opening_time,
                 'closing_time': closing_time,
                 'clinic_description': clinicDescription,
