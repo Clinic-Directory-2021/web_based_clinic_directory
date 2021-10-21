@@ -202,9 +202,9 @@ $('#settingsForm').on('submit', function(e){
     
         elmnt = iframe.contentWindow.document.getElementsByClassName("leaflet-popup-content-wrapper")[0];
         try{
-             elmnt = elmnt.textContent.replace(/[^\d.-]/g, '');
+            //  elmnt = elmnt.textContent.replace(/[^\d.-]/g, '');
 
-             elmnt = elmnt.substring(0, 7) + "*" + elmnt.substring(7, elmnt.length);
+            //  elmnt = elmnt.substring(0, 7) + "*" + elmnt.substring(7, elmnt.length);
              const coordinates = elmnt.textContent.split("*");
             
              $('#latitude').val(coordinates[0]);
@@ -212,7 +212,7 @@ $('#settingsForm').on('submit', function(e){
            
         }
         catch(e){
-            console.log(elmnt);
+            // console.log(elmnt);
             $('#latitude').val("");
             $('#longitude').val("");
         }
