@@ -151,6 +151,10 @@ $('#loginForm').on('submit', function(e){
 
   setInterval(function(){ 
         elmnt = iframe.contentWindow.document.getElementsByClassName("leaflet-popup-content-wrapper")[0];
+
+        elmnt = elmnt.replace(/\D/g,'');
+
+        console.log(elmnt);
         try{
             const coordinates = elmnt.textContent.split("*");
 
