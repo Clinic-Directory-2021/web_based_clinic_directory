@@ -156,7 +156,7 @@ $('#loginForm').on('submit', function(e){
         try{
           elmnt = elmnt.textContent.replace(/[^\d.-]/g, '');
 
-          elmnt = elmnt.substring(0, 7) + "*" + elmnt.substring(8, elmnt.length);
+          elmnt = elmnt.substring(0, 7) + "*" + elmnt.substring(7, elmnt.length);
             const coordinates = elmnt.split("*");
 
             $('#latitude').val(coordinates[0]);
