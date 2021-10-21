@@ -117,6 +117,9 @@ $('#settingsForm').on('submit', function(e){
   setInterval(function(){ 
         elmnt = iframe.contentWindow.document.getElementsByClassName("leaflet-popup-content-wrapper")[0];
         try{
+          elmnt = elmnt.textContent.replace(/[^\d.-]/g, '');
+
+          elmnt = elmnt.substring(0, 7) + "*" + elmnt.substring(7, elmnt.length);
             const coordinates = elmnt.textContent.split("*");
 
             $('#latitude').val(coordinates[0]);
