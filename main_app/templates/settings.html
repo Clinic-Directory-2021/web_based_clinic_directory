@@ -89,9 +89,10 @@ save.style.display = "none";
 
 
 
-$('#map').hide();
+$('#map').css('visibility', 'hidden');
 function edit_clinic_info(){
-    $('#map').show();
+    //$('#map').show();
+    $('#map').css('visibility', 'visible');
 
    for(i = 0; i < credentials.length; i++)
    {
@@ -238,5 +239,6 @@ $(function(){
           }
         });
       });
+    
 </script>
 </html>
