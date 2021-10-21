@@ -29,7 +29,7 @@ config={
 }
 
 firebase = pyrebase.initialize_app(config)
-cred = credentials.Certificate("main_app\serviceAccountKey.json")
+cred = credentials.Certificate("main_app/serviceAccountKey.json")
 firebase_admin.initialize_app(cred)
 
 auth = firebase.auth()
