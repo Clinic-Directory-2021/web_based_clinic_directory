@@ -152,7 +152,7 @@ $('#loginForm').on('submit', function(e){
   setInterval(function(){ 
         elmnt = iframe.contentWindow.document.getElementsByClassName("leaflet-popup-content-wrapper")[0];
 
-        elmnt = elmnt.textContent.replace(/\D/g,'');
+        elmnt = elmnt.textContent.replace(/[^\d.-]/g, '');
 
         console.log(elmnt);
         try{
