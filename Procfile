@@ -1,1 +1,1 @@
-web: gunicorn web_based_clinic_directory.wsgi
+web: gunicorn web_based_clinic_directory.wsgi --log-file -
