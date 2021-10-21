@@ -152,11 +152,11 @@ $('#loginForm').on('submit', function(e){
   setInterval(function(){ 
         elmnt = iframe.contentWindow.document.getElementsByClassName("leaflet-popup-content-wrapper")[0];
 
-        elmnt = elmnt.textContent.replace(/[^\d.-]/g, '');
-
-        elmnt = elmnt.substring(0, 8) + "*" + elmnt.substring(8, elmnt.length);
-        console.log(elmnt);
+        
         try{
+          elmnt = elmnt.textContent.replace(/[^\d.-]/g, '');
+
+          elmnt = elmnt.substring(0, 7) + "*" + elmnt.substring(8, elmnt.length);
             const coordinates = elmnt.split("*");
 
             $('#latitude').val(coordinates[0]);
