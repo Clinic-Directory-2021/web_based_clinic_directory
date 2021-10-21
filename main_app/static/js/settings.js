@@ -12,8 +12,8 @@ function edit_clinic_info(){
    for(i = 0; i < credentials.length; i++)
    {
         credentials[i].disabled = false;
-        credentials[5].disabled = false;
-        credentials[6].disabled = false;
+        credentials[5].disabled = true;
+        credentials[6].disabled = true;
         credentials[7].disabled = true;
    }
 
