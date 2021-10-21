@@ -203,16 +203,14 @@ $('#settingsForm').on('submit', function(e){
         elmnt = iframe.contentWindow.document.getElementsByClassName("leaflet-popup-content-wrapper")[0];
         try{
              elmnt = elmnt.textContent.replace(/[^\d.-]/g, '');
-             console.log(elmnt);
-            //  elmnt = elmnt.substring(0, 7) + "*" + elmnt.substring(7, elmnt.length);
-             const coordinates = elmnt.textContent.split("*");
+             elmnt = elmnt.substring(0, 7) + "*" + elmnt.substring(7, elmnt.length);
+             const coordinates = elmnt.split("*");
             
              $('#latitude').val(coordinates[0]);
              $('#longitude').val(coordinates[1]);
            
         }
         catch(e){
-            // console.log(elmnt);
             $('#latitude').val("");
             $('#longitude').val("");
         }
