@@ -12,8 +12,8 @@ function edit_clinic_info(){
    for(i = 0; i < credentials.length; i++)
    {
         credentials[i].disabled = false;
-        credentials[5].disabled = true;
-        credentials[6].disabled = true;
+        credentials[5].disabled = false;
+        credentials[6].disabled = false;
         credentials[7].disabled = true;
    }
 
@@ -121,7 +121,7 @@ $('#settingsForm').on('submit', function(e){
 
           elmnt = elmnt.substring(0, 7) + "*" + elmnt.substring(7, elmnt.length);
             const coordinates = elmnt.textContent.split("*");
-
+            
             $('#latitude').val(coordinates[0]);
             $('#longitude').val(coordinates[1]);
         }
@@ -132,7 +132,8 @@ $('#settingsForm').on('submit', function(e){
     }, 
     100);
 
-    $(function(){
+    
+$(function(){
         $('#clinic_image').change(function(){
           var input = this;
           var url = $(this).val();
@@ -151,5 +152,4 @@ $('#settingsForm').on('submit', function(e){
             $('#preview_img').attr('src', '../static/images/map.jpg');
           }
         });
-      
       });
