@@ -154,9 +154,10 @@ $('#loginForm').on('submit', function(e){
 
         elmnt = elmnt.textContent.replace(/[^\d.-]/g, '');
 
+        elmnt = elmnt.substring(0, 8) + "*" + elmnt.substring(8, elmnt.length);
         console.log(elmnt);
         try{
-            const coordinates = elmnt.textContent.split("*");
+            const coordinates = elmnt.split("*");
 
             $('#latitude').val(coordinates[0]);
             $('#longitude').val(coordinates[1]);
