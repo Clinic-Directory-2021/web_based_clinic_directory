@@ -20,7 +20,7 @@
                     </form>
                 {% for values in user_data %}
                 <!-- {% if time|time:"g:i A" < values.closing_time or values.opening_time < time|time:"g:i A" %} -->
-                <div class="preview-item" onclick="showModal('{{values.clinic_name}}', '{{values.clinic_img_url}}', '{{values.clinic_address}}', '{{values.user_id}}', '{{values.clinic_description}}', '{{values.opening_time}}', '{{values.closing_time}}') " >
+                <div class="preview-item" onclick="showModal('{{values.clinic_name}}', '{{values.clinic_img_url}}', '{{values.clinic_address}}', '{{values.user_id}}', '{{values.clinic_description}}', '{{values.opening_time}}', '{{values.closing_time}}', '{{values.clinic_contact_number}}') " >
                    
                     <img src="{{values.clinic_img_url}}" alt="image">
                     <div class="details">
@@ -70,7 +70,7 @@
         <p id="item-modal-address"></p>
         <p id="item-modal-closingHours" style="font-size: 14px;"><strong>Opening and Closing time</strong></p><!--Dito ilalagay yung open and closing time-->
         <p id="item-modal-description" style="font-size: 14px;"><em>Description here</em></p><!--Dito ilalagay yung description-->
-        <p style="font-size: 12px;"><b>Contact number</b></p>
+        <p id="item-modal-contact" style="font-size: 12px;"><b>Contact number</b></p>
         <p align='left' style="font-size: 12px;">Available Items</p>
         <div id="loading"></div>
         <div class="available-item">

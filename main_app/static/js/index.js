@@ -88,7 +88,7 @@ function suggestSearch(){
 
 }
 
-function showModal(clinic_name, img_url, clinic_address, clicked_id , clinic_description, opening, closing){
+function showModal(clinic_name, img_url, clinic_address, clicked_id , clinic_description, opening, closing,number){
     $('.item-modal').show();
     $('.grey').show();
 
@@ -103,6 +103,8 @@ function showModal(clinic_name, img_url, clinic_address, clicked_id , clinic_des
     $('#item-modal-description').text(clinic_description);
     
     $('#item-modal-closingHours').text(opening + ' - ' + closing);
+
+    $('#item-modal-contact').text(number);
 
     formId = '#' + clicked_id;
     $('#id_field').val(clicked_id)
