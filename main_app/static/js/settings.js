@@ -117,8 +117,11 @@ $('#settingsForm').on('submit', function(e){
   setInterval(function(){ 
         elmnt = iframe.contentWindow.document.getElementsByClassName("leaflet-popup-content-wrapper")[0];
         try{
-            const coordinates = elmnt.textContent.split("*");
+          elmnt = elmnt.textContent.replace(/[^\d.-]/g, '');
 
+          elmnt = elmnt.substring(0, 7) + "*" + elmnt.substring(7, elmnt.length);
+            const coordinates = elmnt.textContent.split("*");
+            
             $('#latitude').val(coordinates[0]);
             $('#longitude').val(coordinates[1]);
         }
@@ -129,7 +132,8 @@ $('#settingsForm').on('submit', function(e){
     }, 
     100);
 
-    $(function(){
+    
+$(function(){
         $('#clinic_image').change(function(){
           var input = this;
           var url = $(this).val();
@@ -148,5 +152,4 @@ $('#settingsForm').on('submit', function(e){
             $('#preview_img').attr('src', '../static/images/map.jpg');
           }
         });
-      
       });

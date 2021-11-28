@@ -29,7 +29,7 @@ config={
 }
 
 firebase = pyrebase.initialize_app(config)
-cred = credentials.Certificate("main_app\serviceAccountKey.json")
+cred = credentials.Certificate("main_app/serviceAccountKey.json")
 firebase_admin.initialize_app(cred)
 
 auth = firebase.auth()
@@ -73,7 +73,7 @@ def index(request):
         longitude = value['longitude']
 
         folium.Marker([latitude, longitude], 
-        popup= "<img style=\"width:200px;\" src=\""+value['clinic_img_url']+"\">"+"<b>Clinic Name:</b><br>" + value['clinic_name'] +"<br><br><img src='../static/images/rate.png' alt='' class='rate'><img src='../static/images/rate.png' alt='' class='rate'><img src='../static/images/rate.png' alt='' class='rate'><img src='../static/images/rate.png' alt='' class='rate'><img src='../static/images/rate.png' alt='' class='rate'><br>5.0" + "<br><br><b>Clinic Address:</b><br>" + value['clinic_address']  + "<br><br><b>Open and Closing time:</b><br>" + "<br><br><em>Description:</em><br>"+ value['clinic_description']  +"<br><br><b>Contact number:</b><br>", 
+        popup= "<img style=\"width:200px;\" src=\""+value['clinic_img_url']+"\">"+"<b>Clinic Name:</b><br>" + value['clinic_name'] +"<br><br><img src='../static/images/rate.png' alt='' class='rate'><img src='../static/images/rate.png' alt='' class='rate'><img src='../static/images/rate.png' alt='' class='rate'><img src='../static/images/rate.png' alt='' class='rate'><img src='../static/images/rate.png' alt='' class='rate'><br>5.0" + "<br><br><b>Clinic Address:</b><br>" + value['clinic_address']  + "<br><br><b>Open and Closing time:</b><br>" + value['opening_time'] + " - " + value['closing_time'] + "<br><br><em>Description:</em><br>"+ value['clinic_description']  +"<br><br><b>Contact number:</b><br>" + value['clinic_contact_number'], 
         icon=folium.Icon(color="red", icon="fa-paw", prefix='fa'),
         tooltip= value['clinic_name']).add_to(map)
         
@@ -209,6 +209,7 @@ def register_user_firebase(request):
                 'latitude': latitude,
                 'longitude': longitude,
                 'email': email,
+                'password': password,
                 'opening_time': opening_time,
                 'closing_time': closing_time,
                 'clinic_description': clinicDescription,
@@ -233,19 +234,16 @@ def login_validation(request):
     
     users = firestoreDB.collection('users').get()
 
-    
-
-
     try:
         user_signin = auth.sign_in_with_email_and_password(email,password)
-        request.session['user_id'] = user_signin['localId']
-        return HttpResponse('Success!')
-        # for user in users:
-        #     value = user.to_dict()
-        #     if value['email'] == 'email':
-                
+        
+        for user in users:
+            value = user.to_dict()
+            if value['email'] == email:
+              request.session['user_id'] = user_signin['localId']
+              return HttpResponse('Success!')
 
-        # return HttpResponse('Invalid Email or Password!')
+        return HttpResponse('Invalid Email or Password!')
     except:
         return HttpResponse('Invalid Email or Password!')
 

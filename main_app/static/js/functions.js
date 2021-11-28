@@ -151,8 +151,13 @@ $('#loginForm').on('submit', function(e){
 
   setInterval(function(){ 
         elmnt = iframe.contentWindow.document.getElementsByClassName("leaflet-popup-content-wrapper")[0];
+
+        
         try{
-            const coordinates = elmnt.textContent.split("*");
+          elmnt = elmnt.textContent.replace(/[^\d.-]/g, '');
+
+          elmnt = elmnt.substring(0, 7) + "*" + elmnt.substring(7, elmnt.length);
+            const coordinates = elmnt.split("*");
 
             $('#latitude').val(coordinates[0]);
             $('#longitude').val(coordinates[1]);

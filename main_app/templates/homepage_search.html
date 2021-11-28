@@ -29,7 +29,7 @@
       <p style='background-color:#42ba96; font-weight: bold; color:white;'>{{values.availability|upper}}</p><!--Hex color if it's not available #ff0e0e-->
       {% else %}
       <p style='background-color:#ff0e0e; font-weight: bold; color:white;'>{{values.availability|upper}}</p>
-
+      {% endif %}
       <img src="{{values.product_img_url}}" alt="" data-bs-toggle="modal" data-bs-target="#exampleModal"><br><br>
       <b>{{values.product_name}}</b>
       <div style="display: flex;">
@@ -37,7 +37,7 @@
         <button type="button" class="btn btn-danger" style="width: 150px; height: 50px;" onclick="MarkProductNotAvailable('{{key}}','{{values.product_img_url}}','{{values.product_img_directory}}' , '{{values.product_name}}' , '{{values.product_price}}')" >Unavailable</button>
       </div>
     </div>
-    {% endif %}
+    
     {% endif %}
     {% endfor %}
 
