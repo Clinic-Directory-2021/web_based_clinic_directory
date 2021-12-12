@@ -53,6 +53,8 @@
       </select>
       <p>The system is under development. The payment method is currently disabled.</p>
     <h3 id="responseMessage"></h3>
+    <input type="checkbox" id="agree">
+    <a href="#" data-bs-toggle="modal" data-bs-target="#exampleModal"> Agree to Terms and Agreement in this website.</a>
     <input type="submit" value="Register" class="register-button" />
     <br>
     <br>
@@ -60,4 +62,52 @@
     </form>
 </div>
 <div id="loader"></div>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">End-User Terms and Agreement</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        End User Lisence Agreement
+        <br>
+        <br>
+        EULA
+        <br>
+        <br>
+        <br>
+        1. This Agreement will be available and eligible until a certain clinic is no longer included in the system.
+        <br>
+        <br>
+        2. The super-admin will only be the one who can accept/decline requests from veterinary clinics.
+        <br>
+        <br>
+        3. Transactions are performed between the customer and the veterinary clinic only.
+        <br>
+        <br>
+        4. Information’s are voluntarily given by the veterinary clinics and will be used for location information only, contact information of the veterinary clinics are strictly for transactions use.
+        <br>
+        <br>
+        5. Email Accounts are used for verification and security purposes only.
+        <br>
+        <br>
+        6. You acknowledge that by to use any of the Offerings, You may come across content that is insulting, inappropriate, or inappropriate, which information may or may not be diagnosed as having strong language, and that the results of any search or entering of a particular URL may produce links or reference materials to objectionable content instantaneously and unintentionally. Nonetheless, you acknowledge that you are using the Services at your own risk and that the Application Provider will not be liable to you for any material that is determined to be offensive, indecent, or objectionable.
+        <br>
+        <br>
+        7. Some Services, as well as links to third-party web sites, may display, incorporate, or make accessible third-party content, data, information, applications, or materials ("Third Party Materials"). You recognize and accept that the website is not responsible for inspecting or assessing the content, accuracy, completeness, timeliness, validity, copyright compliance, legality, decency, quality, or any other element of such Third Party Materials or websites by utilizing the Services.
+        <br>
+        <br>
+        8. Location information provided by any Services is aimed only for simple aerial mapping and should not be relied upon in situations where precise location information is required or where mistaken, misleading, or insufficient location data could result in death, personal injury, loss of property, or damage to the environment.
+        <br>
+        <br>
+        9. All the details in this Software is in English, and its use is destined solely for persons entirely proficient in English.
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+    </div>
+  </div>
+</div>
 {% endblock content %}
