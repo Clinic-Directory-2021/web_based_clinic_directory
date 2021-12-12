@@ -42,10 +42,10 @@ storage = firebase.storage()
 
 def index(request):
     #map Size
-    #f = folium.Figure(width=1200, height=1000)
+    f = folium.Figure(width=900, height=900)
 
     #create Map and zoom on Malolos, Bulacan Philippines
-    map = folium.Map(location =[14.8527, 120.8160], zoom_start = 13, min_zoom=13)
+    map = folium.Map(location =[14.8527, 120.8160], zoom_start = 13, min_zoom=13).add_to(f)
 
     timeNow = datetime.datetime.now().time()
     date_time = timeNow.strftime('%I:%M %p')
