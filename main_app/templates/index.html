@@ -123,31 +123,28 @@
         </div>
         <div class="modal-body">
             <form>
+                {% csrf_token %}
                 <div class="mb-3">
                   <label for="exampleInputEmail1" class="form-label">Full Name</label>
-                  <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                  <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" required>
                 </div>
                 <div class="mb-3">
                     <label for="exampleInputEmail1" class="form-label">Email</label>
-                    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" required>
                   </div>
                   <div class="mb-3">
-                    <label for="exampleInputEmail1" class="form-label">Full Name</label>
-                    <input type="datetime" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-                    <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
+                    <label for="exampleInputEmail1" class="form-label">Date and time appointment</label>
+                    <input type="datetime" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" required>
                   </div>
                   <div class="mb-3">
                     <label for="exampleInputEmail1" class="form-label">Phone Number</label>
-                    <input type="number" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                    <input type="number" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" required>
                     <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
                   </div>
-
+                        
+                  <input type="text" name="user_id" id="id_field" />
                 <button type="submit" class="btn btn-primary">Book Appointment</button>
               </form>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary">Save changes</button>
         </div>
       </div>
     </div>
