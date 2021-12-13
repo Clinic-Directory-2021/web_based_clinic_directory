@@ -1,4 +1,4 @@
-function showBookAppointment(){
+const showBookAppointment = () => {
     clinic_id_appointment = $('#item-modal-user-id').text();
     $('#user_id_appointment').val(clinic_id_appointment);
     window.console.log("Hello world");
