@@ -71,6 +71,10 @@
         <p id="item-modal-closingHours" style="font-size: 14px;"><strong>Opening and Closing time</strong></p><!--Dito ilalagay yung open and closing time-->
         <p id="item-modal-description" style="font-size: 14px;"><em>Description here</em></p><!--Dito ilalagay yung description-->
         <p id="item-modal-contact" style="font-size: 12px;"><b>Contact number</b></p>
+        <!-- Button trigger modal -->
+        <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#exampleModal" style="background-color: #B85C38;">
+            Book appointment
+        </button>
         <p align='left' style="font-size: 12px;">Available Items</p>
         <div id="loading"></div>
         <div class="available-item">
@@ -108,5 +112,23 @@
     </div>
     
   </div>
- 
+
+ <!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          ...
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary">Save changes</button>
+        </div>
+      </div>
+    </div>
+  </div>
 {% endblock content %}
