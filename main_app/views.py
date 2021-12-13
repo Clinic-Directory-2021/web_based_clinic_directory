@@ -515,3 +515,6 @@ def forgot_password(request):
 
 def about(request):
     return render(request,'about.html')
+
+def addAppointment(request):
+    return redirect('/')

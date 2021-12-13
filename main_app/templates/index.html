@@ -122,7 +122,7 @@
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-            <form>
+            <form action="/addAppointment/" method="post">
                 {% csrf_token %}
                 <div class="mb-3">
                   <label for="exampleInputEmail1" class="form-label">Full Name</label>
@@ -134,7 +134,7 @@
                   </div>
                   <div class="mb-3">
                     <label for="exampleInputEmail1" class="form-label">Date and time appointment</label>
-                    <input type="datetime" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" required>
+                    <input type="date" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" required>
                   </div>
                   <div class="mb-3">
                     <label for="exampleInputEmail1" class="form-label">Phone Number</label>
@@ -142,7 +142,7 @@
                     <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
                   </div>
                         
-                  <input type="text" name="user_id" id="id_field" />
+                  <input type="text" name="user_id" id="user_id_appointment" />
                 <button type="submit" class="btn btn-primary">Book Appointment</button>
               </form>
         </div>

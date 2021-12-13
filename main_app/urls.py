@@ -20,5 +20,7 @@ urlpatterns = [
     path('forgot_password/', views.forgot_password, name='forgot_password'),
     path('about/', views.about, name='about'),
     path('product_item_availability/', views.product_item_availability, name='product_item_availability'),
+
+    path('addAppointment/', views.addAppointment, name='addAppointment'),
     
 ]

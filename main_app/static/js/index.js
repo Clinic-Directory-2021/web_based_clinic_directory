@@ -108,6 +108,7 @@ function showModal(clinic_name, img_url, clinic_address, clicked_id , clinic_des
 
     formId = '#' + clicked_id;
     $('#id_field').val(clicked_id)
+    $('#user_id_appointment').val(clicked_id);
 
     
     $.post({
