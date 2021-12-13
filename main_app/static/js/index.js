@@ -1,12 +1,17 @@
 $('#loading').hide();
 $( ".search-modal" ).hide();
 
+var clinic_id_appointment = "";
 
 setInterval(function(){ 
     if(!$("#searchItem").is(":focus")){
         $( ".search-result" ).remove();
         $( ".search-modal" ).hide();
     }
+
+    console.log(clinic_id_appointment);
+    $('#user_id_appointment').val(clinic_id_appointment);
+    
 
 }, 
 1000);
@@ -108,7 +113,8 @@ function showModal(clinic_name, img_url, clinic_address, clicked_id , clinic_des
 
     formId = '#' + clicked_id;
     $('#id_field').val(clicked_id)
-    $('#user_id_appointment').val(clicked_id);
+
+    clinic_id_appointment = clicked_id;
 
     
     $.post({
