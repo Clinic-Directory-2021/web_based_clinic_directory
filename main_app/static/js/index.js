@@ -105,10 +105,12 @@ function showModal(clinic_name, img_url, clinic_address, clicked_id , clinic_des
 
     $('#item-modal-contact').text(number);
 
+    $('#item-modal-user-id').text(clicked_id);
+    
     formId = '#' + clicked_id;
     $('#id_field').val(clicked_id)
 
-    console.log("LOGOOGOGGOGOGLLGLGLGLGGOOGOOGOL");
+
 
     
     $.post({
@@ -184,3 +186,10 @@ else{
     
 }
 
+
+
+function showBookAppointment(){
+    clinic_id_appointment = $('#item-modal-user-id').text();
+    $('#user_id_appointment').val(clinic_id_appointment);
+    console.log("APPOINTMENT!!!!!!!");
+}
