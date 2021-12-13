@@ -5,17 +5,17 @@ function showBookAppointment(){
     console.log("APPOINTMENT!!!!!!!");
 }
 
-$('#loading').hide();
-$( ".search-modal" ).hide();
+// $('#loading').hide();
+// $( ".search-modal" ).hide();
 
-setInterval(function(){ 
-    if(!$("#searchItem").is(":focus")){
-        $( ".search-result" ).remove();
-        $( ".search-modal" ).hide();
-    }
+// setInterval(function(){ 
+//     if(!$("#searchItem").is(":focus")){
+//         $( ".search-result" ).remove();
+//         $( ".search-modal" ).hide();
+//     }
 
-}, 
-1000);
+// }, 
+// 1000);
 
 
 
