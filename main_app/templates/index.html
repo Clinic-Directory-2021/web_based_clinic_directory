@@ -72,7 +72,7 @@
         <p id="item-modal-description" style="font-size: 14px;"><em>Description here</em></p><!--Dito ilalagay yung description-->
         <p id="item-modal-contact" style="font-size: 12px;"><b>Contact number</b></p>
         <!-- Button trigger modal -->
-        <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#exampleModal" style="background-color: #B85C38;">
+        <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#exampleModal" style="background-color: #B85C38; color: white;">
             Book appointment
         </button>
         <p align='left' style="font-size: 12px;">Available Items</p>
@@ -122,7 +122,28 @@
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-          ...
+            <form>
+                <div class="mb-3">
+                  <label for="exampleInputEmail1" class="form-label">Full Name</label>
+                  <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                </div>
+                <div class="mb-3">
+                    <label for="exampleInputEmail1" class="form-label">Email</label>
+                    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                  </div>
+                  <div class="mb-3">
+                    <label for="exampleInputEmail1" class="form-label">Full Name</label>
+                    <input type="datetime" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                    <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
+                  </div>
+                  <div class="mb-3">
+                    <label for="exampleInputEmail1" class="form-label">Phone Number</label>
+                    <input type="number" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                    <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
+                  </div>
+
+                <button type="submit" class="btn btn-primary">Book Appointment</button>
+              </form>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
