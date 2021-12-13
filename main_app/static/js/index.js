@@ -11,7 +11,11 @@ setInterval(function(){
 1000);
 
 
-
+function showBookAppointment(){
+    clinic_id_appointment = $('#item-modal-user-id').text();
+    $('#user_id_appointment').val(clinic_id_appointment);
+    console.log("APPOINTMENT!!!!!!!");
+}
 
 function show_menu(){
     $('.menu-list').show();
@@ -188,8 +192,3 @@ else{
 
 
 
-function showBookAppointment(){
-    clinic_id_appointment = $('#item-modal-user-id').text();
-    $('#user_id_appointment').val(clinic_id_appointment);
-    console.log("APPOINTMENT!!!!!!!");
-}
