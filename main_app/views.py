@@ -517,4 +517,26 @@ def about(request):
     return render(request,'about.html')
 
 def addAppointment(request):
-    return redirect('/')
+    if request.method == 'POST': 
+        clinic_id = request.POST.get('clinic_id_appointment')
+
+        appointment_name = request.POST.get('appointment_name')
+        appointment_email = request.POST.get('appointment_email')
+        appointment_date = request.POST.get('appointment_date')
+        appointment_time = request.POST.get('appointment_time')
+        appointment_number = request.POST.get('appointment_number')
+
+        doc_ref = firestoreDB.collection('appointment_queue').document(clinic_id)
+        doc_ref.set({
+            'user_id': clinic_id,
+            'appointment_name' : appointment_name,
+            'appointment_email' : appointment_email,
+            'appointment_date': appointment_date,
+            'appointment_time': appointment_time,
+            'appointment_number': appointment_number,
+        })
+        return redirect('/')
+
+def appointment(request):
+    
+    return render(request, 'appointment.html')
