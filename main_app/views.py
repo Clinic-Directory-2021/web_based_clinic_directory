@@ -544,9 +544,19 @@ def addAppointment(request):
 
 def appointment(request):
     if 'user_id' in request.session:
-        appointment_queue = firestoreDB.collection('appointment_queue').document(request.session['user_id']).get()
+        appointment_queue = firestoreDB.collection('appointment_queue').where('user_id' , '==', request.session['user_id']).stream()
 
-        return render(request, 'appointment.html', {'appointment_queue': appointment_queue.to_dict()})
+        queue = []
+
+        for appointment in appointment_queue:
+            value = appointment.to_dict()
+            queue.append(value)
+
+        data ={
+            'appointment_queue': queue,
+        }
+
+        return render(request, 'appointment.html', data)
     else:
         return redirect('/login')
     
