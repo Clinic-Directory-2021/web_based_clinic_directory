@@ -1,6 +1,7 @@
 {% extends "home_base.html" %}
 {% load static %}
 {% block content %}
+<div style="padding: 25px;">
 <table class="table table-striped">
     <thead>
         <tr>
@@ -10,6 +11,7 @@
           <th scope="col">Date Appointment</th>
           <th scope="col">Time Appointment</th>
           <th scope="col">Contact Number</th>
+          <th scope="col">Action</th>
         </tr>
       </thead>
       <tbody>
@@ -20,22 +22,12 @@
           <td>@mdo</td>
           <td>@mdo</td>
           <td>@mdo</td>
-        </tr>
-        <tr>
-          <th scope="row">2</th>
-          <td>Jacob</td>
-          <td>Thornton</td>
-          <td>@fat</td>
-          <td>@mdo</td>
-          <td>@mdo</td>
-        </tr>
-        <tr>
-          <th scope="row">3</th>
-          <td colspan="2">Larry the Bird</td>
-          <td>@twitter</td>
-          <td>@mdo</td>
-          <td>@mdo</td>
+          <td>
+            <button type="button" class="btn btn-success">Accept</button>
+            <button type="button" class="btn btn-danger">Decline</button>
+        </td>
         </tr>
       </tbody>
   </table>
+<div>
 {% endblock %}

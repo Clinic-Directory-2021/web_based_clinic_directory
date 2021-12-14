@@ -17,6 +17,8 @@ import datetime
 from django.template.loader import render_to_string
 from django.template import loader
 
+import time
+
 config={
     "apiKey": "AIzaSyDwWsW--ZHaZIOE4OXu5VhMIclZad8zDYw",
     "authDomain": "animal-clinic-directory-2021.firebaseapp.com",
@@ -526,13 +528,16 @@ def addAppointment(request):
         appointment_time = request.POST.get('appointment_time')
         appointment_number = request.POST.get('appointment_number')
 
+        time = time.strptime(appointment_time, "%H:%M")
+        timevalue_12hour = time.strftime( "%I:%M %p", t )
+
         doc_ref = firestoreDB.collection('appointment_queue').document(clinic_id)
         doc_ref.set({
             'user_id': clinic_id,
             'appointment_name' : appointment_name,
             'appointment_email' : appointment_email,
             'appointment_date': appointment_date,
-            'appointment_time': appointment_time,
+            'appointment_time': timevalue_12hour,
             'appointment_number': appointment_number,
         })
         return redirect('/')
