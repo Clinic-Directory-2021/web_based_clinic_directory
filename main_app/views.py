@@ -528,7 +528,7 @@ def addAppointment(request):
         appointment_time = request.POST.get('appointment_time')
         appointment_number = request.POST.get('appointment_number')
 
-        time = time.strptime(appointment_time, "%H:%M")
+        t = time.strptime(appointment_time, "%H:%M")
         timevalue_12hour = time.strftime( "%I:%M %p", t )
 
         doc_ref = firestoreDB.collection('appointment_queue').document(clinic_id)

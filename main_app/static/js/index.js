@@ -115,9 +115,6 @@ function showModal(clinic_name, img_url, clinic_address, clicked_id , clinic_des
 
     globalClinicID = clicked_id;
 
-    console.log(globalClinicID);
-    console.log(clicked_id);
-
 
     formId = '#' + clicked_id;
     $('#id_field').val(clicked_id)
