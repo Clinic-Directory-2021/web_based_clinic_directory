@@ -18,6 +18,7 @@ from django.template.loader import render_to_string
 from django.template import loader
 
 import time
+from django.core.mail import send_mail
 
 config={
     "apiKey": "AIzaSyDwWsW--ZHaZIOE4OXu5VhMIclZad8zDYw",
