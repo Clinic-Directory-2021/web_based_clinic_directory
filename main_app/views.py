@@ -547,14 +547,22 @@ def appointment(request):
     if 'user_id' in request.session:
         appointment_queue = firestoreDB.collection('appointment_queue').where('user_id' , '==', request.session['user_id']).stream()
 
+        accepted_appointment = firestoreDB.collection('accepted_appointment').where('user_id' , '==', request.session['user_id']).stream()
+
         queue = []
+        accepted = []
 
         for appointment in appointment_queue:
             value = appointment.to_dict()
             queue.append(value)
 
+        for accep in accepted_appointment:
+            value = accep.to_dict()
+            accepted.append(value)
+
         data ={
             'appointment_queue': queue,
+            'accepted_appointment': accepted,
         }
 
         return render(request, 'appointment.html', data)

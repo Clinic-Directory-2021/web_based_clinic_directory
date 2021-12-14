@@ -65,14 +65,14 @@
           </thead>
           <tbody>
               
-              {% for  in  %}               
+              {% for accepted  in accepted_appointment %}               
             <tr>
               <th scope="row">1</th>
-              <td>{{appointment.appointment_name}}</td>
-              <td>{{appointment.appointment_email}}</td>
-              <td>{{appointment.appointment_date}}</td>
-              <td>{{appointment.appointment_time}}</td>
-              <td>{{appointment.appointment_number}}</td>
+              <td>{{accepted.appointment_name}}</td>
+              <td>{{accepted.appointment_email}}</td>
+              <td>{{accepted.appointment_date}}</td>
+              <td>{{accepted.appointment_time}}</td>
+              <td>{{accepted.appointment_number}}</td>
             </tr>
             {% endfor %}
           </tbody>
