@@ -546,7 +546,7 @@ def appointment(request):
     if 'user_id' in request.session:
         appointment_queue = firestoreDB.collection('appointment_queue').document(request.session['user_id']).get()
 
-        return render(request, 'appointment.html', 'appointment_queue': appointment_queue.to_dict())
+        return render(request, 'appointment.html', {'appointment_queue': appointment_queue.to_dict()})
     else:
         return redirect('/login')
     
