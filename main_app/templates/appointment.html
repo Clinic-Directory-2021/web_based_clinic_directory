@@ -1,33 +1,67 @@
 {% extends "home_base.html" %}
 {% load static %}
 {% block content %}
-<div style="padding: 25px;">
-<table class="table table-striped">
-    <thead>
-        <tr>
-          <th scope="col">#</th>
-          <th scope="col">Name</th>
-          <th scope="col">Email</th>
-          <th scope="col">Date Appointment</th>
-          <th scope="col">Time Appointment</th>
-          <th scope="col">Contact Number</th>
-          <th scope="col">Action</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <th scope="row">1</th>
-          <td>Mark</td>
-          <td>Otto</td>
-          <td>@mdo</td>
-          <td>@mdo</td>
-          <td>@mdo</td>
-          <td>
-            <button type="button" class="btn btn-success">Accept</button>
-            <button type="button" class="btn btn-danger">Decline</button>
-        </td>
-        </tr>
-      </tbody>
-  </table>
+<div style="padding: 25px; display: flex;">
+    <div style="width: 50%;">
+        <table class="table table-striped">
+        <thead>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">Name</th>
+              <th scope="col">Email</th>
+              <th scope="col">Date Appointment</th>
+              <th scope="col">Time Appointment</th>
+              <th scope="col">Contact Number</th>
+              <th scope="col">Action</th>
+            </tr>
+          </thead>
+          <tbody>
+              
+              {% for appointment in appointment_queue %}
+          
+            <tr>
+              <th scope="row">1</th>
+              <td>{{appointment.appointment_name}}</td>
+              <td>{{appointment.appointment_email}}</td>
+              <td>{{appointment.appointment_date}}</td>
+              <td>{{appointment.appointment_time}}</td>
+              <td>{{appointment.appointment_number}}</td>
+              <td>
+                <button type="button" class="btn btn-success">Accept</button>
+                <button type="button" class="btn btn-danger">Decline</button>
+            </td>
+            </tr>
+            {% endfor %}
+          </tbody>
+      </table>
+    </div>
+<div style="width: 50%;">
+    <table class="table table-striped">
+        <thead>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">Name</th>
+              <th scope="col">Email</th>
+              <th scope="col">Date Appointment</th>
+              <th scope="col">Time Appointment</th>
+              <th scope="col">Contact Number</th>
+              <th scope="col">Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th scope="row">1</th>
+              <td>Mark</td>
+              <td>Otto</td>
+              <td>@mdo</td>
+              <td>@mdo</td>
+              <td>@mdo</td>
+              <td>
+                <button type="button" class="btn btn-danger">Delete</button>
+            </td>
+            </tr>
+          </tbody>
+      </table>
+</div>
 <div>
 {% endblock %}
