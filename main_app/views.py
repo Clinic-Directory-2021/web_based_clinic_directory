@@ -531,7 +531,7 @@ def addAppointment(request):
         t = time.strptime(appointment_time, "%H:%M")
         timevalue_12hour = time.strftime( "%I:%M %p", t )
 
-        doc_ref = firestoreDB.collection('appointment_queue').document(clinic_id)
+        doc_ref = firestoreDB.collection('appointment_queue').document()
         doc_ref.set({
             'user_id': clinic_id,
             'appointment_name' : appointment_name,
@@ -539,6 +539,7 @@ def addAppointment(request):
             'appointment_date': appointment_date,
             'appointment_time': timevalue_12hour,
             'appointment_number': appointment_number,
+            'appointment_id': doc_ref.id
         })
         return redirect('/')
 
