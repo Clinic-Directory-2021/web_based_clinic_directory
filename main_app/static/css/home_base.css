@@ -45,6 +45,7 @@ button:active{
         height: 100%;
     }
     .header .navigation{
+        list-style-type: none;
         width: 70%;
         height: 100%;
     }
