@@ -561,3 +561,33 @@ def appointment(request):
     else:
         return redirect('/login')
     
+def acceptAppointment(request):
+    if request.method == 'POST': 
+        clinic_id = request.POST.get('clinic_id')
+
+        appointment_name = request.POST.get('name')
+        appointment_email = request.POST.get('email')
+        appointment_date = request.POST.get('date')
+        appointment_time = request.POST.get('time')
+        appointment_number = request.POST.get('number')
+
+        doc_ref = firestoreDB.collection('accepted_appointment').document()
+        doc_ref.set({
+            'user_id': clinic_id,
+            'appointment_name' : appointment_name,
+            'appointment_email' : appointment_email,
+            'appointment_date': appointment_date,
+            'appointment_time': appointment_time,
+            'appointment_number': appointment_number,
+            'accepted_appointment_id': doc_ref.id
+        })
+
+        return redirect('/appointment')
+
+def declineAppointment(request):
+    if request.method == 'POST': 
+        appointment_id = request.POST.get('appointment_id')
+
+        firestoreDB.collection('appointment_queue').document(appointment_id).delete()
+
+        return redirect('/appointment')

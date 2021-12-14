@@ -28,8 +28,21 @@
               <td>{{appointment.appointment_time}}</td>
               <td>{{appointment.appointment_number}}</td>
               <td>
-                <button type="button" class="btn btn-success">Accept</button>
-                <button type="button" class="btn btn-danger">Decline</button>
+                <form action="/acceptAppointment/" method="post">
+                <input type="hidden" name="name" value="{{appointment.appointment_name}}">
+                <input type="hidden" name="email" value="{{appointment.appointment_email}}">
+                <input type="hidden" name="date" value="{{appointment.appointment_date}}">
+                <input type="hidden" name="time" value="{{appointment.appointment_time}}">
+                <input type="hidden" name="number" value="{{appointment.appointment_number}}">
+                <input type="hidden" name="clinic_id" value="{{appointment.user_id}}">
+                <input type="hidden" name="appointment_id" value="{{appointment.appointment_id}}">
+                <button type="submit" class="btn btn-success">Accept</button>
+                </form>
+
+                <form action="/declineAppointment/" method="post">
+                <input type="hidden" name="appointment_id" value="{{appointment.appointment_id}}">
+                <button type="submit" class="btn btn-danger">Decline</button>
+                </form>
             </td>
             </tr>
             {% endfor %}
@@ -51,17 +64,17 @@
             </tr>
           </thead>
           <tbody>
+              
+              {% for  in  %}               
             <tr>
               <th scope="row">1</th>
-              <td>Mark</td>
-              <td>Otto</td>
-              <td>@mdo</td>
-              <td>@mdo</td>
-              <td>@mdo</td>
-              <td>
-                <button type="button" class="btn btn-danger">Delete</button>
-            </td>
+              <td>{{appointment.appointment_name}}</td>
+              <td>{{appointment.appointment_email}}</td>
+              <td>{{appointment.appointment_date}}</td>
+              <td>{{appointment.appointment_time}}</td>
+              <td>{{appointment.appointment_number}}</td>
             </tr>
+            {% endfor %}
           </tbody>
       </table>
 </div>
