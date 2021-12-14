@@ -243,6 +243,7 @@ def login_validation(request):
             value = user.to_dict()
             if value['email'] == email:
               request.session['user_id'] = user_signin['localId']
+              request.session['clinic_name'] = value['clinic_name']
               return HttpResponse('Success!')
 
         return HttpResponse('Invalid Email or Password!')
@@ -571,6 +572,10 @@ def appointment(request):
     
 def acceptAppointment(request):
     if request.method == 'POST': 
+
+
+
+
         clinic_id = request.POST.get('clinic_id')
 
         appointment_name = request.POST.get('name')
@@ -590,12 +595,36 @@ def acceptAppointment(request):
             'accepted_appointment_id': doc_ref.id
         })
 
+        email_message = 'Hello Mr./Mrs. '+ appointment_name.upper() + 'Your Appointment Schedule on ' + request.session['clinic_name'].upper() + ' at ' + appointment_date + ' ' + appointment_time + ' is Now ACCEPTED.'
+
+        send_mail(
+            'Animal Clinic Directory',
+            email_message,
+            'clinic.directory.2021@gmail.com',
+            [appointment_email],
+            fail_silently=False,
+        )
         return redirect('/appointment')
 
 def declineAppointment(request):
     if request.method == 'POST': 
         appointment_id = request.POST.get('appointment_id')
 
+        appointment_name = request.POST.get('name')
+        appointment_email = request.POST.get('email')
+        appointment_date = request.POST.get('date')
+        appointment_time = request.POST.get('time')
+
         firestoreDB.collection('appointment_queue').document(appointment_id).delete()
+
+        email_message = 'Hello Mr./Mrs. '+ appointment_name.upper() + 'Your Appointment Schedule on ' + request.session['clinic_name'].upper() + ' at ' + appointment_date + ' ' + appointment_time + ' is REJECTED.'
+
+        send_mail(
+            'Animal Clinic Directory',
+            email_message,
+            'clinic.directory.2021@gmail.com',
+            [appointment_email],
+            fail_silently=False,
+        )
 
         return redirect('/appointment')

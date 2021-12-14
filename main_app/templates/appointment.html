@@ -41,6 +41,10 @@
 
                 <form action="/declineAppointment/" method="post">
                 <input type="hidden" name="appointment_id" value="{{appointment.appointment_id}}">
+                <input type="hidden" name="name" value="{{appointment.appointment_name}}">
+                <input type="hidden" name="email" value="{{appointment.appointment_email}}">
+                <input type="hidden" name="date" value="{{appointment.appointment_date}}">
+                <input type="hidden" name="time" value="{{appointment.appointment_time}}">
                 <button type="submit" class="btn btn-danger">Decline</button>
                 </form>
             </td>
