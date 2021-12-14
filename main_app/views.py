@@ -574,10 +574,9 @@ def appointment(request):
 def acceptAppointment(request):
     if request.method == 'POST': 
 
-
-
-
         clinic_id = request.POST.get('clinic_id')
+
+        appointment_id = request.POST.get('appointment_id')
 
         appointment_name = request.POST.get('name')
         appointment_email = request.POST.get('email')
@@ -605,6 +604,9 @@ def acceptAppointment(request):
             [appointment_email],
             fail_silently=False,
         )
+
+        firestoreDB.collection('appointment_queue').document(appointment_id).delete()
+
         return redirect('/appointment')
 
 def declineAppointment(request):
