@@ -1,21 +1,14 @@
-const showBookAppointment = () => {
-    clinic_id_appointment = $('#item-modal-user-id').text();
-    $('#user_id_appointment').val(clinic_id_appointment);
-    window.console.log("Hello world");
-    console.log("APPOINTMENT!!!!!!!");
-}
+$('#loading').hide();
+$( ".search-modal" ).hide();
 
-// $('#loading').hide();
-// $( ".search-modal" ).hide();
+setInterval(function(){ 
+    if(!$("#searchItem").is(":focus")){
+        $( ".search-result" ).remove();
+        $( ".search-modal" ).hide();
+    }
 
-// setInterval(function(){ 
-//     if(!$("#searchItem").is(":focus")){
-//         $( ".search-result" ).remove();
-//         $( ".search-modal" ).hide();
-//     }
-
-// }, 
-// 1000);
+}, 
+1000);
 
 
 
