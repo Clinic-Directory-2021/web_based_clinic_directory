@@ -1,3 +1,12 @@
+function showBookAppointment(){
+    clinic_id_appointment = $('#item-modal-user-id').text();
+  $('#user_id_appointment').val(clinic_id_appointment);
+  window.console.log("Hello world");
+  console.log("APPOINTMENT!!!!!!!");
+  }
+
+
+
 $('#loading').hide();
 $( ".search-modal" ).hide();
 
