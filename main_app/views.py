@@ -620,7 +620,7 @@ def declineAppointment(request):
 
         firestoreDB.collection('appointment_queue').document(appointment_id).delete()
 
-        email_message = 'Hello Mr./Mrs. '+ appointment_name.upper() + 'Your Appointment Schedule on ' + request.session['clinic_name'].upper() + ' at ' + appointment_date + ' ' + appointment_time + ' is REJECTED.'
+        email_message = 'Hello Mr./Mrs. '+ appointment_name.upper() + ' Your Appointment Schedule on ' + request.session['clinic_name'].upper() + ' at ' + appointment_date + ' ' + appointment_time + ' is REJECTED.'
 
         send_mail(
             'Animal Clinic Directory',
