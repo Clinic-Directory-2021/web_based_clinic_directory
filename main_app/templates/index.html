@@ -20,7 +20,7 @@
                     </form>
                 {% for values in user_data %}
                 <!-- {% if time|time:"g:i A" < values.closing_time or values.opening_time < time|time:"g:i A" %} -->
-                <div class="preview-item" onclick="showModal('{{values.clinic_name}}', '{{values.clinic_img_url}}', '{{values.clinic_address}}', '{{values.user_id}}', '{{values.clinic_description}}', '{{values.opening_time}}', '{{values.closing_time}}', '{{values.clinic_contact_number}}') " >
+                <div class="preview-item" onclick="showModal('{{values.clinic_name |escapejs}}', '{{values.clinic_img_url}}', '{{values.clinic_address |escapejs}}', '{{values.user_id}}', '{{values.clinic_description |escapejs}}', '{{values.opening_time}}', '{{values.closing_time}}', '{{values.clinic_contact_number}}') " >
                    
                     <img src="{{values.clinic_img_url}}" alt="image">
                     <div class="details">

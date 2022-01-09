@@ -30,8 +30,8 @@
               <td>
                 <form action="/acceptAppointment/" method="post">
                     {% csrf_token %}
-                <input type="hidden" name="name" value="{{appointment.appointment_name}}">
-                <input type="hidden" name="email" value="{{appointment.appointment_email}}">
+                <input type="hidden" name="name" value="{{appointment.appointment_name |escapejs}}">
+                <input type="hidden" name="email" value="{{appointment.appointment_email |escapejs}}">
                 <input type="hidden" name="date" value="{{appointment.appointment_date}}">
                 <input type="hidden" name="time" value="{{appointment.appointment_time}}">
                 <input type="hidden" name="number" value="{{appointment.appointment_number}}">
@@ -43,8 +43,8 @@
                 <form action="/declineAppointment/" method="post">
                     {% csrf_token %}
                 <input type="hidden" name="appointment_id" value="{{appointment.appointment_id}}">
-                <input type="hidden" name="name" value="{{appointment.appointment_name}}">
-                <input type="hidden" name="email" value="{{appointment.appointment_email}}">
+                <input type="hidden" name="name" value="{{appointment.appointment_name |escapejs}}">
+                <input type="hidden" name="email" value="{{appointment.appointment_email |escapejs}}">
                 <input type="hidden" name="date" value="{{appointment.appointment_date}}">
                 <input type="hidden" name="time" value="{{appointment.appointment_time}}">
                 <button type="submit" class="btn btn-danger">Decline</button>
