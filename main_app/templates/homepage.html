@@ -1,4 +1,12 @@
-{% extends "home_base.html" %}
+{% include "home_base.html" %}
+{% if session == "homepage" %}
+<script>
+  $('#homepage').css("background-color","#E0C097")
+  $('#homepage').css("border-radius","25px")
+  $('#homapage').css("text-align","center")
+  $('#homepage').css("color","black")
+</script>
+{% endif %}
 {% load static %}
 {% block content %}
 <!-- <h1>Welcome {{user_data.first_name}} {{user_data.last_name}}</h1> -->

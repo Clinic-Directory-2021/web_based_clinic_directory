@@ -45,6 +45,7 @@ storage = firebase.storage()
 
 def index(request):
     #map Size
+    request.session['session'] = "dashboard"
     f = folium.Figure(width=900, height=900)
 
     #create Map and zoom on Malolos, Bulacan Philippines
@@ -97,9 +98,9 @@ def index(request):
         data = {
             'map': map,
             'user_data': user_data,
+            "session":request.session['session']
         }
     
-
     if 'user_id' not in request.session:
         return render(request,'index.html', data)
     else:
@@ -134,12 +135,14 @@ def getSearchData(request):
 
 def login(request):
     #meaning if user_id session variable is not set then execute this code
+    request.session['session'] = "login"
     if 'user_id' not in request.session:
-        return render(request,'login.html')
+        return render(request,'login.html',{"session":request.session['session']})
     else:
         return redirect('/homepage')
 
 def homepage(request):
+    request.session['session'] = "homepage"
     if 'user_id' in request.session:
         user_data = firestoreDB.collection('users').document(request.session['user_id']).get()
 
@@ -148,12 +151,14 @@ def homepage(request):
         return render(request,'homepage.html', {
         'user_data': user_data.to_dict(),
         'item_data': item_data.to_dict(),
+        'session':request.session['session']
         })
     else:
         return redirect('/login')
 
 def register(request):
     #create Map and zoom on Malolos, Bulacan Philippines
+    request.session['session'] = "register"
     map = folium.Map(location =[14.8527, 120.8160], zoom_start = 13, min_zoom=13)
 
     map.add_child(folium.LatLngPopup())
@@ -168,6 +173,7 @@ def register(request):
     #Store the html representation of the map to data variable
     data = {
         'map': map,
+        "session":request.session['session']
     }
 
     return render(request,'register.html', data)
@@ -518,7 +524,8 @@ def forgot_password(request):
 
 
 def about(request):
-    return render(request,'about.html')
+    request.session['session'] = "login"
+    return render(request,'about.html',{"session":request.session['session']})
 
 def addAppointment(request):
     if request.method == 'POST': 
@@ -546,6 +553,7 @@ def addAppointment(request):
         return redirect('/')
 
 def appointment(request):
+    request.session['session'] = "request"
     if 'user_id' in request.session:
         appointment_queue = firestoreDB.collection('appointment_queue').where('user_id' , '==', request.session['user_id']).stream()
 
@@ -565,6 +573,7 @@ def appointment(request):
         data ={
             'appointment_queue': queue,
             'accepted_appointment': accepted,
+            'session': request.session['session']
         }
 
         return render(request, 'appointment.html', data)

@@ -1,4 +1,12 @@
-{% extends "base.html" %}
+{% include "base.html" %}
+{% if session == "login" %}
+<script>
+  $('#login').css("background-color","#E0C097")
+  $('#login').css("border-radius","25px")
+  $('#login').css("text-align","center")
+  $('#login').css("color","black")
+</script>
+{% endif %}
 {% block content %}
 <div class='login-content'>
     <form method='post' id="loginForm">

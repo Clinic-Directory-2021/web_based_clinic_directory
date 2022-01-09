@@ -1,4 +1,11 @@
-{% extends "base.html" %}
+{% include "base.html" %}
+{% if session == "dashboard" %}
+<script>
+  $('#dashboard').css("background-color","#E0C097")
+  $('#dashboard').css("border-radius","25px")
+  $('#dashboard').css("text-align","center")
+</script>
+{% endif %}
 {% block content %}
 <div class="row">
     <div class="column">

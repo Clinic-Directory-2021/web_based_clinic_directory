@@ -1,4 +1,12 @@
-{% extends "home_base.html" %}
+{% include "home_base.html" %}
+{% if session == "request" %}
+<script>
+  $('#request').css("background-color","#E0C097")
+  $('#request').css("border-radius","25px")
+  $('#request').css("text-align","center")
+  $('#request').css("color","black")
+</script>
+{% endif %}
 {% load static %}
 {% block content %}
 <div style="padding: 25px; display: flex;">
