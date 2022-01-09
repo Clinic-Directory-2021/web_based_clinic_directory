@@ -42,9 +42,9 @@
                 <input disabled required name="clinic_image" id="clinic_image" accept=".jpg, .jpeg, .png" type="file" alt="Submit" class="credentials">
                 <br>
                 <label for="exampleInputEmail1" class="form-label">Clinic name</label>
-                <input type="text" disabled placeholder="{{user_data.clinic_name}}" class="credentials">
+                <input type="text" disabled placeholder="{{user_data.clinic_name}}" class="credentials" required>
                 <label for="exampleInputEmail1" class="form-label">Clinic address</label>
-                <input type="text" disabled placeholder="{{user_data.clinic_address}}" class="credentials">
+                <input type="text" disabled placeholder="{{user_data.clinic_address}}" class="credentials" required>
                 <label for="exampleInputEmail1" class="form-label">Clinic Contact Number</label>
                 <input required type="number" placeholder="{{user_data.clinic_contact_number}}" name="clinicContact" id="clinicContact" class="credentials" disabled>
                 <div id="map" style="position: relative; top: 0; left: 30%; right: 0">
@@ -69,7 +69,7 @@
                   </div>
                   <br>
                 <label for="exampleInputEmail1" class="form-label">Description</label><br>
-                <textarea rows="4" cols="50" placeholder="{{user_data.clinic_description}}" class='credentials' disabled></textarea>
+                <textarea rows="4" cols="50" placeholder="{{user_data.clinic_description}}" class='credentials' disabled required></textarea>
                 <br>
                 <br>
                 <input type="submit" value="Save" class="edit" id="settings_save" />
