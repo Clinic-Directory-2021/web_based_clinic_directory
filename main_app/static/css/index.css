@@ -26,8 +26,8 @@
 @media (min-width:320px)  { /* smartphones, iPhone, portrait 480x320 phones */ 
     .to_top{
         position: absolute;
-        bottom: 90%;
-        left: 10%;
+        top: 90%;
+        right: 10%;
     }
     .header{
         background-color:#B85C38;
