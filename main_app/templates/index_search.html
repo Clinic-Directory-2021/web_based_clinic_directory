@@ -1,0 +1,63 @@
+{% for values in user_data %}
+
+{% if search_item|lower in values.clinic_name|lower %}
+    <div class="preview-item" onclick="showModal('{{values.clinic_name}}', '{{values.clinic_img_url}}', '{{values.clinic_address}}', '{{values.user_id}}', '{{values.clinic_description}}', '{{values.opening_time}}', '{{values.closing_time}}', '{{values.clinic_contact_number}}')">
+    
+        <img src="{{values.clinic_img_url}}" alt="image">
+        <div class="details">
+            {{values.clinic_name}}
+            <br>
+            Rate
+            <br>
+            <br>
+            <p>{{values.clinic_address}}</p>
+            
+        </div>
+    </div>
+
+{% elif search_item|lower in values.clinic_address|lower %}
+<div class="preview-item" onclick="showModal('{{values.clinic_name}}', '{{values.clinic_img_url}}', '{{values.clinic_address}}', '{{values.user_id}}', '{{values.clinic_description}}', '{{values.opening_time}}', '{{values.closing_time}}', '{{values.clinic_contact_number}}')">
+    
+    <img src="{{values.clinic_img_url}}" alt="image">
+    <div class="details">
+        {{values.clinic_name}}
+        <br>
+        Rate
+        <br>
+        <br>
+        <p>{{values.clinic_address}}</p>
+        
+    </div>
+</div>
+
+{% else %}
+
+{% for items in item_data %}
+                {% for key, item_value in items.items %}
+                        {% if search_item|lower in item_value.product_name|lower %}
+                
+                                {% if item_value.belong_to == values.user_id %}
+                <div class="preview-item" onclick="showModal('{{values.clinic_name}}', '{{values.clinic_img_url}}', '{{values.clinic_address}}', '{{values.user_id}}', '{{values.clinic_description}}', '{{values.opening_time}}', '{{values.closing_time}}', '{{values.clinic_contact_number}}')">
+                    
+                    <img src="{{values.clinic_img_url}}" alt="image">
+                    <div class="details">
+                        {{values.clinic_name}}
+                        <br>
+                        Rate
+                        <br>
+                        <br>
+                        <p>{{values.clinic_address}}</p>
+                        
+                    </div>
+                </div>
+                {% endif %}
+
+
+        {% endif %}
+        {% endfor %}            
+    {% endfor %}
+
+
+{% endif %}
+{% endfor %}
+

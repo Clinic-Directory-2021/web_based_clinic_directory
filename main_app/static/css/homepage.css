@@ -1,0 +1,152 @@
+.welcome{
+    margin: 10px;
+}
+.search-product:focus{
+    outline: none !important;
+    border:3px solid #E0C097;
+}
+.add-item:hover{
+    opacity: 0.7;
+}
+.add-item:active{
+    background-color: #5C3D2E;
+}
+.item:active{
+    background-color: #5C3D2E;
+}
+.item:hover{
+    opacity: 0.7;
+}
+@media (min-width:320px)  { /* smartphones, iPhone, portrait 480x320 phones */ 
+    .items{
+        display: block;
+        height: 100vh;
+    }
+    .search-product{
+        width: 60%;
+        height: 50px;
+        margin-left: 10px;
+        margin-right: 10px;
+        border-radius: 5px;
+        border:2px solid #E0C097;
+    }
+    .search-button{
+        width: 30%;
+        height: 50px;
+        background-color: #E0C097;
+        border-radius: 5px;
+        border:1px solid #E0C097;
+    }
+    .add-item{
+        margin: auto;
+        width: 70%;
+        margin-bottom: 10px;
+        height: 50%;
+        border-radius: 5px;
+        background-color: #E0C097;
+        cursor: pointer;
+        background-image: url('../images/add.png');
+        background-repeat: no-repeat;
+        background-position:center;
+    }
+    .item{
+        margin: auto;
+        width: 70%;
+        margin-bottom: 10px;
+        height: 50%;
+        border-radius: 5px;
+        border: 1px solid #E0C097;
+        padding: 10px;
+        cursor: pointer;
+        text-align: center;
+    }
+    .item img{
+        width: 80%;
+        height: 50%;
+    }
+}
+@media (min-width:481px)  { /* portrait e-readers (Nook/Kindle), smaller tablets @ 600 or @ 640 wide. */ 
+   .add-item{
+       width: 50%;
+       height: 50%;
+   }
+   .item{
+    width: 50%;
+    height: 50%;
+
+}
+}
+@media (min-width:641px)  { /* portrait tablets, portrait iPad, landscape e-readers, landscape 800x480 or 854x480 phones */ 
+    .add-item{
+        width: 40%;
+        margin: 5%;
+        float: left;
+    }
+    .item{
+     width: 40%;
+     margin: 5%;
+     float: left;
+ 
+ }
+    
+}
+@media (min-width:961px)  { /* tablet, landscape iPad, lo-res laptops ands desktops */ 
+    .add-item{
+        width: 30%;
+        height: 400px;
+        margin: 1.5%;
+        float: left;
+    }
+    .item{
+     width: 30%;
+     height: 400px;
+     margin: 1.5%;
+     float: left;
+ 
+ }
+}
+@media (min-width:1025px) { /* big landscape tablets, laptops, and desktops */ 
+    
+}
+@media (min-width:1281px) { /* hi-res laptops and desktops */ 
+    .search-product{
+        width: 30%;
+        height: 50px;
+        margin-left: 10px;
+        margin-right: 10px;
+        border-radius: 5px;
+        border:2px solid #E0C097;
+    }
+    .search-button{
+        width: 10%;
+        height: 50px;
+        background-color: #E0C097;
+        border-radius: 5px;
+        border:1px solid #E0C097;
+    }
+    .add-item{
+        width: 20%;
+        height: 350px;
+        margin: 1%;
+        float: left;
+    }
+    .item{
+     width: 20%;
+     height: 350px;
+     margin: 1%;
+     float: left;
+ 
+ }
+}
+
+#loader {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+    background: rgba(0,0,0,0.75) url(../images/spinner.png) no-repeat center center;
+    z-index: 10000;
+  }
