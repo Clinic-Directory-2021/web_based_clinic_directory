@@ -1,0 +1,92 @@
+*{
+    margin: 0;
+    font-family: Arial, Helvetica, sans-serif;
+    overflow-x: hidden;
+}
+/* width */
+::-webkit-scrollbar {
+    width: 10px;
+  }
+  
+  /* Track */
+  ::-webkit-scrollbar-track {
+    background: none; 
+    border-radius: 10px;
+  }
+   
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background: #888; 
+    border-radius: 10px;
+  }
+  
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
+    background: #555; 
+    border-radius: 10px;
+  }
+
+@media (min-width:320px)  { /* smartphones, iPhone, portrait 480x320 phones */ 
+    .contents{
+        font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif; 
+        background-color: gainsboro;
+    }
+    .banner{
+        width: 100%; 
+        background-color: #E0C097; 
+        /* display: flex;  */
+        padding: 10px;
+    }
+    .banner .image-banner{
+        width: 100%;
+        height: 200px;
+        text-align: center;
+    }
+    .banner .content-banner{
+        width: 100%;
+    }
+    .banner img{
+        width: 150px; 
+        height: 150px; 
+        border-radius: 50%; 
+        border: 1px solid black;
+    }
+    .developers{
+        width: 100%; 
+        height: 50%; 
+        background-color: #E0C097; 
+        /* display: flex;  */
+        padding: 10px;
+    }
+    .developers .developers-image{
+        text-align: center;
+        width: 100%;
+        height: 300px;
+    }
+    .developers .developers-content{
+        width: 100%; 
+        padding: 10px; 
+        text-align: center;
+    }
+    .developers img{
+        width: 150px; 
+        height: 150px; 
+        border-radius: 50%;
+    }
+}
+@media (min-width:481px)  { /* portrait e-readers (Nook/Kindle), smaller tablets @ 600 or @ 640 wide. */ 
+    
+}
+@media (min-width:641px)  { /* portrait tablets, portrait iPad, landscape e-readers, landscape 800x480 or 854x480 phones */ 
+    
+    
+}
+@media (min-width:961px)  { /* tablet, landscape iPad, lo-res laptops ands desktops */ 
+    
+}
+@media (min-width:1025px) { /* big landscape tablets, laptops, and desktops */ 
+    
+}
+@media (min-width:1281px) { /* hi-res laptops and desktops */ 
+    
+}

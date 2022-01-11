@@ -13,6 +13,7 @@
     <link rel="stylesheet" href="{% static 'css/login.css' %}">
     <link rel="stylesheet" href="{% static 'css/register.css' %}">
     <link rel="stylesheet" href="{% static 'css/forgot_password.css' %}">
+    <link rel="stylesheet" href="{% static 'css/about.css' %}">
     <script src="{% static 'js/index.js' %}" defer></script>
     <script src="{% static 'js/base.js' %}" defer></script>
     <script src="{% static 'js/functions.js' %}" defer></script>
@@ -32,7 +33,7 @@
                 <a href="{% url 'dashboard' %}" style='color:#2D2424;'><li id="dashboard"><h6>Dashboard</h6></li></a>
                 <a href="{% url 'login' %}"><li id="login"><h6>Login</h6></li></a>
                 <a href="{% url 'register' %}" ><li id="register"><h6>Register</h6></li></a>
-                <a href="{% url 'about' %}" style = "color: #2D2424;"><li><h6>About</h6></li></a>
+                <a href="{% url 'about' %}" style = "color: #2D2424;"><li id="about"><h6>About</h6></li></a>
             </ul>
         </div>
         <div class="menu" onclick="show_menu()">
@@ -54,7 +55,7 @@
             <a href="{% url 'dashboard' %}"><li><h3>Dashboard</h3></li></a>
             <a href="{% url 'login' %}"><li><h3>Login</h3></li></a>
             <a href="{% url 'register' %}"><li><h3>Register</h3></li></a>
-            <a href="#"><li><h3>About</h3></li></a>
+            <a href="{% url 'about' %}"><li><h3>About</h3></li></a>
         </ul>
     </div>
     {% block content %}

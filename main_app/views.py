@@ -265,7 +265,7 @@ def logout(request):
     return redirect('/')
 
 def settings(request):
-
+    request.session['session'] = "settings"
 
     if 'user_id' in request.session:
         #map Size
@@ -286,6 +286,7 @@ def settings(request):
         return render(request,'settings.html', {
             'user_data': result.to_dict(),
             'map': map,
+            'session':request.session['session']
             })
     else:
         return redirect('/login')
@@ -524,7 +525,7 @@ def forgot_password(request):
 
 
 def about(request):
-    request.session['session'] = "login"
+    request.session['session'] = "about"
     return render(request,'about.html',{"session":request.session['session']})
 
 def addAppointment(request):

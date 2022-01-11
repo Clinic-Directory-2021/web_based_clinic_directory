@@ -1,28 +1,13 @@
-{% load static %}
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
-    <!-- <script src="{% static 'js/settings.js' %}" defer></script> -->
-
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-
-     <!-- sweetalert2 -->
-     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-
-    <link rel="stylesheet" href="{% static 'css/settings.css' %}">
-</head>
-<body>
+{% include "home_base.html" %}
+{% if session == "settings" %}
+<script>
+  $('#settings').css("background-color","#E0C097")
+  $('#settings').css("border-radius","25px")
+  $('#settings').css("text-align","center")
+  $('#settings').css("color","black")
+</script>
+{% endif %}
     <div id="loader"></div>
-
-    <div class='header'>
-        <a href="{% url 'homepage' %}" class="back-link">Back to dashboard</a>
-    </div>
     <div class="content">
         <div class="left">
             <div class="option">
@@ -41,11 +26,11 @@
                 <!-- Clinic Image Input File-->
                 <input disabled required name="clinic_image" id="clinic_image" accept=".jpg, .jpeg, .png" type="file" alt="Submit" class="credentials">
                 <br>
-                <label for="exampleInputEmail1" class="form-label">Clinic name</label>
-                <input type="text" disabled placeholder="{{user_data.clinic_name}}" class="credentials" required>
-                <label for="exampleInputEmail1" class="form-label">Clinic address</label>
-                <input type="text" disabled placeholder="{{user_data.clinic_address}}" class="credentials" required>
-                <label for="exampleInputEmail1" class="form-label">Clinic Contact Number</label>
+                <label for="exampleInputEmail1" class="form-label" style="text-align: center;">Clinic name</label><br>
+                <input type="text" disabled placeholder="{{user_data.clinic_name}}" class="credentials" required><br>
+                <label for="exampleInputEmail1" class="form-label">Clinic address</label><br>
+                <input type="text" disabled placeholder="{{user_data.clinic_address}}" class="credentials" required><br>
+                <label for="exampleInputEmail1" class="form-label">Clinic Contact Number</label><br>
                 <input required type="number" placeholder="{{user_data.clinic_contact_number}}" name="clinicContact" id="clinicContact" class="credentials" disabled>
                 <div id="map" style="position: relative; top: 0; left: 30%; right: 0">
                 <h3> Please Select Exact Location on the Map</h3>
@@ -54,17 +39,17 @@
                 {{map}}
                 {% endautoescape %}
                 </div><br>Latitude:<br>
-                <input type="text" id="latitude" disabled placeholder="{{user_data.latitude}}" class="credentials" required>
-                Longitude: <input type="text" id="longitude" disabled placeholder="{{user_data.longitude}}" class="credentials" required><br>
+                <input type="text" id="latitude" disabled placeholder="{{user_data.latitude}}" class="credentials" required><br>
+                Longitude:<br> <input type="text" id="longitude" disabled placeholder="{{user_data.longitude}}" class="credentials" required><br>
                 <label for="exampleInputEmail1" class="form-label">Email</label><br>
                 <input type="text" disabled placeholder="{{user_data.email}}" class="credentials"><br>
                 <div class="form-floating mb-3">
-                    <input required type="time" class="form-control" id="opening_time" placeholder="Opening" disabled>
+                    <input required type="time" class="form-control" id="opening_time" placeholder="Opening" readonly>
                     <label for="floatingInput">Opening</label>
                   </div>
                   <br>
                   <div class="form-floating mb-3">
-                    <input required type="time" class="form-control" id="closing_time" placeholder="Closing" disabled>
+                    <input required type="time" class="form-control" id="closing_time" placeholder="Closing" readonly>
                     <label for="floatingInput">Closing</label>
                   </div>
                   <br>
@@ -241,4 +226,3 @@ $(function(){
       });
     
 </script>
-</html>

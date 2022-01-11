@@ -25,9 +25,9 @@
 }
 @media (min-width:320px)  { /* smartphones, iPhone, portrait 480x320 phones */ 
     .to_top{
-        position: absolute;
-        top: 90%;
-        right: 10%;
+        position: fixed;
+        top: 95%;
+        left: 5%;
     }
     .header{
         background-color:#B85C38;
@@ -196,7 +196,8 @@
 @media (min-width:1025px) { /* big landscape tablets, laptops, and desktops */ 
 .to_top{
     display: none;
-}  /* Create two equal columns that floats next to each other */
+} 
+ /* Create two equal columns that floats next to each other */
 .column {
     float: left;
     width: 50%;

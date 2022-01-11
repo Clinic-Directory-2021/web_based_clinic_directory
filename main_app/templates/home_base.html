@@ -12,6 +12,7 @@
     <link rel="stylesheet" href="{% static 'css/base.css' %}">
     <link rel="stylesheet" href="{% static 'css/homepage.css' %}">
     <link rel="stylesheet" href="{% static 'css/add_item.css' %}">
+    <link rel="stylesheet" href="{% static 'css/settings.css' %}">
     <script src="{% static 'js/home_base.js' %}" defer></script>
     <script src="{% static 'js/edit_item.js' %}" defer></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -48,6 +49,22 @@
             <div class="line"></div>
             <div class="line"></div>
         </div>
+        </div>
+
+        <div class="menu-list">
+            <div class="menu-header">
+                <div class="decoy"></div>
+                <div class='close' onclick="close_menu()">
+                    <div class="line left"></div>
+                    <div class="line right"></div>
+                </div>
+            </div>
+            <ul>
+                <a href="{% url 'homepage' %}"><li><h3>Home</h3></li></a>
+                <a href="{% url 'appointment' %}"><li><h3>Request</h3></li></a>
+                <a href="{% url 'settings' %}"><li><h3>Settings</h3></li></a>
+                <a href="{% url 'logout' %}"><li><h3>Logout</h3></li></a>
+            </ul>
         </div>
     {% block content %}
     {% endblock %}

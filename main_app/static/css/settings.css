@@ -1,41 +1,3 @@
-*{
-    margin: 0;
-    font-family: Arial, Helvetica, sans-serif;
-    overflow-x: hidden;
-}
-/* width */
-::-webkit-scrollbar {
-    width: 10px;
-  }
-  
-  /* Track */
-  ::-webkit-scrollbar-track {
-    background: none; 
-    border-radius: 10px;
-  }
-   
-  /* Handle */
-  ::-webkit-scrollbar-thumb {
-    background: #888; 
-    border-radius: 10px;
-  }
-  
-  /* Handle on hover */
-  ::-webkit-scrollbar-thumb:hover {
-    background: #555; 
-    border-radius: 10px;
-  }
-.header{
-    background-color:#B85C38;
-    width: 100%;
-    height: 70px;
-    display: flex;
-}
-.back-link{
-    color: black;
-    font-size: 18px;
-    margin: 10px;
-}
 .edit{
     position: relative;
     left: 35%;
@@ -44,7 +6,7 @@
         border-radius: 5px;
         border:1px solid #E0C097;
 }
-img{
+.image{
     border:1px solid #E0C097;
     border-radius: 50%;
     width: 200px;
@@ -66,8 +28,8 @@ img{
        height: 100vh;
        padding: 10px;
    }
-   .credentials{
-    width: 100%;
+    .credentials{
+    width: 80%;
     padding: 10px;
     border-radius: 5px;
     border: 1.5px solid #E0C097;
@@ -95,6 +57,9 @@ img{
        width: 80%;
        height: 100%;
        border-left: 1px solid #B85C38;
+   }
+   .credentials{
+       width: 50%;
    }
 }
 @media (min-width:1025px) { /* big landscape tablets, laptops, and desktops */ 

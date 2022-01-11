@@ -120,7 +120,7 @@
     
   </div>
 
-  <button class="to_top">Go to Top</button>
+  <button class="btn btn-primary to_top" onclick="toTop()">Go to Top</button>
  <!-- Modal -->
 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
@@ -161,5 +161,10 @@
       </div>
     </div>
   </div>
-
+ 
+  <script>
+    function toTop(){
+      window.scrollTo(0, 0);
+    }
+  </script>
 {% endblock content %}
