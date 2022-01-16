@@ -4,7 +4,7 @@ function validation(){
     var form = document.getElementById('registerForm');
     var email = document.getElementById('registerEmail').value;
     var text = document.getElementById('emailValidationText');
-    var pattern = /^[^ ]+@[^ ]+\.[a-z]{2,3}$/;
+    var pattern = /^[^ ]+@gmail+\.com$/;
 
     if(email.match(pattern)){
         form.classList.add("valid");
