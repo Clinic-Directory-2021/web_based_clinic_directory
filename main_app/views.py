@@ -286,8 +286,6 @@ def settings(request):
 
         dict_data = result.to_dict()
 
-        print(dict_data)
-
         open_time = dict_data['opening_time']
 
         close_time = dict_data['closing_time']
@@ -296,12 +294,15 @@ def settings(request):
 
         close_time = datetime.datetime.strptime(close_time, '%I:%M %p')
 
+        print(open_time.strftime("%I:%M"))
+        print(close_time.strftime("%I:%M"))
+
         return render(request,'settings.html', {
             'user_data': result.to_dict(),
             'map': map,
             'session':request.session['session'],
-            'open_time': open_time,
-            'close_time': close_time,
+            'open_time': open_time.strftime("%I:%M"),
+            'close_time': close_time.strftime("%I:%M"),
 
             })
     else:
