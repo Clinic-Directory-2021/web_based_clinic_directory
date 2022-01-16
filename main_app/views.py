@@ -294,15 +294,15 @@ def settings(request):
 
         close_time = datetime.datetime.strptime(close_time, '%I:%M %p')
 
-        print(open_time.strftime("%I:%M"))
-        print(close_time.strftime("%I:%M"))
+        print(open_time.strftime("%H:%M"))
+        print(close_time.strftime("%H:%M"))
 
         return render(request,'settings.html', {
             'user_data': result.to_dict(),
             'map': map,
             'session':request.session['session'],
-            'open_time': open_time.strftime("%I:%M"),
-            'close_time': close_time.strftime("%I:%M"),
+            'open_time': open_time.strftime("%H:%M"),
+            'close_time': close_time.strftime("%H:%M"),
 
             })
     else:
