@@ -75,9 +75,9 @@ def index(request):
             
         latitude = value['latitude']
         longitude = value['longitude']
-
+        # commented line removed 5 star image +"<br><br><img src='../static/images/rate.png' alt='' class='rate'><img src='../static/images/rate.png' alt='' class='rate'><img src='../static/images/rate.png' alt='' class='rate'><img src='../static/images/rate.png' alt='' class='rate'><img src='../static/images/rate.png' alt='' class='rate'><br>5.0" 
         folium.Marker([latitude, longitude], 
-        popup= "<img style=\"width:200px;\" src=\""+value['clinic_img_url']+"\">"+"<b>Clinic Name:</b><br>" + value['clinic_name'] +"<br><br><img src='../static/images/rate.png' alt='' class='rate'><img src='../static/images/rate.png' alt='' class='rate'><img src='../static/images/rate.png' alt='' class='rate'><img src='../static/images/rate.png' alt='' class='rate'><img src='../static/images/rate.png' alt='' class='rate'><br>5.0" + "<br><br><b>Clinic Address:</b><br>" + value['clinic_address']  + "<br><br><b>Open and Closing time:</b><br>" + value['opening_time'] + " - " + value['closing_time'] + "<br><br><em>Description:</em><br>"+ value['clinic_description']  +"<br><br><b>Contact number:</b><br>" + value['clinic_contact_number'], 
+        popup= "<img style=\"width:200px;\" src=\""+value['clinic_img_url']+"\">"+"<b>Clinic Name:</b><br>" + value['clinic_name'] + "<br><br><b>Clinic Address:</b><br>" + value['clinic_address']  + "<br><br><b>Open and Closing time:</b><br>" + value['opening_time'] + " - " + value['closing_time'] + "<br><br><em>Description:</em><br>"+ value['clinic_description']  +"<br><br><b>Contact number:</b><br>" + value['clinic_contact_number'], 
         icon=folium.Icon(color="red", icon="fa-paw", prefix='fa'),
         tooltip= value['clinic_name']).add_to(map)
         
