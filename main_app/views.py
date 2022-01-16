@@ -286,9 +286,11 @@ def settings(request):
 
         dict_data = result.to_dict()
 
-        open_time = dict_data.opening_time
+        print(dict_data)
 
-        close_time = dict_data.closing_time
+        open_time = dict_data['opening_time']
+
+        close_time = dict_data['closing_time']
 
         open_time = datetime.strptime(open_time, '%I:%M %p')
 
