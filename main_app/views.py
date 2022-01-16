@@ -292,9 +292,9 @@ def settings(request):
 
         close_time = dict_data['closing_time']
 
-        open_time = datetime.strptime(open_time, '%I:%M %p')
+        open_time = datetime.datetime.strptime(open_time, '%I:%M %p')
 
-        close_time = datetime.strptime(close_time, '%I:%M %p')
+        close_time = datetime.datetime.strptime(close_time, '%I:%M %p')
 
         return render(request,'settings.html', {
             'user_data': result.to_dict(),
