@@ -283,10 +283,24 @@ def settings(request):
 
         result = firestoreDB.collection('users').document(request.session['user_id']).get()
         result.to_dict()
+
+        dict_data = result.to_dict()
+
+        open_time = dict_data.opening_time
+
+        close_time = dict_data.closing_time
+
+        open_time = datetime.strptime(open_time, '%I:%M %p')
+
+        close_time = datetime.strptime(close_time, '%I:%M %p')
+
         return render(request,'settings.html', {
             'user_data': result.to_dict(),
             'map': map,
-            'session':request.session['session']
+            'session':request.session['session'],
+            'open_time': open_time,
+            'close_time': close_time,
+
             })
     else:
         return redirect('/login')
