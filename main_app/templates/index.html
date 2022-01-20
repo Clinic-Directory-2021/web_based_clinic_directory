@@ -37,8 +37,7 @@
                    
                     <img src="{{values.clinic_img_url}}" alt="image">
                     <div class="details">
-                        {{values.clinic_name}}
-                        <br>
+                      <p align="center" style="font-size:14px;"><b>{{values.clinic_name}}</b></p>
                         <!-- <img src="../static/images/rate.png" alt="" class="rate">
                         <img src="../static/images/rate.png" alt="" class="rate">
                         <img src="../static/images/rate.png" alt="" class="rate">
@@ -46,7 +45,7 @@
                         <img src="../static/images/rate.png" alt="" class="rate"> -->
                         <!-- <br> -->
                         <br>
-                        <p>{{values.clinic_address}}</p>
+                        <p align="center" style="font-size:12px;">{{values.clinic_address}}</p>
                         
                     </div>
                 </div>
@@ -67,7 +66,8 @@
   </div>
 <div class="grey"></div>
   <div class="item-modal">
-    <img src="../static/images/map.jpg" id="item-modal-img" alt="image">
+    <img src="../static/images/map.jpg" id="item-modal-img" alt="image" 
+    style="width: 300px; height: 300px;">
     <div class="details">
         <b><p id="item-modal-name"></p></b>
         <br>
@@ -100,7 +100,6 @@
                     Stocks: 0
                 </div>
             </div> -->
-            
         </div>
         
 
@@ -169,6 +168,23 @@
     </div>
   </div>
  
+  <div class="modal fade" id="show_pic" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+        <div class="modal-body">
+            <img src="{{values.product_img_url}}" alt="image" id="image_large" style="text-align: center; width: 100%; height: 100%;">
+        </div>
+        <div class="modal-footer">
+            <!-- <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <button type="submit" class="btn btn-primary" onclick="returnEmpty()">Save changes</button> -->
+        </div>
+      </div>
+    </div>
+  </div>
+
   <script>
     function toTop(){
       window.scrollTo(0, 0);

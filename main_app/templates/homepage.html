@@ -32,11 +32,11 @@
       <p style='background-color:#ff0e0e; font-weight: bold; color:white;'>{{values.availability|upper}}</p>
       {% endif %}
 
-        <img src="{{values.product_img_url}}" alt="" data-bs-toggle="modal" data-bs-target="#exampleModal"><br><br>
+        <img src="{{values.product_img_url}}" alt="" data-bs-toggle="modal" data-bs-target="#exampleModal" style="width: 150px; height: 150px;"><br><br>
         <b>{{values.product_name}}</b><br><br>
     <div style="display: flex;">
-        <button type="button" class="btn btn-success" style="margin:0 10px 0 10px; width: 150px; height: 50px;" onclick="MarkProductAvailable('{{key}}','{{values.product_img_url}}','{{values.product_img_directory}}' , '{{values.product_name |escapejs}}' , '{{values.product_price}}')">Available</button>
-        <button type="button" class="btn btn-danger" style="width: 150px; height: 50px;" onclick="MarkProductNotAvailable('{{key}}','{{values.product_img_url}}','{{values.product_img_directory}}' , '{{values.product_name |escapejs}}' , '{{values.product_price}}')" >Unavailable</button>
+        <button type="button" class="btn btn-success" style="margin:auto; width: 150px; height: 50px;" onclick="MarkProductAvailable('{{key}}','{{values.product_img_url}}','{{values.product_img_directory}}' , '{{values.product_name |escapejs}}' , '{{values.product_price}}')">Available</button>
+        <button type="button" class="btn btn-danger" style="margin:auto; width: 150px; height: 50px;" onclick="MarkProductNotAvailable('{{key}}','{{values.product_img_url}}','{{values.product_img_directory}}' , '{{values.product_name |escapejs}}' , '{{values.product_price}}')" >Unavailable</button>
     </div>
     </div>
     {% endfor %}
@@ -55,7 +55,7 @@
           {% csrf_token %}
         <div class="modal-body">
             <!-- Image Preview-->
-            <a data-bs-toggle="modal" data-bs-target="#show_pic"><img src="../static/images/map.jpg" alt="" class="image" id="edit_prod_img_preview" style="cursor: pointer;"></a>
+            <a ><img src="../static/images/map.jpg" alt="" class="image" id="edit_prod_img_preview" style="cursor: pointer;"></a>
             <br>
             <!-- Input File-->
             <input name="selected_edit_product_image" id="edit_prod_img" type="file" alt="Submit" class="credentials" accept=".jpg, .jpeg, .png" required>
@@ -80,6 +80,7 @@
       </div>
     </div>
   </div>
+
 
   <div id="loader"></div>
  <script src="{% static 'js/homepage.js' %}"></script>
