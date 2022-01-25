@@ -78,6 +78,7 @@
      .preview-item:hover{
          background-color: #178CA4;
          border: 1px solid #178CA4;
+         color: #F9F7F0;
      }
      .preview-item img{
          width: 100px;

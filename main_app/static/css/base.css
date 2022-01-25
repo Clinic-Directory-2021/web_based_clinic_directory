@@ -1,25 +1,23 @@
 /* width */
 ::-webkit-scrollbar {
-    width: 10px;
+    width: 20px;
   }
   
   /* Track */
   ::-webkit-scrollbar-track {
-    background: none; 
-    border-radius: 10px;
+    background: none;
   }
    
   /* Handle */
   ::-webkit-scrollbar-thumb {
-    background: #888; 
-    border-radius: 10px;
+    background: #18B7BE;
   }
   
   /* Handle on hover */
   ::-webkit-scrollbar-thumb:hover {
-    background: #555; 
-    border-radius: 10px;
+    background:  #178CA4;
   }
+
 *{
     margin: 0;
     font-family: Arial, Helvetica, sans-serif;
