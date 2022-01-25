@@ -340,19 +340,27 @@ def save_clinic_info(request):
     #upload product image
     storage.child(img_file_directory).put(clinicImage, request.session['user_id'])
 
-    doc_ref.update({
-        'clinic_img_url' : storage.child(img_file_directory).get_url(request.session['user_id']),
-        'clinic_img_directory' : img_file_directory,
-        'clinic_address': editClinicAddress,
-        'clinic_contact_number': clinicContact,
-        'clinic_name': editClinicName,
-        'latitude': editLatitude,
-        'longitude': editLongitude,
-        'clinic_description': editClinicDescription,
-        'opening_time': opening_time,
-        'closing_time': closing_time,
-        })
-    return HttpResponse('Information Updated Successfully!')
+
+    opening_timeCheck = datetime.datetime.strptime(opening_time, '%I:%M %p').time()
+
+    closing_timeCheck = datetime.datetime.strptime(closing_time, '%I:%M %p').time()
+
+    if opening_timeCheck > closing_timeCheck:
+        return HttpResponse('Time Error')
+    else:
+        doc_ref.update({
+            'clinic_img_url' : storage.child(img_file_directory).get_url(request.session['user_id']),
+            'clinic_img_directory' : img_file_directory,
+            'clinic_address': editClinicAddress,
+            'clinic_contact_number': clinicContact,
+            'clinic_name': editClinicName,
+            'latitude': editLatitude,
+            'longitude': editLongitude,
+            'clinic_description': editClinicDescription,
+            'opening_time': opening_time,
+            'closing_time': closing_time,
+            })
+        return HttpResponse('Information Updated Successfully!')
 
 def add_item(request):
     user_data = firestoreDB.collection('users').document(request.session['user_id']).get()
