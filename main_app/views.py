@@ -84,9 +84,29 @@ def index(request):
     # Get html representation of the map
     map = map._repr_html_()
 
+    time_opens = ""
+    time_closed = ""
+
     if request.method == 'POST':
         userId = request.POST.get('user_id_post')
         items = firestoreDB.collection('items').document(userId).get()
+
+        result = firestoreDB.collection('users').document(userId).get()
+        result.to_dict()
+
+        dict_data = result.to_dict()
+
+        open_time = dict_data['opening_time']
+
+        close_time = dict_data['closing_time']
+
+        open_time = datetime.datetime.strptime(open_time, '%I:%M %p')
+
+        close_time = datetime.datetime.strptime(close_time, '%I:%M %p')
+
+        time_opens = open_time.strftime("%H:%M")
+        time_closed = close_time.strftime("%H:%M")
+
         data = {
             'map': map,
             'user_data': user_data,
@@ -98,7 +118,9 @@ def index(request):
         data = {
             'map': map,
             'user_data': user_data,
-            "session":request.session['session']
+            "session":request.session['session'],
+            "time_opens": time_opens,
+            "time_closed": time_closed,
         }
     
     if 'user_id' not in request.session:
@@ -194,48 +216,56 @@ def register_user_firebase(request):
     opening_time = request.POST.get('opening_time')
     closing_time = request.POST.get('closing_time')
     clinicDescription = request.POST.get('clinicDescription')
+    
 
-    if password == confirm_password:
-        try:
-            #register email and password to firebase auth
-            user = auth.create_user_with_email_and_password(email, password)
+    opening_timeCheck = datetime.datetime.strptime(opening_time, '%I:%M %p').time()
 
-            img_file_directory = user['localId']+"/clinic_images/"+ fileName
+    closing_timeCheck = datetime.datetime.strptime(closing_time, '%I:%M %p').time()
 
-            #upload product image
-            storage.child(img_file_directory).put(clinicImage, user['localId'])
-
-
-            
-            doc_ref = firestoreDB.collection('queue').document(user['localId'])
-            doc_ref.set({
-                'user_id': user['localId'],
-                'clinic_img_url' : storage.child(img_file_directory).get_url(user['localId']),
-                'clinic_img_directory' : img_file_directory,
-                'clinic_name': clinicName,
-                'clinic_address': clinicAddress,
-                'clinic_contact_number': clinicContact,
-                'latitude': latitude,
-                'longitude': longitude,
-                'email': email,
-                'password': password,
-                'opening_time': opening_time,
-                'closing_time': closing_time,
-                'clinic_description': clinicDescription,
-                'total_items': 0,
-            })
-            #messages.success(request, "New User Registered Successfully!")
-            return HttpResponse('New User Registered Successfully!')
-        except requests.HTTPError as e:
-            error_json = e.args[1]
-            error = json.loads(error_json)['error']['message']
-            if error == "EMAIL_EXISTS":
-                #messages.success(request, "Email Already Exists!")
-                return HttpResponse('Email Already Exists!')
-
+    if opening_timeCheck > closing_timeCheck:
+        return HttpResponse('Time Error')
     else:
-        #messages.success(request, "Password Do not Match!")
-        return HttpResponse('Password Do not Match!')
+        if password == confirm_password:
+            try:
+                #register email and password to firebase auth
+                user = auth.create_user_with_email_and_password(email, password)
+
+                img_file_directory = user['localId']+"/clinic_images/"+ fileName
+
+                #upload product image
+                storage.child(img_file_directory).put(clinicImage, user['localId'])
+
+
+                
+                doc_ref = firestoreDB.collection('queue').document(user['localId'])
+                doc_ref.set({
+                    'user_id': user['localId'],
+                    'clinic_img_url' : storage.child(img_file_directory).get_url(user['localId']),
+                    'clinic_img_directory' : img_file_directory,
+                    'clinic_name': clinicName,
+                    'clinic_address': clinicAddress,
+                    'clinic_contact_number': clinicContact,
+                    'latitude': latitude,
+                    'longitude': longitude,
+                    'email': email,
+                    'password': password,
+                    'opening_time': opening_time,
+                    'closing_time': closing_time,
+                    'clinic_description': clinicDescription,
+                    'total_items': 0,
+                })
+                #messages.success(request, "New User Registered Successfully!")
+                return HttpResponse('New User Registered Successfully!')
+            except requests.HTTPError as e:
+                error_json = e.args[1]
+                error = json.loads(error_json)['error']['message']
+                if error == "EMAIL_EXISTS":
+                    #messages.success(request, "Email Already Exists!")
+                    return HttpResponse('Email Already Exists!')
+
+        else:
+            #messages.success(request, "Password Do not Match!")
+            return HttpResponse('Password Do not Match!')
 
 def login_validation(request):
     email = request.POST.get('login_email')
@@ -568,6 +598,17 @@ def addAppointment(request):
             'appointment_number': appointment_number,
             'appointment_id': doc_ref.id
         })
+
+        email_message = 'Hello Mr./Mrs. '+ appointment_name.upper() + 'Your Appoinment Request is now Being Processed, Please wait for further notice if Your Request Has Been Accepted or Rejected. Thank You!'
+
+        send_mail(
+            'Animal Clinic Directory',
+            email_message,
+            'clinic.directory.2021@gmail.com',
+            [appointment_email],
+            fail_silently=False,
+        )
+
         return redirect('/')
 
 def appointment(request):
