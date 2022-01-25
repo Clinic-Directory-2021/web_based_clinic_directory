@@ -82,6 +82,12 @@ $('#registerForm').on('submit', function(e){
                     location.reload();
                 }
               })
+          }else if(data == 'Time Error'){
+            Swal.fire({
+              icon: 'error',
+              title: 'Oops...',
+              text: "Opening Time Can't be Later than Closing Time!",
+            })
           }
 
       },
