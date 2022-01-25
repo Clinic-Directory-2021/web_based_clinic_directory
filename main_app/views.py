@@ -688,7 +688,7 @@ def declineAppointment(request):
 
         firestoreDB.collection('appointment_queue').document(appointment_id).delete()
 
-        email_message = 'Hello Mr./Mrs. '+ appointment_name.upper() + ' Your Appointment Schedule on ' + request.session['clinic_name'].upper() + ' at ' + appointment_date + ' ' + appointment_time + ' is REJECTED.'
+        email_message = 'Hello Mr./Mrs. '+ appointment_name.upper() + ' Your Appointment Schedule on ' + request.session['clinic_name'].upper() + ' at ' + appointment_date + ' ' + appointment_time + ' is REJECTED. You Can try Again to Book an Appointment by visiting us at govet.herokuapp.com, Thank you!'
 
         send_mail(
             'Animal Clinic Directory',
