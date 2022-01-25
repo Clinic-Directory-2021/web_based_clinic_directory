@@ -126,6 +126,7 @@
          margin-left: 10px;
          background-color: white;
          border-radius: 5px;
+         
      }
      .search-modal .search-result{
          width: 100%;
@@ -214,8 +215,9 @@
       height: 100%;
   }
   .search-modal{
-    width: 50%;
+    width: 48%;
     top:150px;
+    padding: 10px;
 }
 }
 @media (min-width:1281px) { /* hi-res laptops and desktops */ 

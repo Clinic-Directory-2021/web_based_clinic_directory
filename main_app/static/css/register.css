@@ -17,6 +17,7 @@
         padding-top: 10%;
         padding-left: 10%;
         padding-right: 10%;
+        overflow-y: hidden;
     }
     .register-input{
         width: 100%;
