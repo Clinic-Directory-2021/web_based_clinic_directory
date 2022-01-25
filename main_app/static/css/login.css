@@ -1,9 +1,9 @@
 .login-input:focus{
     outline: none !important;
-    border: 2.5px solid #E0C097;
+    border: 2.5px solid #178CA4;
 }
 .login-link:hover{
-    color: #5C3D2E;
+    color: #072A40;
 }
 
 @media (min-width:320px)  { /* smartphones, iPhone, portrait 480x320 phones */ 
@@ -11,7 +11,7 @@
         margin-top: 10px;
         text-align: center;
         font-weight: bolder;
-        color: #5C3D2E;
+        color: #072A40;
     }
     .login-content{
         padding-top: 10%;
@@ -23,11 +23,11 @@
         padding: 10px;
         margin-top: 50px;
         border-radius: 5px;
-        border: 1.5px solid #E0C097;
+        border: 1.5px solid #178CA4;
     }
     .login-link{
         text-decoration: none;
-        color: #5C3D2E;
+        color: #072A40;
         padding-top: 10px;
     }
     .login-button{
@@ -35,8 +35,8 @@
         width: 100%;
         padding: 10px;
         border-radius: 5px;
-        background-color: #B85C38;
-        color: #E0C097;
+        background-color: #072A40;
+        color: #F9F7F0 ;
         font-weight: bold;
         font-size: 18px;
         border: 0;

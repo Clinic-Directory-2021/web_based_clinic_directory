@@ -2,12 +2,12 @@
     position: relative;
     left: 35%;
         height: 50px;
-        background-color: #E0C097;
+        background-color: #178CA4;
         border-radius: 5px;
-        border:1px solid #E0C097;
+        border:1px solid #178CA4;
 }
 .image{
-    border:1px solid #E0C097;
+    border:1px solid #178CA4;
     border-radius: 50%;
     width: 200px;
     height: 200px;
@@ -32,7 +32,7 @@
     width: 80%;
     padding: 10px;
     border-radius: 5px;
-    border: 1.5px solid #E0C097;
+    border: 1.5px solid #178CA4;
     margin-bottom: 50px;
 }
 }
@@ -46,7 +46,7 @@
 @media (min-width:961px)  { /* tablet, landscape iPad, lo-res laptops ands desktops */ 
     .content .left .option{
         text-align: center;
-        border-bottom: 1px solid #B85C38;
+        border-bottom: 1px solid #072A40;
     }
    .content .left{
     display: block;
@@ -56,7 +56,7 @@
    .content .right{
        width: 80%;
        height: 100%;
-       border-left: 1px solid #B85C38;
+       border-left: 1px solid #072A40;
    }
    .credentials{
        width: 50%;

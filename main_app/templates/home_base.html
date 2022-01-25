@@ -37,14 +37,14 @@
         <div class='logo' style="display: flex;">
             <a href="{% url 'dashboard' %}"><img src="../static/images/logo.png" alt="logo" width="50" height="50" style="cursor: pointer;"></a>
             &nbsp; &nbsp;
-            <h2 style="margin-top: 10px; overflow-y: hidden; color: #E0C097;">GoVet</h2>
+            <h2 style="margin-top: 10px; overflow-y: hidden; color: #F9F7F0;">GoVet</h2>
         </div>
         <div class="middle">
             <ul>
-                <a href="{% url 'homepage' %}"><li id="homepage"><h6>Home</h6></li></a>
-                <a href="{% url 'appointment' %}"><li id="request"><h6>Request</h6></li></a>
-                <a href="{% url 'settings' %}" ><li id="settings"><h6>Settings</h6></li></a>
-                <a href="{% url 'logout' %}"><li><h6>Logout</h6></li></a>
+                <a href="{% url 'homepage' %}"><li id="homepage" style="color: #F9F7F0;"><h6>Home</h6></li></a>
+                <a href="{% url 'appointment' %}"><li id="request" style="color: #F9F7F0;"><h6>Request</h6></li></a>
+                <a href="{% url 'settings' %}" ><li id="settings" style="color: #F9F7F0;"><h6>Settings</h6></li></a>
+                <a href="{% url 'logout' %}"><li style="color: #F9F7F0;"><h6>Logout</h6></li></a>
             </ul>
         </div>
         <div class="menu" onclick="show_menu()">

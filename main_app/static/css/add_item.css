@@ -2,7 +2,7 @@
     margin: 0;
 }
 .header{
-    background-color:#B85C38;
+    background-color:#072A40;
     width: 100%;
     height: 70px;
     display: flex;
@@ -17,7 +17,7 @@
     margin: 10px;
 }
 .save{
-   background-color: #E0C097;
+   background-color: #178CA4;
    margin: auto;
    margin-right: 0;
    border:0;

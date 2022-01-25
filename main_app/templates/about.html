@@ -1,10 +1,9 @@
 {% include "base.html" %}
 {% if session == "about" %}
 <script>
-  $('#about').css("background-color","#E0C097")
+  $('#about').css("background-color","#178CA4")
   $('#about').css("border-radius","25px")
   $('#about').css("text-align","center")
-  $('#about').css("color","black")
 </script>
 {% endif %}
   {% block content %}
@@ -24,7 +23,7 @@
         </div>
 
       </div>
-      <h2 align="center">Developers</h2>
+      <h2 align="center" style="color: black;">Developers</h2>
       <div style="padding-left: 10%;">
       <div  class="developers" style="float: left;">
         <div class="developers-image">
@@ -115,7 +114,7 @@
     {% include 'footer.html' %}
   </div>
     <script>
-      $('#about').css("background-color","#E0C097")
+      $('#about').css("background-color","#178CA4")
       $('#about').css("border-radius","25px")
       $('#about').css("text-align","center")
     </script>
