@@ -49,12 +49,19 @@
 
                 <form action="/declineAppointment/" method="post">
                     {% csrf_token %}
-                <input type="hidden" name="appointment_id" value="{{appointment.appointment_id}}">
-                <input type="hidden" name="name" value="{{appointment.appointment_name |escapejs}}">
-                <input type="hidden" name="email" value="{{appointment.appointment_email |escapejs}}">
-                <input type="hidden" name="date" value="{{appointment.appointment_date}}">
-                <input type="hidden" name="time" value="{{appointment.appointment_time}}">
-                <button type="submit" class="btn btn-danger">Decline</button>
+                <!-- <input type="hidden" name="appointment_id" value="">
+                <input type="hidden" name="name" value="">
+                <input type="hidden" name="email" value="">
+                <input type="hidden" name="date" value="">
+                <input type="hidden" name="time" value="">
+                <button type="submit" class="btn btn-danger">Decline</button> -->
+
+                <button type="button" class="btn btn-danger" 
+                onclick="appointmentDecline('{{appointment.appointment_id}}',
+                '{{appointment.appointment_name |escapejs}}',
+                '{{appointment.appointment_email |escapejs}}' ,
+                '{{appointment.appointment_date}}' ,
+                '{{appointment.appointment_time}}')">Decline</button>
                 </form>
             </td>
             </tr>

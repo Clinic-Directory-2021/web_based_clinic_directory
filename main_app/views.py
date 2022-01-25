@@ -672,10 +672,11 @@ def declineAppointment(request):
         appointment_email = request.POST.get('email')
         appointment_date = request.POST.get('date')
         appointment_time = request.POST.get('time')
+        reasons = request.POST.get('reasons')
 
         firestoreDB.collection('appointment_queue').document(appointment_id).delete()
 
-        email_message = 'Hello Mr./Mrs. '+ appointment_name.upper() + ' Your Appointment Schedule on ' + request.session['clinic_name'].upper() + ' at ' + appointment_date + ' ' + appointment_time + ' is REJECTED. You Can try Again to Book an Appointment by visiting us at govet.herokuapp.com, Thank you!'
+        email_message = 'Hello Mr./Mrs. '+ appointment_name.upper() + ' Your Appointment Schedule on ' + request.session['clinic_name'].upper() + ' at ' + appointment_date + ' ' + appointment_time + ' is REJECTED Because of the following reason/reasons. ' + reasons + ' You Can try Again to Book an Appointment by visiting us at govet.herokuapp.com, Thank you!'
 
         send_mail(
             'Animal Clinic Directory',
