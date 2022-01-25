@@ -84,28 +84,9 @@ def index(request):
     # Get html representation of the map
     map = map._repr_html_()
 
-    time_opens = ""
-    time_closed = ""
-
     if request.method == 'POST':
         userId = request.POST.get('user_id_post')
         items = firestoreDB.collection('items').document(userId).get()
-
-        result = firestoreDB.collection('users').document(userId).get()
-        result.to_dict()
-
-        dict_data = result.to_dict()
-
-        open_time = dict_data['opening_time']
-
-        close_time = dict_data['closing_time']
-
-        open_time = datetime.datetime.strptime(open_time, '%I:%M %p')
-
-        close_time = datetime.datetime.strptime(close_time, '%I:%M %p')
-
-        time_opens = open_time.strftime("%H:%M")
-        time_closed = close_time.strftime("%H:%M")
 
         data = {
             'map': map,
@@ -119,8 +100,6 @@ def index(request):
             'map': map,
             'user_data': user_data,
             "session":request.session['session'],
-            "time_opens": time_opens,
-            "time_closed": time_closed,
         }
     
     if 'user_id' not in request.session:

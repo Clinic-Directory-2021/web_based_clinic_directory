@@ -120,8 +120,44 @@ function showModal(clinic_name, img_url, clinic_address, clicked_id , clinic_des
     $('#id_field').val(clicked_id)
 
 
+    //APPOINTMENT TIME RESTRICTION
+    var time = opening;
+    var hours = Number(time.match(/^(\d+)/)[1]);
+    var minutes = Number(time.match(/:(\d+)/)[1]);
+    var AMPM = time.match(/\s(.*)$/)[1];
+    if(AMPM == "PM" && hours<12) hours = hours+12;
+    if(AMPM == "AM" && hours==12) hours = hours-12;
+    var sHours = hours.toString();
+    var sMinutes = minutes.toString();
+    if(hours<10) sHours = "0" + sHours;
+    if(minutes<10) sMinutes = "0" + sMinutes;
+    time_opening = sHours + ":" + sMinutes
+
+    var time = closing;
+    var hours = Number(time.match(/^(\d+)/)[1]);
+    var minutes = Number(time.match(/:(\d+)/)[1]);
+    var AMPM = time.match(/\s(.*)$/)[1];
+    if(AMPM == "PM" && hours<12) hours = hours+12;
+    if(AMPM == "AM" && hours==12) hours = hours-12;
+    var sHours = hours.toString();
+    var sMinutes = minutes.toString();
+    if(hours<10) sHours = "0" + sHours;
+    if(minutes<10) sMinutes = "0" + sMinutes;
+    time_closing = sHours + ":" + sMinutes
+
+    console.log(time_closing + time_opening )
+    $("#appointment_time").attr({
+        "max" : time_closing,        // substitute your own
+        "min" : time_opening          // values (or variables) here
+     });
 
     
+    //APPOINTMENT TIME RESTRICTION END
+
+
+
+
+
     $.post({
         type: 'post',
         url: "",
