@@ -32,6 +32,7 @@ $('#search-clinic-form').on('submit', function(e){
     e.preventDefault();
     $( ".preview-item" ).remove();
     console.log("1");
+    $('#pageLabel').html("Results")
     $.ajax({
         type: 'post',
         url: "/search_clinic/",

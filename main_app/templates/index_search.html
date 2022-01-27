@@ -6,7 +6,6 @@
         <img src="{{values.clinic_img_url}}" alt="image">
         <div class="details">
             <p align="center" style="font-size:14px;"><b>{{values.clinic_name}}</b></p>    
-            <br>
             <p align="center" style="font-size:12px;">Closed At {{values.closing_time}}</p>
             <br>
             <p align="center" style="font-size:12px;">{{values.clinic_address}}</p>
@@ -20,7 +19,6 @@
     <img src="{{values.clinic_img_url}}" alt="image">
     <div class="details">
         <p align="center" style="font-size:14px;"><b>{{values.clinic_name}}</b></p>    
-        <br>
         <p align="center" style="font-size:12px;">Closed At {{values.closing_time}}</p>
         <br>
         <p align="center" style="font-size:12px;">{{values.clinic_address}}</p>
@@ -37,10 +35,9 @@
                                 {% if item_value.belong_to == values.user_id %}
                 <div class="preview-item" onclick="showModal('{{values.clinic_name}}', '{{values.clinic_img_url}}', '{{values.clinic_address}}', '{{values.user_id}}', '{{values.clinic_description}}', '{{values.opening_time}}', '{{values.closing_time}}', '{{values.clinic_contact_number}}')">
                     
-                    <img src="{{values.clinic_img_url}}" alt="image">
+                    <img src="{{item_value.product_img_url}}" alt="image">
                     <div class="details">
-                        <p align="center" style="font-size:14px;"><b>{{values.clinic_name}}</b></p>    
-            <br>
+                        <p align="center" style="font-size:14px;"><b>This Product is Available At {{values.clinic_name}}</b></p>    
             <p align="center" style="font-size:12px;">Closed At {{values.closing_time}}</p>
             <br>
             <p align="center" style="font-size:12px;">{{values.clinic_address}}</p>
