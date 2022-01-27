@@ -57,6 +57,7 @@
                 <br>
                 <br>
                 <input type="submit" value="Save" class="edit" id="settings_save" />
+                <input type="button" value="Cancel" class="edit" id="settings_cancel" onclick="cancelSettings()"/>
                 </form>
                 <h3 id="responseMessage"></h3>
                 <button class="edit" onclick="edit_clinic_info()" id="settings_edit">Edit credentials</button>
@@ -69,9 +70,10 @@
 <script type="text/javascript">
     var edit = document.getElementById("settings_edit");
 var save = document.getElementById("settings_save");
+var cancel = document.getElementById("settings_cancel");
 var credentials = document.getElementsByClassName("credentials");
 save.style.display = "none";
-
+cancel.style.display = "none";
 
 
 $('#map').css('visibility', 'hidden');
@@ -92,7 +94,7 @@ function edit_clinic_info(){
   
    edit.style.display = "none";
    save.style.display = "block";
-
+   cancel.style.display = "block";
 }
 
 $('#settingsForm').on('submit', function(e){
@@ -224,5 +226,27 @@ $(function(){
           }
         });
       });
+
+    
+    
+    
+ function cancelSettings(){
+  $('#map').css('visibility', 'hidden');
+
+for(i = 0; i < credentials.length; i++)
+{
+     credentials[i].disabled = false;
+     credentials[5].disabled = false;
+     credentials[6].disabled = false;
+     credentials[7].disabled = false;
+}
+
+$('#opening_time').prop('disabled', true);
+$('#closing_time').prop('disabled', true);
+
+edit.style.display = "block";
+save.style.display = "none";
+cancel.style.display = "none";
+    }
     
 </script>
