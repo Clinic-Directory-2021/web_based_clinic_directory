@@ -28,7 +28,7 @@
                 
                                 {% if item_value.belong_to == values.user_id %}
                                 <div class="search-result" onclick="showModal('{{values.clinic_name |escapejs}}', '{{values.clinic_img_url}}', '{{values.clinic_address |escapejs}}', '{{values.user_id}}', '{{values.clinic_description |escapejs}}', '{{values.opening_time}}', '{{values.closing_time}}', '{{values.clinic_contact_number}}')">
-                                    <img src="{{values.clinic_img_url}}" alt="">
+                                    <img src="{{item_value.product_img_url}}" alt="">
                                         <div class="details">
                                             <p align="center" style="font-size:14px;"><b>{{item_value.product_name}}</b></p>
                                             <p align="center" style="font-size:14px;"><b>This Product is Available At {{values.clinic_name}}</b></p>    
