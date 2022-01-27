@@ -20,7 +20,7 @@
             <div class='preview'>
                 <br>
                 {% if user_data %}
-                <h3 align='center'>Available Clinics</h3>
+                <h3 align='center'>Currently Open Clinic</h3>
                 {% else %}
                 <h3 align='center'>All Clinics are closed</h3>
                 {% endif %}
@@ -44,6 +44,8 @@
                         <img src="../static/images/rate.png" alt="" class="rate">
                         <img src="../static/images/rate.png" alt="" class="rate"> -->
                         <!-- <br> -->
+                        <br>
+                        <p align="center" style="font-size:12px;">Closed At {{values.closing_time}}</p>
                         <br>
                         <p align="center" style="font-size:12px;">{{values.clinic_address}}</p>
                         
