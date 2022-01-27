@@ -20,6 +20,8 @@ from django.template import loader
 import time
 from django.core.mail import send_mail
 
+from django.core.paginator import Paginator
+
 config={
     "apiKey": "AIzaSyDwWsW--ZHaZIOE4OXu5VhMIclZad8zDYw",
     "authDomain": "animal-clinic-directory-2021.firebaseapp.com",
@@ -608,6 +610,8 @@ def appointment(request):
         queue = []
         accepted = []
 
+        
+
         for appointment in appointment_queue:
             value = appointment.to_dict()
             queue.append(value)
@@ -616,10 +620,20 @@ def appointment(request):
             value = accep.to_dict()
             accepted.append(value)
 
+        paginator = Paginator(queue, 3)
+        page_number = request.GET.get('page') or 1
+        item_list = paginator.get_page(page_number)
+
+        paginator2 = Paginator(accepted, 3)
+        page_number2 = request.GET.get('page2') or 1
+        item_list2 = paginator2.get_page(page_number2)
+
         data ={
             'appointment_queue': queue,
             'accepted_appointment': accepted,
-            'session': request.session['session']
+            'session': request.session['session'],
+            'item_list': item_list,
+            'item_list2': item_list2,
         }
 
         return render(request, 'appointment.html', data)

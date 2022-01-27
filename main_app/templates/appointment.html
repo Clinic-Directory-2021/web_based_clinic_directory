@@ -25,10 +25,10 @@
           </thead>
           <tbody>
               
-              {% for appointment in appointment_queue %}
+              {% for appointment in item_list %}
           
             <tr>
-              <th scope="row">1</th>
+              <th scope="row">{{ forloop.counter }}</th>
               <td>{{appointment.appointment_name}}</td>
               <td>{{appointment.appointment_email}}</td>
               <td>{{appointment.appointment_date}}</td>
@@ -69,6 +69,27 @@
           </tbody>
       </table>
     </div>
+
+
+    <div class="pagination">
+      <span class="step-links">
+          {% if item_list.has_previous %}
+              <a href="?page=1">&laquo; first</a>
+              <a href="?page={{ item_list.previous_page_number }}">previous</a>
+          {% endif %}
+  
+          <span class="current">
+              Page {{ item_list.number }} of {{ item_list.paginator.num_pages }}.
+          </span>
+  
+          {% if item_list.has_next %}
+              <a href="?page={{ item_list.next_page_number }}">next</a>
+              <a href="?page={{ item_list.paginator.num_pages }}">last &raquo;</a>
+          {% endif %}
+      </span>
+  </div>
+
+
 <div style="margin: 5px; height: 50vh;">
     <h1>Accepted</h1>
     <table class="table table-striped">
@@ -85,9 +106,9 @@
           </thead>
           <tbody>
               
-              {% for accepted  in accepted_appointment %}               
+              {% for accepted  in item_list2 %}               
             <tr>
-              <th scope="row">1</th>
+              <th scope="row">{{ forloop.counter }}</th>
               <td>{{accepted.appointment_name}}</td>
               <td>{{accepted.appointment_email}}</td>
               <td>{{accepted.appointment_date}}</td>
@@ -98,6 +119,26 @@
           </tbody>
       </table>
 </div>
+
+<div class="pagination">
+  <span class="step-links">
+      {% if item_list2.has_previous %}
+          <a href="?page2=1">&laquo; first</a>
+          <a href="?page2={{ item_list2.previous_page_number }}">previous</a>
+      {% endif %}
+
+      <span class="current">
+          Page {{ item_list2.number }} of {{ item_list2.paginator.num_pages }}.
+      </span>
+
+      {% if item_list2.has_next %}
+          <a href="?page2={{ item_list2.next_page_number }}">next</a>
+          <a href="?page2={{ item_list2.paginator.num_pages }}">last &raquo;</a>
+      {% endif %}
+  </span>
+</div>
+
+
 </div>
 <div>
   {% include 'footer.html' %}
