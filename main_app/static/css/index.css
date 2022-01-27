@@ -168,6 +168,8 @@
     .preview-item img{
         width: 100px;
         height: 100px;
+        margin-top: 2%;
+        margin-left: 3%;
     }
     .preview-item .details{
         padding: 10px;
