@@ -57,7 +57,7 @@
                 <br>
                 <br>
                 <input type="submit" value="Save" class="edit" id="settings_save" />
-                <input type="button" value="Cancel" class="edit" id="settings_cancel" onclick="cancelSettings()"/>
+                <input type="button" value="Cancel" class="edit" id="settings_cancel" onclick="cancelSettings()" style="background-color: #f44336; display: inline-block;"/>
                 </form>
                 <h3 id="responseMessage"></h3>
                 <button class="edit" onclick="edit_clinic_info()" id="settings_edit">Edit credentials</button>
@@ -93,8 +93,8 @@ function edit_clinic_info(){
    $('#closing_time').prop('disabled', false);
   
    edit.style.display = "none";
-   save.style.display = "block";
-   cancel.style.display = "block";
+   save.style.display = "inline-block";
+   cancel.style.display = "inline-block";
 }
 
 $('#settingsForm').on('submit', function(e){
