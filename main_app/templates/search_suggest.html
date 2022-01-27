@@ -4,8 +4,9 @@
             <div class="search-result" onclick="showModal('{{values.clinic_name |escapejs}}', '{{values.clinic_img_url}}', '{{values.clinic_address |escapejs}}', '{{values.user_id}}', '{{values.clinic_description |escapejs}}', '{{values.opening_time}}', '{{values.closing_time}}', '{{values.clinic_contact_number}}')">
                 <img src="{{values.clinic_img_url}}" alt="">
                 <div class="details">
-                    <p style="font-size: 14px;"><b>{{values.clinic_name}}</b></p>
-                    <p style="font-size: 12px;">{{values.clinic_address}}</p>
+                    <p align="center" style="font-size:14px;"><b>{{values.clinic_name}}</b></p>    
+            <p align="center" style="font-size:12px;">Closed At {{values.closing_time}}</p>
+            <p align="center" style="font-size:12px;">{{values.clinic_address}}</p>
                 </div>
             </div>
 
@@ -13,8 +14,9 @@
             <div class="search-result" onclick="showModal('{{values.clinic_name |escapejs}}', '{{values.clinic_img_url}}', '{{values.clinic_address |escapejs}}', '{{values.user_id}}', '{{values.clinic_description |escapejs}}', '{{values.opening_time}}', '{{values.closing_time}}', '{{values.clinic_contact_number}}')">
                 <img src="{{values.clinic_img_url}}" alt="">
                 <div class="details">
-                    <p style="font-size: 14px;"><b>{{values.clinic_name}}</b></p>
-                    <p style="font-size: 12px;">{{values.clinic_address}}</p>
+                    <p align="center" style="font-size:14px;"><b>{{values.clinic_name}}</b></p>    
+            <p align="center" style="font-size:12px;">Closed At {{values.closing_time}}</p>
+            <p align="center" style="font-size:12px;">{{values.clinic_address}}</p>
                 </div>
             </div>
 
@@ -28,12 +30,10 @@
                                 <div class="search-result" onclick="showModal('{{values.clinic_name |escapejs}}', '{{values.clinic_img_url}}', '{{values.clinic_address |escapejs}}', '{{values.user_id}}', '{{values.clinic_description |escapejs}}', '{{values.opening_time}}', '{{values.closing_time}}', '{{values.clinic_contact_number}}')">
                                     <img src="{{values.clinic_img_url}}" alt="">
                                         <div class="details">
-                                            {{values.clinic_name}}
-                                            <br>
-                                            Rate
-                                            <br>
-                                            <br>
-                                            {{values.clinic_address}}
+                                            <p align="center" style="font-size:14px;"><b>{{item_value.product_name}}</b></p>
+                                            <p align="center" style="font-size:14px;"><b>This Product is Available At {{values.clinic_name}}</b></p>    
+                                <p align="center" style="font-size:12px;">Closed At {{values.closing_time}}</p>
+                                <p align="center" style="font-size:12px;">{{values.clinic_address}}</p>
                                         </div>
                                 </div>
                                 {% endif %}
