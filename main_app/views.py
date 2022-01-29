@@ -701,3 +701,7 @@ def declineAppointment(request):
         )
 
         return redirect('/appointment')
+    
+def grooming(request):
+    request.session['grooming'] = "grooming"
+    return render(request,'grooming.html',{"session":request.session['grooming']})

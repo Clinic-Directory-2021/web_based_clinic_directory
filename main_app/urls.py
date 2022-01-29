@@ -27,5 +27,6 @@ urlpatterns = [
     path('acceptAppointment/', views.acceptAppointment, name="acceptAppointment"),
     path('declineAppointment/', views.declineAppointment, name="declineAppointment"),
     
+    path('grooming/', views.grooming, name="grooming"),
     
 ]
