@@ -22,6 +22,10 @@ from django.core.mail import send_mail
 
 from django.core.paginator import Paginator
 
+import rsa
+
+publicKey, privateKey = rsa.newkeys(512)
+
 config={
     "apiKey": "AIzaSyDwWsW--ZHaZIOE4OXu5VhMIclZad8zDYw",
     "authDomain": "animal-clinic-directory-2021.firebaseapp.com",
@@ -216,7 +220,8 @@ def register_user_firebase(request):
                 #upload product image
                 storage.child(img_file_directory).put(clinicImage, user['localId'])
 
-
+                encPassword = rsa.encrypt(password.encode(),
+                         publicKey)
                 
                 doc_ref = firestoreDB.collection('queue').document(user['localId'])
                 doc_ref.set({
@@ -229,7 +234,7 @@ def register_user_firebase(request):
                     'latitude': latitude,
                     'longitude': longitude,
                     'email': email,
-                    'password': password,
+                    'password': encPassword,
                     'opening_time': opening_time,
                     'closing_time': closing_time,
                     'clinic_description': clinicDescription,
