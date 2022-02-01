@@ -21,7 +21,7 @@ from django.views.static import serve
 # from django.conf.urls import url
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
+    # path('admin/', admin.site.urls),
     path('', include('main_app.urls')),
     # path(r'^media/(?P<path>.*)$', serve,{'document_root': settings.MEDIA_ROOT}), 
     # path(r'^static/(?P<path>.*)$', serve,{'document_root': settings.STATIC_ROOT}), 
