@@ -20,9 +20,9 @@
             <div class='preview'>
                 <br>
                 {% if user_data %}
-                <h3 align='center' id="pageLabel">Currently Open Clinic</h3>
+                <h3 align='center' id="pageLabel">Currently Open Establishments</h3>
                 {% else %}
-                <h3 align='center'>All Clinics are closed</h3>
+                <h3 align='center'>All Establishments are closed</h3>
                 {% endif %}
                 <form id="indexForm" method='post' enctype="multipart/form-data">
                     {% csrf_token %}
