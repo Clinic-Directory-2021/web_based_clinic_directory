@@ -48,7 +48,7 @@ storage = firebase.storage()
 def index(request):
     #map Size
     request.session['session'] = "dashboard"
-    f = folium.Figure(width=900, height=900)
+    f = folium.Figure(width=880, height=800)
 
     #create Map and zoom on Malolos, Bulacan Philippines
     map = folium.Map(location =[14.8527, 120.8160], zoom_start = 13, min_zoom=13).add_to(f)
@@ -72,9 +72,11 @@ def index(request):
 
         # closing_time = value['closing_time'].strftime('%I:%M %p')
 
-        if opening_time < currentTime and currentTime < closing_time:
-            user_data.append(value)
-            
+        # if opening_time < currentTime and currentTime < closing_time:
+        #     user_data.append(value)
+        
+        user_data.append(value)
+
         latitude = value['latitude']
         longitude = value['longitude']
         # commented line removed 5 star image +"<br><br><img src='../static/images/rate.png' alt='' class='rate'><img src='../static/images/rate.png' alt='' class='rate'><img src='../static/images/rate.png' alt='' class='rate'><img src='../static/images/rate.png' alt='' class='rate'><img src='../static/images/rate.png' alt='' class='rate'><br>5.0" 
@@ -102,6 +104,9 @@ def index(request):
             'map': map,
             'user_data': user_data,
             "session":request.session['session'],
+            'currentTime': currentTime, 
+            'opening_time': opening_time,
+            'closing_time': closing_time,
         }
     
     if 'user_id' not in request.session:

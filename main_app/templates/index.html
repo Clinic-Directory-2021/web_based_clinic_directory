@@ -20,7 +20,7 @@
             <div class='preview'>
                 <br>
                 {% if user_data %}
-                <h3 align='center' id="pageLabel">Currently Open Establishments</h3>
+                <!-- <h3 align='center' id="pageLabel">Currently Open Establishments</h3> -->
                 {% else %}
                 <h3 align='center'>All Establishments are closed</h3>
                 {% endif %}
@@ -37,6 +37,13 @@
                    
                     <img src="{{values.clinic_img_url}}" alt="image">
                     <div class="details">
+                      
+                      {% if opening_time < currentTime and currentTime < closing_time %}
+                      <p align="center" style="font-size:14px;color:green"><b>Open Now</b></p>
+                      {% else %}
+                      <p align="center" style="font-size:14px; color:red"><b>Closed Now</b></p>
+                      {% endif %}
+                        
                       <p align="center" style="font-size:14px;"><b>{{values.clinic_name}}</b></p>
                         <!-- <img src="../static/images/rate.png" alt="" class="rate">
                         <img src="../static/images/rate.png" alt="" class="rate">
@@ -47,7 +54,10 @@
                         <p align="center" style="font-size:12px;">Closed At {{values.closing_time}}</p>
                         <p align="center" style="font-size:12px;">Category: {{values.clinicCategory}}</p>
                         <p align="center" style="font-size:12px;">{{values.clinic_address}}</p>
-                        
+                         <!-- Button trigger modal -->
+                      <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#exampleModal" style="background-color: #072A40; color: #F9F7F0;margin-left: 37%;z-index: 99;" onclick="showBookAppointment('{{values.user_id}}')">
+                        Book appointment
+                    </button>
                     </div>
                 </div>
                 <!-- {% endif %} -->
@@ -85,10 +95,10 @@
         <p id="item-modal-closingHours" style="font-size: 14px;"><strong>Opening and Closing time</strong></p><!--Dito ilalagay yung open and closing time-->
         <p id="item-modal-description" style="font-size: 14px;"><em>Description here</em></p><!--Dito ilalagay yung description-->
         <p id="item-modal-contact" style="font-size: 12px;"><b>Contact number</b></p>
-        <!-- Button trigger modal -->
+        <!-- Button trigger modal
         <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#exampleModal" style="background-color: #072A40; color: #F9F7F0;" onclick="showBookAppointment()">
             Book appointment
-        </button>
+        </button> -->
         <p align='left' style="font-size: 12px;">Available Items</p>
         <div id="loading"></div>
         <div class="available-item">

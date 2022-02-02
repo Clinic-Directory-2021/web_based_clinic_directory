@@ -1,7 +1,7 @@
 var globalClinicID = "";
 
-function showBookAppointment(){
-  $('#user_id_appointment').val(globalClinicID);
+function showBookAppointment(user_id){
+  $('#user_id_appointment').val(user_id);
   }
 
 
