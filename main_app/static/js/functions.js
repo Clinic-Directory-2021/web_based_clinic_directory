@@ -23,12 +23,15 @@ function validation(){
 
 $('#registerForm').on('submit', function(e){
   $('#loader').show();
+  var category = document.getElementById("selectCategory");
+
   var formData = new FormData();
   var files = $('#clinic_image')[0].files[0];
 
   formData.append('clinicImage', files);
   formData.append('fileName', files.name);
   formData.append('clinicName', $('#clinicName').val());
+  formData.append('clinicCategory', category.value);
   formData.append('clinicAddress', $('#clinicAddress').val());
   formData.append('clinicContact', $('#clinicContact').val());
   formData.append('latitude', $('#latitude').val());

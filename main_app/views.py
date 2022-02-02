@@ -197,6 +197,7 @@ def register_user_firebase(request):
     opening_time = request.POST.get('opening_time')
     closing_time = request.POST.get('closing_time')
     clinicDescription = request.POST.get('clinicDescription')
+    clinicCategory = request.POST.get('clinicCategory')
     
 
     opening_timeCheck = datetime.datetime.strptime(opening_time, '%I:%M %p').time()
@@ -231,6 +232,7 @@ def register_user_firebase(request):
                     'closing_time': closing_time,
                     'clinic_description': clinicDescription,
                     'total_items': 0,
+                    'clinicCategory': clinicCategory,
                 })
                 #messages.success(request, "New User Registered Successfully!")
                 return HttpResponse('New User Registered Successfully!')
