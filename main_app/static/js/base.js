@@ -15,3 +15,7 @@ if(mm<10){
 
 today = yyyy+'-'+mm+'-'+dd;
 document.getElementById("datefield").setAttribute("min", today);
+
+function redirectToAdmin(){
+  window.location.replace("http://clinic-directory-admin.herokuapp.com");
+}
