@@ -42,6 +42,7 @@ $('#search-clinic-form').on('submit', function(e){
           },
         success: function(data){
             $( ".preview-item" ).remove();
+            $( ".pagination" ).remove();
             $('.preview').append(data);
         },
         error: function(data){

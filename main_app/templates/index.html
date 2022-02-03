@@ -31,19 +31,18 @@
                 </form>
               
                   
-                {% for values in user_data %}
+                {% for values in item_list %}
                 <!-- {% if time|time:"g:i A" < values.closing_time or values.opening_time < time|time:"g:i A" %} -->
                 <div class="preview-item" onclick="showModal('{{values.clinic_name |escapejs}}', '{{values.clinic_img_url}}', '{{values.clinic_address |escapejs}}', '{{values.user_id}}', '{{values.clinic_description |escapejs}}', '{{values.opening_time}}', '{{values.closing_time}}', '{{values.clinic_contact_number}}') " >
                    
                     <img src="{{values.clinic_img_url}}" alt="image">
                     <div class="details">
                       
-                      {% if opening_time < currentTime and currentTime < closing_time %}
+                      {% if values.isOpen == 'True' %}
                       <p align="center" style="font-size:14px;color:green"><b>Open Now</b></p>
                       {% else %}
                       <p align="center" style="font-size:14px; color:red"><b>Closed Now</b></p>
                       {% endif %}
-                        
                       <p align="center" style="font-size:14px;"><b>{{values.clinic_name}}</b></p>
                         <!-- <img src="../static/images/rate.png" alt="" class="rate">
                         <img src="../static/images/rate.png" alt="" class="rate">
@@ -62,12 +61,30 @@
                 </div>
                 <!-- {% endif %} -->
                 {% endfor %}
+                <div class="pagination">
+                  <span class="step-links">
+                      {% if item_list.has_previous %}
+                          <a href="?page=1">&laquo; first</a>
+                          <a href="?page={{ item_list.previous_page_number }}">previous</a>
+                      {% endif %}
+              
+                      <span class="current">
+                          Page {{ item_list.number }} of {{ item_list.paginator.num_pages }}.
+                      </span>
+              
+                      {% if item_list.has_next %}
+                          <a href="?page={{ item_list.next_page_number }}">next</a>
+                          <a href="?page={{ item_list.paginator.num_pages }}">last &raquo;</a>
+                      {% endif %}
+                  </span>
+              </div>
 
             </div>
             </div>
 
     </div>
     <div class="column" style="overflow-y: hidden;">
+      <br><br><br><br><br>
         <div class='map' style="overflow-y: hidden;">
             {% autoescape off %}
                 {{map}}
