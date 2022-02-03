@@ -30,6 +30,7 @@ $('#search-clinic-form').on('submit', function(e){
         url: "/search_clinic/",
         data: {
             search_item: $('#searchItem').val(),
+            category: $('#categorySearch').val(),
             csrfmiddlewaretoken: $("input[name='csrfmiddlewaretoken']").val(),
           },
         success: function(data){

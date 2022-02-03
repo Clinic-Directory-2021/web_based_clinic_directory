@@ -537,6 +537,7 @@ def search_clinic(request):
     items = firestoreDB.collection('items').get()
 
     search_item = request.POST.get('search_item')
+    category = request.POST.get('category')
 
     user_data = []
 
@@ -544,7 +545,8 @@ def search_clinic(request):
 
     for user in users:
         value = user.to_dict()
-        user_data.append(value)
+        if value['clinicCategory'] == category:
+            user_data.append(value)
 
     for item in items:
         item_value = item.to_dict()
