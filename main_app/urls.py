@@ -28,5 +28,8 @@ urlpatterns = [
     path('declineAppointment/', views.declineAppointment, name="declineAppointment"),
     
     path('grooming/', views.grooming, name="grooming"),
-    
+
+    path('showVetClinics/', views.showVetClinics, name="showVetClinics"),
+    path('showPetShops/', views.showPetShops, name="showPetShops"),
+    path('showPetSalons/', views.showPetSalons, name="showPetSalons"),
 ]

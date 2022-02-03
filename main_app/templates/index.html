@@ -22,7 +22,7 @@
                 {% if user_data %}
                 <!-- <h3 align='center' id="pageLabel">Currently Open Establishments</h3> -->
                 {% else %}
-                <h3 align='center'>All Establishments are closed</h3>
+                <h3 align='center'>No Establishments Available</h3>
                 {% endif %}
                 <form id="indexForm" method='post' enctype="multipart/form-data">
                     {% csrf_token %}
@@ -30,6 +30,15 @@
                     <input type="submit" hidden>
                 </form>
               
+                <button type="button" class="btn" style="display:inline;background-color: #072A40; color: #F9F7F0;z-index: 99;" onclick="showVetClinics()">
+                  Show Vet Clinics
+              </button>
+              <button type="button" class="btn" style="display:inline;background-color: #072A40; color: #F9F7F0;z-index: 99;" onclick="showPetShops()">
+                Show Pet Shops
+            </button>
+            <button type="button" class="btn" style="display:inline;background-color: #072A40; color: #F9F7F0;z-index: 99;" onclick="showPetSalons()">
+              Show Pet Salons
+          </button>
                   
                 {% for values in item_list %}
                 <!-- {% if time|time:"g:i A" < values.closing_time or values.opening_time < time|time:"g:i A" %} -->

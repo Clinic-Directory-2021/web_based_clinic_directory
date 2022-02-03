@@ -4,6 +4,24 @@ function showBookAppointment(user_id){
   $('#user_id_appointment').val(user_id);
   }
 
+function showVetClinics(){
+    var url = "/showVetClinics";
+
+    // Construct the full URL with "id"
+    document.location.href = url;
+}
+function showPetShops(){
+    var url = "/showPetShops";
+
+    // Construct the full URL with "id"
+    document.location.href = url;
+}
+function showPetSalons(){
+    var url = "/showPetSalons";
+
+    // Construct the full URL with "id"
+    document.location.href = url;
+}
 
 
 $('#loading').hide();

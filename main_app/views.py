@@ -722,3 +722,251 @@ def declineAppointment(request):
 def grooming(request):
     request.session['grooming'] = "grooming"
     return render(request,'grooming.html',{"session":request.session['grooming']})
+
+def showVetClinics(request):
+    #map Size
+    request.session['session'] = "dashboard"
+    f = folium.Figure(width=880, height=700)
+
+    #create Map and zoom on Malolos, Bulacan Philippines
+    map = folium.Map(location =[14.8527, 120.8160], zoom_start = 13, min_zoom=13).add_to(f)
+
+    timeNow = datetime.datetime.now().time()
+    date_time = timeNow.strftime('%I:%M %p')
+    currentTime = datetime.datetime.strptime(date_time, '%I:%M %p').time()
+
+    users = firestoreDB.collection('users').get()
+
+    user_data = []
+
+    for user in users:
+        value = user.to_dict()
+
+        opening_time = datetime.datetime.strptime(value['opening_time'], '%I:%M %p').time()
+
+        closing_time = datetime.datetime.strptime(value['closing_time'], '%I:%M %p').time()
+
+        # opening_time = value['opening_time'].strftime('%I:%M %p')
+
+        # closing_time = value['closing_time'].strftime('%I:%M %p')
+
+        if opening_time < currentTime and currentTime < closing_time:
+            value['isOpen'] = "True"
+            # user_data.append(value)
+        if value['clinicCategory'] == 'Vet Clinic':
+            user_data.append(value)
+
+            latitude = value['latitude']
+            longitude = value['longitude']
+            # commented line removed 5 star image +"<br><br><img src='../static/images/rate.png' alt='' class='rate'><img src='../static/images/rate.png' alt='' class='rate'><img src='../static/images/rate.png' alt='' class='rate'><img src='../static/images/rate.png' alt='' class='rate'><img src='../static/images/rate.png' alt='' class='rate'><br>5.0" 
+            folium.Marker([latitude, longitude], 
+            popup= "<img style=\"width:200px;\" src=\""+value['clinic_img_url']+"\">"
+            +"<b>Clinic Name:</b><br>" + value['clinic_name'] + "<br><br><b>Clinic Address:</b><br>" 
+            + value['clinic_address']  +
+            "<br><br><b>Open and Closing time:</b><br>" + value['opening_time'] +
+            " - " + value['closing_time'] + "<br><br><em>Description:</em><br>"+
+            value['clinic_description']  +"<br><br><b>Contact number:</b><br>" +
+                value['clinic_contact_number'] , 
+            icon=folium.Icon(color="red", icon="fa-paw", prefix='fa'),
+            tooltip= value['clinic_name']).add_to(map)
+        
+
+    paginator = Paginator(user_data, 3)
+    page_number = request.GET.get('page') or 1
+    item_list = paginator.get_page(page_number)
+    
+    # Get html representation of the map
+    map = map._repr_html_()
+
+    if request.method == 'POST':
+        userId = request.POST.get('user_id_post')
+        items = firestoreDB.collection('items').document(userId).get()
+
+        data = {
+            'map': map,
+            'user_data': user_data,
+            'item_data': items.to_dict(),
+         }
+        return render(request, 'item_data.html', {'item_data':items.to_dict()})
+        #return HttpResponse(json.dumps(items.to_dict()))
+    else:
+        data = {
+            'map': map,
+            'user_data': user_data,
+            "session":request.session['session'],
+            'currentTime': currentTime, 
+            'opening_time': opening_time,
+            'closing_time': closing_time,
+            'item_list':item_list,
+        }
+    
+    if 'user_id' not in request.session:
+        return render(request,'index.html', data)
+    else:
+        return redirect('/homepage')
+
+
+def showPetShops(request):
+    #map Size
+    request.session['session'] = "dashboard"
+    f = folium.Figure(width=880, height=700)
+
+    #create Map and zoom on Malolos, Bulacan Philippines
+    map = folium.Map(location =[14.8527, 120.8160], zoom_start = 13, min_zoom=13).add_to(f)
+
+    timeNow = datetime.datetime.now().time()
+    date_time = timeNow.strftime('%I:%M %p')
+    currentTime = datetime.datetime.strptime(date_time, '%I:%M %p').time()
+
+    users = firestoreDB.collection('users').get()
+
+    user_data = []
+
+    for user in users:
+        value = user.to_dict()
+
+        opening_time = datetime.datetime.strptime(value['opening_time'], '%I:%M %p').time()
+
+        closing_time = datetime.datetime.strptime(value['closing_time'], '%I:%M %p').time()
+
+        # opening_time = value['opening_time'].strftime('%I:%M %p')
+
+        # closing_time = value['closing_time'].strftime('%I:%M %p')
+
+        if opening_time < currentTime and currentTime < closing_time:
+            value['isOpen'] = "True"
+            # user_data.append(value)
+        if value['clinicCategory'] == 'Pet Shop':
+            user_data.append(value)
+
+            latitude = value['latitude']
+            longitude = value['longitude']
+            # commented line removed 5 star image +"<br><br><img src='../static/images/rate.png' alt='' class='rate'><img src='../static/images/rate.png' alt='' class='rate'><img src='../static/images/rate.png' alt='' class='rate'><img src='../static/images/rate.png' alt='' class='rate'><img src='../static/images/rate.png' alt='' class='rate'><br>5.0" 
+            folium.Marker([latitude, longitude], 
+            popup= "<img style=\"width:200px;\" src=\""+value['clinic_img_url']+"\">"
+            +"<b>Clinic Name:</b><br>" + value['clinic_name'] + "<br><br><b>Clinic Address:</b><br>" 
+            + value['clinic_address']  +
+            "<br><br><b>Open and Closing time:</b><br>" + value['opening_time'] +
+            " - " + value['closing_time'] + "<br><br><em>Description:</em><br>"+
+            value['clinic_description']  +"<br><br><b>Contact number:</b><br>" +
+                value['clinic_contact_number'] , 
+            icon=folium.Icon(color="red", icon="fa-paw", prefix='fa'),
+            tooltip= value['clinic_name']).add_to(map)
+        
+
+    paginator = Paginator(user_data, 3)
+    page_number = request.GET.get('page') or 1
+    item_list = paginator.get_page(page_number)
+    
+    # Get html representation of the map
+    map = map._repr_html_()
+
+    if request.method == 'POST':
+        userId = request.POST.get('user_id_post')
+        items = firestoreDB.collection('items').document(userId).get()
+
+        data = {
+            'map': map,
+            'user_data': user_data,
+            'item_data': items.to_dict(),
+         }
+        return render(request, 'item_data.html', {'item_data':items.to_dict()})
+        #return HttpResponse(json.dumps(items.to_dict()))
+    else:
+        data = {
+            'map': map,
+            'user_data': user_data,
+            "session":request.session['session'],
+            'currentTime': currentTime, 
+            'opening_time': opening_time,
+            'closing_time': closing_time,
+            'item_list':item_list,
+        }
+    
+    if 'user_id' not in request.session:
+        return render(request,'index.html', data)
+    else:
+        return redirect('/homepage')
+
+def showPetSalons(request):
+    #map Size
+    request.session['session'] = "dashboard"
+    f = folium.Figure(width=880, height=700)
+
+    #create Map and zoom on Malolos, Bulacan Philippines
+    map = folium.Map(location =[14.8527, 120.8160], zoom_start = 13, min_zoom=13).add_to(f)
+
+    timeNow = datetime.datetime.now().time()
+    date_time = timeNow.strftime('%I:%M %p')
+    currentTime = datetime.datetime.strptime(date_time, '%I:%M %p').time()
+
+    users = firestoreDB.collection('users').get()
+
+    user_data = []
+
+    for user in users:
+        value = user.to_dict()
+
+        opening_time = datetime.datetime.strptime(value['opening_time'], '%I:%M %p').time()
+
+        closing_time = datetime.datetime.strptime(value['closing_time'], '%I:%M %p').time()
+
+        # opening_time = value['opening_time'].strftime('%I:%M %p')
+
+        # closing_time = value['closing_time'].strftime('%I:%M %p')
+
+        if opening_time < currentTime and currentTime < closing_time:
+            value['isOpen'] = "True"
+            # user_data.append(value)
+        if value['clinicCategory'] == 'Pet Salon':
+            user_data.append(value)
+
+            latitude = value['latitude']
+            longitude = value['longitude']
+            # commented line removed 5 star image +"<br><br><img src='../static/images/rate.png' alt='' class='rate'><img src='../static/images/rate.png' alt='' class='rate'><img src='../static/images/rate.png' alt='' class='rate'><img src='../static/images/rate.png' alt='' class='rate'><img src='../static/images/rate.png' alt='' class='rate'><br>5.0" 
+            folium.Marker([latitude, longitude], 
+            popup= "<img style=\"width:200px;\" src=\""+value['clinic_img_url']+"\">"
+            +"<b>Clinic Name:</b><br>" + value['clinic_name'] + "<br><br><b>Clinic Address:</b><br>" 
+            + value['clinic_address']  +
+            "<br><br><b>Open and Closing time:</b><br>" + value['opening_time'] +
+            " - " + value['closing_time'] + "<br><br><em>Description:</em><br>"+
+            value['clinic_description']  +"<br><br><b>Contact number:</b><br>" +
+                value['clinic_contact_number'] , 
+            icon=folium.Icon(color="red", icon="fa-paw", prefix='fa'),
+            tooltip= value['clinic_name']).add_to(map)
+        
+
+    paginator = Paginator(user_data, 3)
+    page_number = request.GET.get('page') or 1
+    item_list = paginator.get_page(page_number)
+    
+    # Get html representation of the map
+    map = map._repr_html_()
+
+    if request.method == 'POST':
+        userId = request.POST.get('user_id_post')
+        items = firestoreDB.collection('items').document(userId).get()
+
+        data = {
+            'map': map,
+            'user_data': user_data,
+            'item_data': items.to_dict(),
+         }
+        return render(request, 'item_data.html', {'item_data':items.to_dict()})
+        #return HttpResponse(json.dumps(items.to_dict()))
+    else:
+        data = {
+            'map': map,
+            'user_data': user_data,
+            "session":request.session['session'],
+            'currentTime': currentTime, 
+            'opening_time': opening_time,
+            'closing_time': closing_time,
+            'item_list':item_list,
+        }
+    
+    if 'user_id' not in request.session:
+        return render(request,'index.html', data)
+    else:
+        return redirect('/homepage')
+    
