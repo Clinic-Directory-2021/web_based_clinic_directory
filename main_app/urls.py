@@ -32,4 +32,8 @@ urlpatterns = [
     path('showVetClinics/', views.showVetClinics, name="showVetClinics"),
     path('showPetShops/', views.showPetShops, name="showPetShops"),
     path('showPetSalons/', views.showPetSalons, name="showPetSalons"),
+
+    path('getSearchDataShop/', views.getSearchDataShop, name='getSearchDataShop'),
+    path('getSearchDataClinic/', views.getSearchDataClinic, name='getSearchDataClinic'),
+    path('getSearchDataSalon/', views.getSearchDataSalon, name='getSearchDataSalon'),
 ]
