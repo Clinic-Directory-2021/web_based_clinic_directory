@@ -798,6 +798,7 @@ def showVetClinics(request):
             'opening_time': opening_time,
             'closing_time': closing_time,
             'item_list':item_list,
+            'category': 'Vet Clinic',
         }
     
     if 'user_id' not in request.session:
@@ -881,6 +882,7 @@ def showPetShops(request):
             'opening_time': opening_time,
             'closing_time': closing_time,
             'item_list':item_list,
+            'category': 'Pet Shop',
         }
     
     if 'user_id' not in request.session:
