@@ -120,6 +120,7 @@ def index(request):
             'opening_time': opening_time,
             'closing_time': closing_time,
             'item_list':item_list,
+            'category': 'all',
         }
     
     if 'user_id' not in request.session:
@@ -543,10 +544,15 @@ def search_clinic(request):
 
     item_data = []
 
-    for user in users:
-        value = user.to_dict()
-        if value['clinicCategory'] == category:
+    if category == 'all':
+        for user in users:
+            value = user.to_dict()
             user_data.append(value)
+    else:
+        for user in users:
+            value = user.to_dict()
+            if value['clinicCategory'] == category:
+                user_data.append(value)
 
     for item in items:
         item_value = item.to_dict()

@@ -24,7 +24,7 @@
                 <input required type="text" autocomplete="off" name="search_item" class='search-bar' placeholder="Search place, clinic name, or item" id="searchItem" onkeyup="suggestSearch()"> 
                 {% endif %}
                   
-                <input type="hidden" name="category" id="categorySearch" />
+                <input type="hidden" name="category" id="categorySearch" value="{{category}}"/>
                 <input type="submit" class="search-button" value="Search">
             </form>
             <!--RESULT-->
