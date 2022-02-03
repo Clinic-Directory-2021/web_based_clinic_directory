@@ -114,6 +114,130 @@ function suggestSearch(){
         }
 
 }
+function suggestSearchShop(){
+    $( ".search-result" ).remove();
+    $( ".search-modal" ).show();
+
+        if( $('#searchItem').val() == ""){
+            $( ".search-result" ).remove();
+            $( ".search-modal" ).hide();
+        }
+        else{
+            $.post({
+                type: 'post',
+                url: "/getSearchDataShop/",
+                data: {
+                    search_item: $('#searchItem').val(),
+                    csrfmiddlewaretoken: $("input[name='csrfmiddlewaretoken']").val(),
+                },
+                success: function(data){
+                $( ".search-result" ).remove();
+
+                },
+                error: function(data){
+                    alert(data + 'have an error');
+                },
+
+            })
+            .done(function(data){
+                $('.search-modal').append(data);
+
+                notFound = "<p class=\"search-not-found\"> Not Found! </p>";
+                if($('.search-result').length)
+                {
+                    $( ".search-not-found" ).remove();
+                }
+                else{
+                    $( ".search-not-found" ).remove();
+                    $('.search-modal').append(notFound);
+                }
+            });
+        }
+
+}
+function suggestSearchClinic(){
+    $( ".search-result" ).remove();
+    $( ".search-modal" ).show();
+
+        if( $('#searchItem').val() == ""){
+            $( ".search-result" ).remove();
+            $( ".search-modal" ).hide();
+        }
+        else{
+            $.post({
+                type: 'post',
+                url: "/getSearchDataClinic/",
+                data: {
+                    search_item: $('#searchItem').val(),
+                    csrfmiddlewaretoken: $("input[name='csrfmiddlewaretoken']").val(),
+                },
+                success: function(data){
+                $( ".search-result" ).remove();
+
+                },
+                error: function(data){
+                    alert(data + 'have an error');
+                },
+
+            })
+            .done(function(data){
+                $('.search-modal').append(data);
+
+                notFound = "<p class=\"search-not-found\"> Not Found! </p>";
+                if($('.search-result').length)
+                {
+                    $( ".search-not-found" ).remove();
+                }
+                else{
+                    $( ".search-not-found" ).remove();
+                    $('.search-modal').append(notFound);
+                }
+            });
+        }
+
+}
+function suggestSearchSalon(){
+    $( ".search-result" ).remove();
+    $( ".search-modal" ).show();
+
+        if( $('#searchItem').val() == ""){
+            $( ".search-result" ).remove();
+            $( ".search-modal" ).hide();
+        }
+        else{
+            $.post({
+                type: 'post',
+                url: "/getSearchDataSalon/",
+                data: {
+                    search_item: $('#searchItem').val(),
+                    csrfmiddlewaretoken: $("input[name='csrfmiddlewaretoken']").val(),
+                },
+                success: function(data){
+                $( ".search-result" ).remove();
+
+                },
+                error: function(data){
+                    alert(data + 'have an error');
+                },
+
+            })
+            .done(function(data){
+                $('.search-modal').append(data);
+
+                notFound = "<p class=\"search-not-found\"> Not Found! </p>";
+                if($('.search-result').length)
+                {
+                    $( ".search-not-found" ).remove();
+                }
+                else{
+                    $( ".search-not-found" ).remove();
+                    $('.search-modal').append(notFound);
+                }
+            });
+        }
+
+}
+
 
 function showModal(clinic_name, img_url, clinic_address, clicked_id , clinic_description, opening, closing,number){
     $('.item-modal').show();

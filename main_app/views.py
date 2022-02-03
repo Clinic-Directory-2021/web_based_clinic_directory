@@ -946,7 +946,7 @@ def showPetSalons(request):
     if request.method == 'POST':
         userId = request.POST.get('user_id_post')
         items = firestoreDB.collection('items').document(userId).get()
-
+        
         data = {
             'map': map,
             'user_data': user_data,
@@ -963,10 +963,94 @@ def showPetSalons(request):
             'opening_time': opening_time,
             'closing_time': closing_time,
             'item_list':item_list,
+            'category': 'Pet Salon',
         }
     
     if 'user_id' not in request.session:
         return render(request,'index.html', data)
     else:
         return redirect('/homepage')
-    
+
+def getSearchDataClinic(request):
+    if request.method == 'POST':
+        search_item = request.POST.get('search_item')
+
+    users = firestoreDB.collection('users').get()
+
+    items = firestoreDB.collection('items').get()
+
+    user_data = []
+
+    item_data = []
+
+    for user in users:
+        value = user.to_dict()
+        if value['clinicCategory'] == 'Vet Clinic':
+            user_data.append(value)
+        
+
+    for item in items:
+        item_value = item.to_dict()
+        item_data.append(item_value)
+
+    return render(request, 'search_suggest.html', {
+        'user_data': user_data,
+        'search_item': search_item,
+        'item_data': item_data,
+        })
+
+def getSearchDataShop(request):
+    if request.method == 'POST':
+        search_item = request.POST.get('search_item')
+
+    users = firestoreDB.collection('users').get()
+
+    items = firestoreDB.collection('items').get()
+
+    user_data = []
+
+    item_data = []
+
+    for user in users:
+        value = user.to_dict()
+        if value['clinicCategory'] == 'Pet Shop':
+            user_data.append(value)
+        
+
+    for item in items:
+        item_value = item.to_dict()
+        item_data.append(item_value)
+
+    return render(request, 'search_suggest.html', {
+        'user_data': user_data,
+        'search_item': search_item,
+        'item_data': item_data,
+        })
+
+def getSearchDataSalon(request):
+    if request.method == 'POST':
+        search_item = request.POST.get('search_item')
+
+    users = firestoreDB.collection('users').get()
+
+    items = firestoreDB.collection('items').get()
+
+    user_data = []
+
+    item_data = []
+
+    for user in users:
+        value = user.to_dict()
+        if value['clinicCategory'] == 'Pet Salon':
+            user_data.append(value)
+        
+
+    for item in items:
+        item_value = item.to_dict()
+        item_data.append(item_value)
+
+    return render(request, 'search_suggest.html', {
+        'user_data': user_data,
+        'search_item': search_item,
+        'item_data': item_data,
+        })

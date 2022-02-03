@@ -13,7 +13,18 @@
             <!-- Search bar-->
             <form id="search-clinic-form" method="post">
                 {% csrf_token %}
+                
+                {% if category == 'Pet Salon' %}
+                <input required type="text" autocomplete="off" name="search_item" class='search-bar' placeholder="Search place, clinic name, or item" id="searchItem" onkeyup="suggestSearchSalon()"> 
+                {% elif category == 'Pet Shop' %}
+                <input required type="text" autocomplete="off" name="search_item" class='search-bar' placeholder="Search place, clinic name, or item" id="searchItem" onkeyup="suggestSearchShop()"> 
+                {% elif category == 'Vet Clinic' %}
+                <input required type="text" autocomplete="off" name="search_item" class='search-bar' placeholder="Search place, clinic name, or item" id="searchItem" onkeyup="suggestSearchClinic()"> 
+                {% else %}
                 <input required type="text" autocomplete="off" name="search_item" class='search-bar' placeholder="Search place, clinic name, or item" id="searchItem" onkeyup="suggestSearch()"> 
+                {% endif %}
+                  
+                
                 <input type="submit" class="search-button" value="Search">
             </form>
             <!--RESULT-->
