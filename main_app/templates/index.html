@@ -15,13 +15,13 @@
                 {% csrf_token %}
                 
                 {% if category == 'Pet Salon' %}
-                <input required type="text" autocomplete="off" name="search_item" class='search-bar' placeholder="Search place, clinic name, or item" id="searchItem" onkeyup="suggestSearchSalon()"> 
+                <input required type="text" autocomplete="off" name="search_item" class='search-bar' placeholder="Search place, Establishment name, or Product" id="searchItem" onkeyup="suggestSearchSalon()"> 
                 {% elif category == 'Pet Shop' %}
-                <input required type="text" autocomplete="off" name="search_item" class='search-bar' placeholder="Search place, clinic name, or item" id="searchItem" onkeyup="suggestSearchShop()"> 
+                <input required type="text" autocomplete="off" name="search_item" class='search-bar' placeholder="Search place, Establishment name, or Product" id="searchItem" onkeyup="suggestSearchShop()"> 
                 {% elif category == 'Vet Clinic' %}
-                <input required type="text" autocomplete="off" name="search_item" class='search-bar' placeholder="Search place, clinic name, or item" id="searchItem" onkeyup="suggestSearchClinic()"> 
+                <input required type="text" autocomplete="off" name="search_item" class='search-bar' placeholder="Search place, Establishment name, or Product" id="searchItem" onkeyup="suggestSearchClinic()"> 
                 {% else %}
-                <input required type="text" autocomplete="off" name="search_item" class='search-bar' placeholder="Search place, clinic name, or item" id="searchItem" onkeyup="suggestSearch()"> 
+                <input required type="text" autocomplete="off" name="search_item" class='search-bar' placeholder="Search place, Establishment name, or Product" id="searchItem" onkeyup="suggestSearch()"> 
                 {% endif %}
                   
                 <input type="hidden" name="category" id="categorySearch" value="{{category}}"/>
