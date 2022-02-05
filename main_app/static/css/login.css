@@ -56,7 +56,7 @@
 }
 @media (min-width:961px)  { /* tablet, landscape iPad, lo-res laptops ands desktops */ 
     .login-content{
-        padding-top: 10%;
+        padding-top: 5%;
         padding-left: 30%;
         padding-right: 30%;
     }

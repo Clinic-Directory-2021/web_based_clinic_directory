@@ -5,23 +5,33 @@
   $('#register').css("border-radius","25px")
   $('#register').css("text-align","center")
 </script>
+<style>
+  body {
+     /* background: url("/static/images/bglogin.jpg") 50% 0 no-repeat fixed; */
+     background: url("/static/images/bglogin.jpg");
+     background-repeat: no-repeat;
+     background-size: 100% 100%;
+     background-attachment: fixed;
+   }
+ 
+ </style>
 {% endif %}
 {% block content %}
 
 <div>
 <div class='register-content'>
     
-    <form method='post' id="registerForm" enctype="multipart/form-data">
+    <form method='post' id="registerForm" enctype="multipart/form-data" style='text-align: center;background-color: white;border: 0.2px solid black; padding: 5%;'>
     {% csrf_token %}
     <h1 class='register-h1'>You can register your clinic here</h1>
     <br>
     <h5 align='center'>Make Your First Step Towards Getting your Animal Clinic More Discoverable</h5><br>
     <!-- Clinic Image Preview-->
-    <img src="../static/images/map.jpg" id="preview_img" alt="" class="image">
+    <img src="../static/images/logo.png" id="preview_img" alt="" class="image">
     <br>
     <br>
     <!-- Clinic Image Input File-->
-    <input required name="clinic_image" id="clinic_image" accept=".jpg, .jpeg, .png" type="file" alt="Submit" class="credentials">
+    <input required name="clinic_image" id="clinic_image" accept=".jpg, .jpeg, .png" type="file" alt="Submit" class="credentials" style="border: 0.2px solid black;padding: 0.5%;">
     <br>
     <!-- Clinic Name -->
     <input required type="text" placeholder="Clinic name *" name="clinicName" id="clinicName" class='register-input'>

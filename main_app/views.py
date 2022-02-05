@@ -383,10 +383,13 @@ def save_clinic_info(request):
         return HttpResponse('Information Updated Successfully!')
 
 def add_item(request):
-    user_data = firestoreDB.collection('users').document(request.session['user_id']).get()
-    return render(request,'add_item.html', {
-        'user_data': user_data.to_dict(),
-    })
+    if 'user_id' in request.session:
+        user_data = firestoreDB.collection('users').document(request.session['user_id']).get()
+        return render(request,'add_item.html', {
+            'user_data': user_data.to_dict(),
+        })
+    else:
+        return redirect('/login')
 
 def add_item_firebase(request):
     items_doc_ref = firestoreDB.collection('items').document(request.session['user_id'])

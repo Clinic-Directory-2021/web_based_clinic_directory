@@ -5,12 +5,23 @@
   $('#login').css("border-radius","25px")
   $('#login').css("text-align","center")
 </script>
+<style>
+ body {
+    /* background: url("/static/images/bglogin.jpg") 50% 0 no-repeat fixed; */
+    background: url("/static/images/bglogin.jpg");
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+  }
+
+</style>
 {% endif %}
 {% block content %}
 <div class='login-content' style="height: 100vh;">
-    <form method='post' id="loginForm">
+    <form method='post' id="loginForm" style='background-color: white;border: 0.2px solid black; padding: 5%;'>
     {% csrf_token %}
-    <h1 class='login-h1'>Login to your account</h1>
+    <img src="../static/images/loginDesignPic.png" style="margin-left:15%;margin-right:auto" width="70%"  alt="">
+    
+    <h2 class='login-h1'>Login to Your Establishment Account</h2>
     <input type="email" name="login_email" id="login_email" placeholder="Email" class='login-input' required>
     <input type="password" name="login_password" id="login_password" placeholder="Password" class='login-input' required>
     <br>
@@ -22,7 +33,7 @@
     <br>
     <a href="{% url 'register' %}" class="login-link" style='text-align: center;'><i>Not a member? Register here.</i></a>
     <br>
-    <p class="login-link" style='text-align: center;'>Click <span onclick="redirectToAdmin()" style="cursor: pointer;"><b>Here</b></span> to Log in as Super Administrator</p>
+    <p class="login-link" style='text-align: center;color: #3bb6ed; font-size: 1.2vw;'>Click <span onclick="redirectToAdmin()" style="cursor: pointer;"><b>Here</b></span> to Log in as Super Administrator</p>
 </div>
 {% include 'footer.html' %}
 <div id="loader"></div>
