@@ -31,7 +31,8 @@
             <div class='preview'>
                 <br>
                 {% if user_data %}
-                <!-- <h3 align='center' id="pageLabel">Currently Open Establishments</h3> -->
+                <h3 align='center' id="pageLabel">{{categoryLabel}}</h3>
+                
                 {% else %}
                 <h3 align='center'>No Establishments Available</h3>
                 {% endif %}
@@ -40,7 +41,6 @@
                     <input type="hidden" id="id_field">
                     <input type="submit" hidden>
                 </form>
-              
                 <button type="button" class="btn" style="display:inline;background-color: #072A40; color: #F9F7F0;z-index: 99;" onclick="showVetClinics()">
                   Show Vet Clinics
               </button>

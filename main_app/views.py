@@ -121,6 +121,7 @@ def index(request):
             'closing_time': closing_time,
             'item_list':item_list,
             'category': 'all',
+            'categoryLabel': 'All Establishments',
         }
     
     if 'user_id' not in request.session:
@@ -810,6 +811,7 @@ def showVetClinics(request):
             'closing_time': closing_time,
             'item_list':item_list,
             'category': 'Vet Clinic',
+            'categoryLabel': 'Vet Clinics',
         }
     
     if 'user_id' not in request.session:
@@ -894,6 +896,7 @@ def showPetShops(request):
             'closing_time': closing_time,
             'item_list':item_list,
             'category': 'Pet Shop',
+            'categoryLabel': 'Pet Shop',
         }
     
     if 'user_id' not in request.session:
@@ -977,6 +980,7 @@ def showPetSalons(request):
             'closing_time': closing_time,
             'item_list':item_list,
             'category': 'Pet Salon',
+            'categoryLabel': 'Pet Salon',
         }
     
     if 'user_id' not in request.session:
