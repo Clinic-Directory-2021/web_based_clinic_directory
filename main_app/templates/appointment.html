@@ -116,11 +116,8 @@
               <td>{{accepted.appointment_time}}</td>
               <td>{{accepted.appointment_number}}</td>
               <td>
-                <form action="/declineAppointment/" method="post">
-                  {% csrf_token %}
               <button type="button" class="btn btn-danger" 
               onclick="appointmentDelete('{{accepted.accepted_appointment_id}}')">Delete</button>
-              </form>
               </td>
             </tr>
             {% endfor %}
