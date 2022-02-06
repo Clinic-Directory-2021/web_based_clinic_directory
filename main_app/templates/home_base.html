@@ -43,7 +43,7 @@
         <div class="middle">
             <ul>
                 <a href="{% url 'homepage' %}"><li id="homepage" style="color: #F9F7F0;"><h6>Home</h6></li></a>
-                <a href="{% url 'appointment' %}"><li id="request" style="color: #F9F7F0;"><h6>Request<span style="color: #e71906;">{{appointment_total}}</span></h6></li></a>
+                <a href="{% url 'appointment' %}"><li id="request" style="color: #F9F7F0;"><h6>Request<span style="color: #f85040; margin-left: 5px;"><b>{{appointment_total}}</b></span></h6></li></a>
                 <a href="{% url 'settings' %}" ><li id="settings" style="color: #F9F7F0;"><h6>Settings</h6></li></a>
                 <a href="{% url 'logout' %}"><li style="color: #F9F7F0;"><h6>Logout</h6></li></a>
             </ul>
@@ -65,7 +65,7 @@
             </div>
             <ul>
                 <a href="{% url 'homepage' %}"><li><h3>Home</h3></li></a>
-                <a href="{% url 'appointment' %}"><li><h3>Request</h3></li></a>
+                <a href="{% url 'appointment' %}"><li><h3>Request<span style="color: #f85040; margin-left: 5px;"><b>{{appointment_total}}</b></span></h3></li></a>
                 <a href="{% url 'settings' %}"><li><h3>Settings</h3></li></a>
                 <a href="{% url 'logout' %}"><li><h3>Logout</h3></li></a>
             </ul>

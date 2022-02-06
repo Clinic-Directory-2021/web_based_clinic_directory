@@ -335,12 +335,20 @@ def settings(request):
         print(open_time.strftime("%H:%M"))
         print(close_time.strftime("%H:%M"))
 
+        appointment_queue = firestoreDB.collection('appointment_queue').where('user_id' , '==', request.session['user_id']).stream()
+
+        appointment_total = 0
+
+        for appointment in appointment_queue:
+            appointment_total = appointment + 1
+
         return render(request,'settings.html', {
             'user_data': result.to_dict(),
             'map': map,
             'session':request.session['session'],
             'open_time': open_time.strftime("%H:%M"),
             'close_time': close_time.strftime("%H:%M"),
+            'appointment_total': appointment_total,
 
             })
     else:
