@@ -171,7 +171,15 @@ def homepage(request):
 
         item_data = firestoreDB.collection('items').document(request.session['user_id']).get()
 
+        appointment_queue = firestoreDB.collection('appointment_queue').where('user_id' , '==', request.session['user_id']).stream()
+
+        appointment_total = 0
+
+        for appointment in appointment_queue:
+            appointment_total = appointment + 1
+
         return render(request,'homepage.html', {
+        'appointment_total': str(appointment_total),
         'user_data': user_data.to_dict(),
         'item_data': item_data.to_dict(),
         'session':request.session['session']

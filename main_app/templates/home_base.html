@@ -43,7 +43,7 @@
         <div class="middle">
             <ul>
                 <a href="{% url 'homepage' %}"><li id="homepage" style="color: #F9F7F0;"><h6>Home</h6></li></a>
-                <a href="{% url 'appointment' %}"><li id="request" style="color: #F9F7F0;"><h6>Request</h6></li></a>
+                <a href="{% url 'appointment' %}"><li id="request" style="color: #F9F7F0;"><h6>Request<span style="color: #e71906;">{{appointment_total}}</span></h6></li></a>
                 <a href="{% url 'settings' %}" ><li id="settings" style="color: #F9F7F0;"><h6>Settings</h6></li></a>
                 <a href="{% url 'logout' %}"><li style="color: #F9F7F0;"><h6>Logout</h6></li></a>
             </ul>
