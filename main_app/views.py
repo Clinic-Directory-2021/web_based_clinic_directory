@@ -176,7 +176,7 @@ def homepage(request):
         appointment_total = 0
 
         for appointment in appointment_queue:
-            appointment_total = appointment + 1
+            appointment_total = appointment_total + 1
 
         return render(request,'homepage.html', {
         'appointment_total': str(appointment_total),
@@ -340,7 +340,7 @@ def settings(request):
         appointment_total = 0
 
         for appointment in appointment_queue:
-            appointment_total = appointment + 1
+            appointment_total = appointment_total + 1
 
         return render(request,'settings.html', {
             'user_data': result.to_dict(),
