@@ -402,6 +402,9 @@ def add_item_firebase(request):
         product_image = request.FILES['selected_product_image']
         img_fileName = product_image.name
         img_file_directory = request.session['user_id']+"/product_images/"+ img_fileName
+
+        productCategory = request.POST.get('productCategory')
+        product_description = request.FILES['product_description']
         
         #if fields are not null then try to update the document on items,
         #if that document is not yet existing then create one
@@ -419,6 +422,8 @@ def add_item_firebase(request):
                     'product_name': product_name,
                     'product_price': product_price,
                     'availability': "available",
+                    'product_category': productCategory,
+                    'product_description': product_description,
                     }
                 })
             except:
@@ -430,6 +435,8 @@ def add_item_firebase(request):
                         'product_name': product_name,
                         'product_price': product_price,
                         'availability': "available",
+                        'product_category': productCategory,
+                        'product_description': product_description,
                         }
                     })
             #increment the total number of items in a specific user
@@ -729,6 +736,12 @@ def declineAppointment(request):
             fail_silently=False,
         )
 
+        return redirect('/appointment')
+
+def delete_appointment(request):
+    if request.method == 'GET': 
+        appointment_id = request.GET.get('appointment_id')
+        firestoreDB.collection('accepted_appointment').document(appointment_id).delete()
         return redirect('/appointment')
     
 def grooming(request):

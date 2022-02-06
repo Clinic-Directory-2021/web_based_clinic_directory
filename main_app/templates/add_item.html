@@ -33,7 +33,7 @@
     <br>
 
 
-    <form action="/add_item_firebase/" method='post' enctype="multipart/form-data" id="add_item_form" style='background-color: white;border: 0.2px solid black; padding: 1%;width: 55%; margin-left: auto;margin-right: auto;'>
+    <form action="/add_item_firebase/" id="addItemForm" method='post' enctype="multipart/form-data" id="add_item_form" style='background-color: white;border: 0.2px solid black; padding: 1%;width: 55%; margin-left: auto;margin-right: auto;'>
     {% csrf_token %}
     <!-- Image Preview-->
     <img src="../static/images/logo.png" id="preview_img" alt="" class="image">
@@ -42,9 +42,20 @@
     <input required name="selected_product_image" id="product_image" accept=".jpg, .jpeg, .png" type="file" alt="Submit" class="credentials">
     <br>
     <!-- Input Prod Name-->
+    <label  class="credentials">Product Name</label>
     <input required type="text" name="product_name" id="product_name" class="credentials" placeholder="Product name*">
     <!-- Input Prod Price-->
+    <label  class="credentials">Product Price</label>
     <input required type="number" name="product_price" id="product_price"class="credentials" placeholder="Product price*">
+     <!-- Category -->
+     <label  class="credentials">Product Category</label>
+     <select name="productCategory" id="productCategory" class="credentials" form="addItemForm" required>
+        <option value="Product">Product</option>
+        <option value="Services">Services</option>
+    </select>
+    <!-- Input Prod Description-->
+    <label  class="credentials">Product Description</label>
+    <input required type="text" name="product_description" id="product_description" class="credentials" placeholder="Product Description*">
     <!-- Current Number of Items -->
     <input type="number" hidden="true" class="credentials" name="current_number_of_items" id="current_number_of_items" value="{{user_data.total_items}}" />
     <!-- Field Name -->

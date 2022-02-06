@@ -8,6 +8,12 @@ function close_menu(){
     $('.menu-list').hide();
 }
 
+function appointmentDelete(accepted_appointment_id){
+    var url = "/delete_appointment";
+
+    // Construct the full URL with "id"
+    document.location.href = url + "?appointment_id=" + accepted_appointment_id;
+}
 
 function appointmentDecline(appointment_id, appointment_name,appointment_email, appointment_date, appointment_time){
     Swal.fire({
