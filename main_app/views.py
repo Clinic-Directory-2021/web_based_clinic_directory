@@ -420,7 +420,7 @@ def add_item_firebase(request):
         img_file_directory = request.session['user_id']+"/product_images/"+ img_fileName
 
         productCategory = request.POST.get('productCategory')
-        product_description = request.POST.get['product_description']
+        product_description = request.POST.get('product_description')
         
         #if fields are not null then try to update the document on items,
         #if that document is not yet existing then create one
