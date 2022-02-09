@@ -249,7 +249,7 @@ def register_user_firebase(request):
                 
                 # now = datetime.datetime.now()
                 tz = pytz.timezone('Asia/Hong_Kong')
-                now = datetime.now(tz)
+                now = datetime.datetime.now(tz)
 
 
                 doc_ref = firestoreDB.collection('queue').document(user['localId'])
@@ -268,7 +268,7 @@ def register_user_firebase(request):
                     'clinic_description': clinicDescription,
                     'total_items': 0,
                     'clinicCategory': clinicCategory,
-                    'request_date': now,
+                    'request_date': str(now),
                 })
                 #messages.success(request, "New User Registered Successfully!")
                 return HttpResponse('New User Registered Successfully!')
