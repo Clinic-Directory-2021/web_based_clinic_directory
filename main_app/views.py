@@ -22,6 +22,8 @@ from django.core.mail import send_mail
 
 from django.core.paginator import Paginator
 
+import pytz
+
 config={
     "apiKey": "AIzaSyDwWsW--ZHaZIOE4OXu5VhMIclZad8zDYw",
     "authDomain": "animal-clinic-directory-2021.firebaseapp.com",
@@ -245,6 +247,11 @@ def register_user_firebase(request):
                 #upload product image
                 storage.child(img_file_directory).put(clinicImage, user['localId'])
                 
+                # now = datetime.datetime.now()
+                tz = pytz.timezone('Asia/Hong_Kong')
+                now = datetime.now(tz)
+
+
                 doc_ref = firestoreDB.collection('queue').document(user['localId'])
                 doc_ref.set({
                     'user_id': user['localId'],
@@ -261,6 +268,7 @@ def register_user_firebase(request):
                     'clinic_description': clinicDescription,
                     'total_items': 0,
                     'clinicCategory': clinicCategory,
+                    'request_date': now,
                 })
                 #messages.success(request, "New User Registered Successfully!")
                 return HttpResponse('New User Registered Successfully!')
