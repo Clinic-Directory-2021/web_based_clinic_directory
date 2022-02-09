@@ -268,7 +268,7 @@ def register_user_firebase(request):
                     'clinic_description': clinicDescription,
                     'total_items': 0,
                     'clinicCategory': clinicCategory,
-                    'request_date': str(now),
+                    'request_date': now,
                 })
                 #messages.success(request, "New User Registered Successfully!")
                 return HttpResponse('New User Registered Successfully!')
