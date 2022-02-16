@@ -32,7 +32,10 @@
       {% endif %}
 
         <img src="{{values.product_img_url}}" alt="" data-bs-toggle="modal" data-bs-target="#exampleModal" style="width: 150px; height: 150px;"><br><br>
-        <b>{{values.product_name}}</b><br><br>
+        <b>Item name: </b>{{values.product_name}}<br>
+        <b>Item Price: </b>{{values.product_price}}<br>
+        <b>Description: </b>{{values.product_description}}<br>
+        <b>Category: </b>{{values.product_category}}<br><br><br>
     <div style="display: flex;">
         <button type="button" class="btn btn-success" style="margin:auto; width: 150px; height: 50px;" onclick="MarkProductAvailable('{{key}}','{{values.product_img_url}}','{{values.product_img_directory}}' , '{{values.product_name |escapejs}}' , '{{values.product_price}}')">Available</button>
         <button type="button" class="btn btn-danger" style="margin:auto; width: 150px; height: 50px;" onclick="MarkProductNotAvailable('{{key}}','{{values.product_img_url}}','{{values.product_img_directory}}' , '{{values.product_name |escapejs}}' , '{{values.product_price}}')" >Unavailable</button>

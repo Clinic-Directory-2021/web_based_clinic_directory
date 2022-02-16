@@ -36,10 +36,10 @@
     <form action="/add_item_firebase/" id="addItemForm" method='post' enctype="multipart/form-data" id="add_item_form" style='background-color: white;border: 0.2px solid black; padding: 1%;width: 55%; margin-left: auto;margin-right: auto;'>
     {% csrf_token %}
     <!-- Image Preview-->
-    <img src="../static/images/logo.png" id="preview_img" alt="" class="image">
+    <img src="../static/images/logo.png" id="preview_img" alt="" class="image" >
     <br>
     <!-- Input File-->
-    <input required name="selected_product_image" id="product_image" accept=".jpg, .jpeg, .png" type="file" alt="Submit" class="credentials">
+    <input required name="selected_product_image" id="product_image" accept="image/png" type="file" alt="Submit" class="credentials" ><ss><b>PNG Format pictures only.</b></ss>
     <br>
     <!-- Input Prod Name-->
     <label  class="credentials">Product Name</label>
@@ -55,7 +55,7 @@
     </select>
     <!-- Input Prod Description-->
     <label  class="credentials">Product Description</label>
-    <input required type="text" name="product_description" id="product_description" class="credentials" placeholder="Product Description*">
+    <textarea required  name="product_description" id="product_description" class="credentials" placeholder="Product Description*" style="height: 100px;"></textarea>
     <!-- Current Number of Items -->
     <input type="number" hidden="true" class="credentials" name="current_number_of_items" id="current_number_of_items" value="{{user_data.total_items}}" />
     <!-- Field Name -->
