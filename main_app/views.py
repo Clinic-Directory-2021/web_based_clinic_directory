@@ -648,7 +648,7 @@ def addAppointment(request):
             'appointment_id': doc_ref.id
         })
 
-        email_message = 'Hello Mr./Mrs. '+ appointment_name.upper() + 'Your Appoinment Request is now Being Processed, Please wait for further notice if Your Request Has Been Accepted or Rejected. Thank You!'
+        email_message = 'Hello Mr./Mrs. '+ appointment_name.upper() +',%0a'+ 'Your Appoinment Request is now Being Processed, Please wait for further notice if Your Request Has Been Accepted or Rejected.%0aBest Regards,%0aGoVet'
 
         send_mail(
             'Animal Clinic Directory',
@@ -724,7 +724,7 @@ def acceptAppointment(request):
             'accepted_appointment_id': doc_ref.id
         })
 
-        email_message = 'Hello Mr./Mrs. '+ appointment_name.upper() + 'Your Appointment Schedule on ' + request.session['clinic_name'].upper() + ' at ' + appointment_date + ' ' + appointment_time + ' is Now ACCEPTED.'
+        email_message = 'Hello Mr./Mrs. '+ appointment_name.upper() +',%0a'+ 'We would like to inform you that your request to Book an Appoinment Schedule to the ' + request.session['clinic_name'].upper() + ' at ' + appointment_date + ' ' + appointment_time + ' has been ACCEPTED. Please keep this message as proof of acknowledgement from the system for future purposes.%0aBest Regards,%0aGoVet'
 
         send_mail(
             'Animal Clinic Directory',
@@ -750,7 +750,7 @@ def declineAppointment(request):
 
         firestoreDB.collection('appointment_queue').document(appointment_id).delete()
 
-        email_message = 'Hello Mr./Mrs. '+ appointment_name.upper() + ' Your Appointment Schedule on ' + request.session['clinic_name'].upper() + ' at ' + appointment_date + ' ' + appointment_time + ' is REJECTED Because of the following reason/reasons. ' + reasons + ' You Can try Again to Book an Appointment by visiting us at govet.herokuapp.com, Thank you!'
+        email_message = 'Hello Mr./Mrs. '+ appointment_name.upper() +',%0a'+  ' We would like to inform you that your request to Book an Appoinment Schedule to the ' + request.session['clinic_name'].upper() + ' at ' + appointment_date + ' ' + appointment_time + ' has been DECLINED Because of the following reason/reasons. ' + reasons + ' You Can try Again to Book an Appointment by visiting us at govet.herokuapp.com, Please keep this message as proof of acknowledgement from the system for future purposes.%0aBest Regards,%0aGoVet'
 
         send_mail(
             'Animal Clinic Directory',
