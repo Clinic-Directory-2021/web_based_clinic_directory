@@ -485,6 +485,9 @@ def edit_item_firebase(request):
         img_fileName = product_image.name
         img_file_directory = request.session['user_id']+"/product_images/"+ img_fileName
         old_img_file_directory = request.POST.get('old_image_directory')
+
+        edit_prod_description = request.POST.get('edit_prod_description')
+        edit_prod_category = request.POST.get('edit_prod_category')
         
         #if fields are not null then try to update the document on items,
         #if that document is not yet existing then create one
@@ -503,6 +506,8 @@ def edit_item_firebase(request):
                 'product_img_directory' : img_file_directory,
                 'product_name': product_name,
                 'product_price': product_price,
+                'product_category': edit_prod_category,
+                'product_description': edit_prod_description,
                 'availability': "available",
                 }
             })
@@ -525,6 +530,8 @@ def product_item_availability(request):
         product_price = request.POST.get('prod_price')
         product_image_url = request.POST.get('prod_img_url')
         img_file_directory = request.POST.get('prod_img_directory')
+        category = request.POST.get('categ')
+        description = request.POST.get('desc')
 
         if availability == 'available':
             items_doc_ref.update({
@@ -534,6 +541,8 @@ def product_item_availability(request):
                 'product_img_directory' : img_file_directory,
                 'product_name': product_name,
                 'product_price': product_price,
+                'product_category': category,
+                'product_description': description,
                 'availability': "available",
                 }
             })
@@ -545,6 +554,8 @@ def product_item_availability(request):
                 'product_img_directory' : img_file_directory,
                 'product_name': product_name,
                 'product_price': product_price,
+                'product_category': category,
+                'product_description': description,
                 'availability': "not available",
                 }
             })
@@ -648,7 +659,7 @@ def addAppointment(request):
             'appointment_id': doc_ref.id
         })
 
-        email_message = 'Hello Mr./Mrs. '+ appointment_name.upper() +',\n'+ 'Your Appoinment Request is now Being Processed, Please wait for further notice if Your Request Has Been Accepted or Rejected.\nBest Regards,\nGoVet'
+        email_message = 'Hello Mr./Mrs. '+ appointment_name.upper() +',\n'+ '\nYour Appoinment Request is now Being Processed, Please wait for further notice if Your Request Has Been Accepted or Rejected.\n\nBest Regards,\nGoVet'
 
         send_mail(
             'Animal Clinic Directory',
@@ -724,7 +735,7 @@ def acceptAppointment(request):
             'accepted_appointment_id': doc_ref.id
         })
 
-        email_message = 'Hello Mr./Mrs. '+ appointment_name.upper() +',\n'+ 'We would like to inform you that your request to Book an Appoinment Schedule to the ' + request.session['clinic_name'].upper() + ' at ' + appointment_date + ' ' + appointment_time + ' has been ACCEPTED. Please keep this message as proof of acknowledgement from the system for future purposes.\nBest Regards,\nGoVet'
+        email_message = 'Hello Mr./Mrs. '+ appointment_name.upper() +',\n'+ '\nWe would like to inform you that your request to Book an Appoinment Schedule to the ' + request.session['clinic_name'].upper() + ' at ' + appointment_date + ' ' + appointment_time + ' has been ACCEPTED. Please keep this message as proof of acknowledgement from the system for future purposes.\n\nBest Regards,\nGoVet'
 
         send_mail(
             'Animal Clinic Directory',
@@ -750,7 +761,7 @@ def declineAppointment(request):
 
         firestoreDB.collection('appointment_queue').document(appointment_id).delete()
 
-        email_message = 'Hello Mr./Mrs. '+ appointment_name.upper() +',\n'+  'We would like to inform you that your request to Book an Appoinment Schedule to the ' + request.session['clinic_name'].upper() + ' at ' + appointment_date + ' ' + appointment_time + ' has been DECLINED Because of the following reason/reasons:\n' + reasons.upper() + '\nYou Can try Again to Book an Appointment by visiting us at govet.herokuapp.com, Please keep this message as proof of acknowledgement from the system for future purposes.\nBest Regards,\nGoVet'
+        email_message = 'Hello Mr./Mrs. '+ appointment_name.upper() +',\n'+  '\nWe would like to inform you that your request to Book an Appoinment Schedule to the ' + request.session['clinic_name'].upper() + ' at ' + appointment_date + ' ' + appointment_time + ' has been DECLINED Because of the following reason/reasons:\n' + reasons.upper() + '\nYou Can try Again to Book an Appointment by visiting us at govet.herokuapp.com, Please keep this message as proof of acknowledgement from the system for future purposes.\n\nBest Regards,\nGoVet'
 
         send_mail(
             'Animal Clinic Directory',

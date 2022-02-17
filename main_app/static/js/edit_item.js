@@ -1,6 +1,6 @@
 var default_img_src;
 
-function editItem(key , product_img_url, product_img_old_directory,  product_name, product_price){
+function editItem(key , product_img_url, product_img_old_directory,  product_name, product_price, description, category){
     
     default_img_src = product_img_url;
 
@@ -8,6 +8,10 @@ function editItem(key , product_img_url, product_img_old_directory,  product_nam
 
     $('#edit_prod_name').val(product_name);
     $('#edit_prod_price').val(product_price);
+    
+    $('#edit_prod_description').val(description);
+    $('#edit_prod_category').val(category);
+
     $('#edit_field_name').val(key);
 
     $('#old_image_directory').val(product_img_old_directory);

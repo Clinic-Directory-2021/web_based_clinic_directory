@@ -11,7 +11,7 @@ function returnEmpty(){
 
 }
 
-function MarkProductAvailable(key, product_img_url, product_img_old_directory,  product_name, product_price){
+function MarkProductAvailable(key, product_img_url, product_img_old_directory,  product_name, product_price, description, category){
    $.post({
       type: 'post',
       url: "/product_item_availability/",
@@ -22,6 +22,8 @@ function MarkProductAvailable(key, product_img_url, product_img_old_directory,  
           prod_price: product_price,
           prod_img_url: product_img_url,
           prod_img_directory: product_img_old_directory,
+          desc: description,
+          categ: category,
           csrfmiddlewaretoken: $("input[name='csrfmiddlewaretoken']").val(),
       },
       success: function(data){
@@ -34,7 +36,7 @@ function MarkProductAvailable(key, product_img_url, product_img_old_directory,  
   });
 }
 
-function MarkProductNotAvailable(key, product_img_url, product_img_old_directory,  product_name, product_price){
+function MarkProductNotAvailable(key, product_img_url, product_img_old_directory,  product_name, product_price, description, category){
    $.post({
       type: 'post',
       url: "/product_item_availability/",
@@ -45,6 +47,8 @@ function MarkProductNotAvailable(key, product_img_url, product_img_old_directory
           prod_price: product_price,
           prod_img_url: product_img_url,
           prod_img_directory: product_img_old_directory,
+          desc: description,
+          categ: category,
           csrfmiddlewaretoken: $("input[name='csrfmiddlewaretoken']").val(),
       },
       success: function(data){

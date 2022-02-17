@@ -24,7 +24,7 @@
     <div class="add-item" onclick="toAddItem()">
     </div>
     {% for key, values in item_data.items reversed %}
-    <div  onclick="editItem('{{key}}','{{values.product_img_url}}','{{values.product_img_directory}}' , '{{values.product_name |escapejs}}' , '{{values.product_price}}' )" id="{{key}}" style="background-size: cover;" class="item" > <!--This is the query i removed--><!--background-image: url({{values.product_img_url}});-->
+    <div  onclick="editItem('{{key}}','{{values.product_img_url}}','{{values.product_img_directory}}' , '{{values.product_name |escapejs}}' , '{{values.product_price}}' , '{{values.product_description |escapejs}}', '{{values.product_category}}')" id="{{key}}" style="background-size: cover;" class="item" > <!--This is the query i removed--><!--background-image: url({{values.product_img_url}});-->
       {% if values.availability|lower == 'available' %}
       <p style='background-color:#42ba96; font-weight: bold; color:white;'>{{values.availability|upper}}</p><!--Hex color if it's not available #ff0e0e-->
       {% else %}
@@ -37,8 +37,8 @@
         <b>Description: </b>{{values.product_description}}<br>
         <b>Category: </b>{{values.product_category}}<br><br><br>
     <div style="display: flex;">
-        <button type="button" class="btn btn-success" style="margin:auto; width: 150px; height: 50px;" onclick="MarkProductAvailable('{{key}}','{{values.product_img_url}}','{{values.product_img_directory}}' , '{{values.product_name |escapejs}}' , '{{values.product_price}}')">Available</button>
-        <button type="button" class="btn btn-danger" style="margin:auto; width: 150px; height: 50px;" onclick="MarkProductNotAvailable('{{key}}','{{values.product_img_url}}','{{values.product_img_directory}}' , '{{values.product_name |escapejs}}' , '{{values.product_price}}')" >Unavailable</button>
+        <button type="button" class="btn btn-success" style="margin:auto; width: 150px; height: 50px;" onclick="MarkProductAvailable('{{key}}','{{values.product_img_url}}','{{values.product_img_directory}}' , '{{values.product_name |escapejs}}' , '{{values.product_price}}', '{{values.product_description |escapejs}}', '{{values.product_category}}')">Available</button>
+        <button type="button" class="btn btn-danger" style="margin:auto; width: 150px; height: 50px;" onclick="MarkProductNotAvailable('{{key}}','{{values.product_img_url}}','{{values.product_img_directory}}' , '{{values.product_name |escapejs}}' , '{{values.product_price}}', '{{values.product_description |escapejs}}', '{{values.product_category}}')" >Unavailable</button>
     </div>
     </div>
     {% endfor %}
@@ -66,6 +66,13 @@
             <input type="text" id="edit_prod_name" name="edit_prod_name"  class="credentials" placeholder="Product name*" required>
             <!-- Input Prod Price-->
             <input type="number" id="edit_prod_price" name="edit_prod_price" class="credentials" placeholder="Product price*" required>
+            <!-- Input Prod Description-->
+            <textarea required  name="edit_prod_description" id="edit_prod_description" class="credentials" placeholder="Product Description*" style="height: 100px;"></textarea>
+            <!-- Category -->
+            <select name="edit_prod_category" id="edit_prod_category" class="credentials" form="edit_item_form" required>
+                <option value="Product">Product</option>
+                <option value="Services">Services</option>
+            </select>
             <!-- Field Name -->
             <input type="hidden" id="edit_field_name" name="edit_field_name" class="credentials"  />
 
