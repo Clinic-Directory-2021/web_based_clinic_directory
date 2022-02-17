@@ -750,7 +750,7 @@ def declineAppointment(request):
 
         firestoreDB.collection('appointment_queue').document(appointment_id).delete()
 
-        email_message = 'Hello Mr./Mrs. '+ appointment_name.upper() +',\n'+  ' We would like to inform you that your request to Book an Appoinment Schedule to the ' + request.session['clinic_name'].upper() + ' at ' + appointment_date + ' ' + appointment_time + ' has been DECLINED Because of the following reason/reasons. ' + reasons + ' You Can try Again to Book an Appointment by visiting us at govet.herokuapp.com, Please keep this message as proof of acknowledgement from the system for future purposes.\nBest Regards,\nGoVet'
+        email_message = 'Hello Mr./Mrs. '+ appointment_name.upper() +',\n'+  'We would like to inform you that your request to Book an Appoinment Schedule to the ' + request.session['clinic_name'].upper() + ' at ' + appointment_date + ' ' + appointment_time + ' has been DECLINED Because of the following reason/reasons:\n' + reasons.upper() + '\nYou Can try Again to Book an Appointment by visiting us at govet.herokuapp.com, Please keep this message as proof of acknowledgement from the system for future purposes.\nBest Regards,\nGoVet'
 
         send_mail(
             'Animal Clinic Directory',
