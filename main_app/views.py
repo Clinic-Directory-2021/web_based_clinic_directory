@@ -662,7 +662,7 @@ def addAppointment(request):
         email_message = 'Hello Mr./Mrs. '+ appointment_name.upper() +',\n'+ '\nYour Appoinment Request is now Being Processed, Please wait for further notice if Your Request Has Been Accepted or Rejected.\n\nBest Regards,\nGoVet'
 
         send_mail(
-            'Animal Clinic Directory',
+            'Appointment Request',
             email_message,
             'clinic.directory.2021@gmail.com',
             [appointment_email],
@@ -738,7 +738,7 @@ def acceptAppointment(request):
         email_message = 'Hello Mr./Mrs. '+ appointment_name.upper() +',\n'+ '\nWe would like to inform you that your request to Book an Appoinment Schedule to the ' + request.session['clinic_name'].upper() + ' at ' + appointment_date + ' ' + appointment_time + ' has been ACCEPTED. Please keep this message as proof of acknowledgement from the system for future purposes.\n\nBest Regards,\nGoVet'
 
         send_mail(
-            'Animal Clinic Directory',
+            'Appointment Request',
             email_message,
             'clinic.directory.2021@gmail.com',
             [appointment_email],
@@ -764,7 +764,7 @@ def declineAppointment(request):
         email_message = 'Hello Mr./Mrs. '+ appointment_name.upper() +',\n'+  '\nWe would like to inform you that your request to Book an Appoinment Schedule to the ' + request.session['clinic_name'].upper() + ' at ' + appointment_date + ' ' + appointment_time + ' has been DECLINED Because of the following reason/reasons:\n' + reasons.upper() + '\nYou Can try Again to Book an Appointment by visiting us at govet.herokuapp.com, Please keep this message as proof of acknowledgement from the system for future purposes.\n\nBest Regards,\nGoVet'
 
         send_mail(
-            'Animal Clinic Directory',
+            'Appointment Request',
             email_message,
             'clinic.directory.2021@gmail.com',
             [appointment_email],
